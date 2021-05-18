@@ -3,7 +3,8 @@ const ctx = canvas.getContext("2d")
 
 const colors = {
     background: "#303030",
-    snake: "#4AA96C"
+    snake: "#4AA96C",
+    cauda_snake: "#9FE6A0"
 }
 
 const buttons = {
@@ -28,6 +29,20 @@ const snake = {
     px: 150,
     width: 15,
     direcao: null,
+    cauda: [
+        {
+            py: 150,
+            px: 150 - 45,
+        },
+        {
+            py: 150,
+            px: 150 - 30,
+        },
+        {
+            py: 150,
+            px: 150 - 15,
+        }
+    ],
     setDirecao(direcao){
         if(this.direcao === direcao) return
         if(this.direcao === null) this.direcao = direcao
@@ -57,6 +72,11 @@ const snake = {
 const move = () => {
     const { direcao, width } = snake
     
+    if(direcao !== null){
+        snake.cauda.push( {px: snake.px, py: snake.py})
+        snake.cauda.shift()
+    }
+
     switch(direcao){
         case "up":
             return snake.py = (snake.py - width) >= 0 ? snake.py - width : game.height - width
@@ -81,9 +101,14 @@ const drawBackground = () => {
 }
 
 const drawSnake = () => {
-    const { px, py, width } = snake
+    const { px, py, width, cauda } = snake
     ctx.fillStyle = colors.snake
     ctx.fillRect(px , py, width, width)
+
+    cauda.forEach( ({py,px}) => {
+        ctx.fillStyle = colors.cauda_snake
+        ctx.fillRect(px , py, width, width)
+    })
 }
 
 const render = () => {
@@ -98,7 +123,7 @@ window.onkeydown = event => {
         if(buttons[key]){
             game.status = "active"
             buttons[key]()
-            setInterval( render, 300)
+            setInterval( render, 200)
         }
     }else{
         buttons[key]?.()
