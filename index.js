@@ -3,19 +3,35 @@ const ctx = canvas.getContext("2d")
 
 const colors = {
     background: "#303030",
-    snake: "#DDDDDD"
+    snake: "#4AA96C"
 }
 
 const game = {
     width: canvas.width,
-    height: canvas.height
+    height: canvas.height,
+    status: "inative"
 }
 
 const snake = {
     py: 150,
     px: 150,
     width: 15,
-    height: 15
+    direcao: null
+}
+
+const move = () => {
+    const { direcao, width } = snake
+
+    switch(direcao){
+        case "up":
+            return snake.py -= width
+        case "down":
+            return snake.py += width
+        case "left":
+            return snake.px -= width
+        case "right":
+            return snake.px += width
+    }
 }
 
 const drawBackground = () => {
@@ -24,10 +40,29 @@ const drawBackground = () => {
 }
 
 const drawSnake = () => {
+    const { px, py, width } = snake
     ctx.fillStyle = colors.snake
-    ctx.fillRect(snake.px , snake.py, snake.width, snake.height)
+    ctx.fillRect(px , py, width, width)
 }
 
-drawBackground()
-drawSnake()
+const render = () => {
+    move()
+    drawBackground()
+    drawSnake()
+}
 
+window.onkeydown = event => {
+    const key = event.key.lenght == 1 ? event.key.toLowerCase() : event.key
+    if(game.status === "inative"){
+        if(buttons[key]){
+            game.status = "active"
+            buttons[key]()
+            setInterval( render, 500)
+        }
+    }else{
+        buttons[key]?.()
+    }
+    console.log(snake);
+}
+
+window.onload = render
