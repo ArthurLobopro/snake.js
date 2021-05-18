@@ -34,6 +34,7 @@ const snake = {
     px: 120,
     width: 15,
     direcao: null,
+    ultima: null,
     cauda: [
         {
             py: 150,
@@ -79,7 +80,7 @@ const move = () => {
     
     if(direcao !== null){
         snake.cauda.push( {px: snake.px, py: snake.py})
-        snake.cauda.shift()
+        snake.ultima = snake.cauda.shift()
     }
 
     switch(direcao){
@@ -129,29 +130,32 @@ const spawFruit = () => {
     let py = randint(0, limite) * snake.width
     if(snake.px !== px && snake.py !== py){
         const { cauda } = snake
-        let find = cauda.some( q => {
+        let find = cauda.map( q => {
             if(q.px === px && q.py === py){
-                return true
+                return 't'
             }
-            return false
+            return 'f'
         } )
-        if(!find){
+        find = find.join('')
+        if(find.indexOf('t') === -1){
             game.fruit = {px, py}
+        }else{
+            spawFruit()
         }
     }
-    
 }
 
 const colisao = () => {
     const { px , py } = snake
     if(game.fruit.px === px && game.fruit.py === py){
         spawFruit()
+        snake.cauda.unshift(snake.ultima)
     }
 }
 
 const render = () => {
-    move()
     colisao()
+    move()
     drawBackground()
     drawFruit()
     drawSnake()
@@ -168,7 +172,6 @@ window.onkeydown = event => {
     }else{
         buttons[key]?.()
     }
-    console.log(snake);
 }
 
 window.onload = render
