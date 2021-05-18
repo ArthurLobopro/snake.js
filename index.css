@@ -1,1 +1,18 @@
-/* No CSS *//*# sourceMappingURL=index.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+canvas {
+  border: 1px solid black;
+}
+/*# sourceMappingURL=index.css.map */
