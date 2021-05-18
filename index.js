@@ -4,7 +4,8 @@ const ctx = canvas.getContext("2d")
 const colors = {
     background: "#303030",
     snake: "#4AA96C",
-    cauda_snake: "#9FE6A0"
+    cauda_snake: "#9FE6A0",
+    red_fruit: "#f55c47"
 }
 
 const buttons = {
@@ -21,26 +22,30 @@ const buttons = {
 const game = {
     width: canvas.width,
     height: canvas.height,
-    status: "inative"
+    status: "inative",
+    fruit:{
+        py: 150,
+        px: 120 + 75,
+    },
 }
 
 const snake = {
     py: 150,
-    px: 150,
+    px: 120,
     width: 15,
     direcao: null,
     cauda: [
         {
             py: 150,
-            px: 150 - 45,
+            px: 120 - 45,
         },
         {
             py: 150,
-            px: 150 - 30,
+            px: 120 - 30,
         },
         {
             py: 150,
-            px: 150 - 15,
+            px: 120 - 15,
         }
     ],
     setDirecao(direcao){
@@ -100,6 +105,12 @@ const drawBackground = () => {
     ctx.fillRect(0, 0, game.width, game.height)
 }
 
+const drawFruit = () => {
+    const { py, px } = game.fruit
+    ctx.fillStyle = colors.red_fruit
+    ctx.fillRect(px, py, snake.width, snake.width)
+}
+
 const drawSnake = () => {
     const { px, py, width, cauda } = snake
     ctx.fillStyle = colors.snake
@@ -111,9 +122,38 @@ const drawSnake = () => {
     })
 }
 
+const spawFruit = () => {
+    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
+    const limite = game.width/snake.width
+    let px = randint(0, limite) * snake.width
+    let py = randint(0, limite) * snake.width
+    if(snake.px !== px && snake.py !== py){
+        const { cauda } = snake
+        let find = cauda.some( q => {
+            if(q.px === px && q.py === py){
+                return true
+            }
+            return false
+        } )
+        if(!find){
+            game.fruit = {px, py}
+        }
+    }
+    
+}
+
+const colisao = () => {
+    const { px , py } = snake
+    if(game.fruit.px === px && game.fruit.py === py){
+        spawFruit()
+    }
+}
+
 const render = () => {
     move()
+    colisao()
     drawBackground()
+    drawFruit()
     drawSnake()
 }
 
