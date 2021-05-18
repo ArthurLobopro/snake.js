@@ -7,14 +7,14 @@ const colors = {
 }
 
 const buttons = {
-    "ArrowLeft": () => snake.direcao = "left",
-    "ArrowDown": () => snake.direcao = "down",
-    "ArrowRight": () => snake.direcao = "right",
-    "ArrowUp": () => snake.direcao = "up",
-    "w": () => snake.direcao = "up",
-    "a": () => snake.direcao = "left",
-    "s": () => snake.direcao = "down",
-    "d": () => snake.direcao = "right"
+    "ArrowLeft": () => snake.setDirecao("left"),
+    "ArrowDown": () => snake.setDirecao("down"),
+    "ArrowRight": () => snake.setDirecao("right"),
+    "ArrowUp": () => snake.setDirecao("up"),
+    "w": () => snake.setDirecao("up"),
+    "a": () => snake.setDirecao("left"),
+    "s": () => snake.setDirecao("down"),
+    "d": () => snake.setDirecao("right")
 }
 
 const game = {
@@ -27,7 +27,31 @@ const snake = {
     py: 150,
     px: 150,
     width: 15,
-    direcao: null
+    direcao: null,
+    setDirecao(direcao){
+        if(this.direcao === direcao) return
+        if(this.direcao === null) this.direcao = direcao
+
+        if(this.direcao === "right"){
+            if(direcao !== "left")
+                this.direcao = direcao
+        }
+
+        if(this.direcao === "left"){
+            if(direcao !== "right")
+                this.direcao = direcao
+        }
+
+        if(this.direcao === "up"){
+            if(direcao !== "down")
+                this.direcao = direcao
+        }
+
+        if(this.direcao === "down"){
+            if(direcao !== "up")
+                this.direcao = direcao
+        }
+    }
 }
 
 const move = () => {
