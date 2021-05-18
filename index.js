@@ -98,7 +98,7 @@ window.onkeydown = event => {
         if(buttons[key]){
             game.status = "active"
             buttons[key]()
-            setInterval( render, 500)
+            setInterval( render, 300)
         }
     }else{
         buttons[key]?.()
