@@ -6,6 +6,17 @@ const colors = {
     snake: "#4AA96C"
 }
 
+const buttons = {
+    "ArrowLeft": () => snake.direcao = "left",
+    "ArrowDown": () => snake.direcao = "down",
+    "ArrowRight": () => snake.direcao = "right",
+    "ArrowUp": () => snake.direcao = "up",
+    "w": () => snake.direcao = "up",
+    "a": () => snake.direcao = "left",
+    "s": () => snake.direcao = "down",
+    "d": () => snake.direcao = "right"
+}
+
 const game = {
     width: canvas.width,
     height: canvas.height,
