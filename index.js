@@ -56,16 +56,22 @@ const snake = {
 
 const move = () => {
     const { direcao, width } = snake
-
+    
     switch(direcao){
         case "up":
-            return snake.py -= width
+            return snake.py = (snake.py - width) >= 0 ? snake.py - width : game.height - width
         case "down":
-            return snake.py += width
+            if(snake.py + width < game.height){
+                return snake.py += width
+            }
+            return snake.py = snake.py - game.height + 15
         case "left":
-            return snake.px -= width
+            return snake.px = (snake.px - width) >= 0 ? snake.px - width : game.width - width
         case "right":
-            return snake.px += width
+            if(snake.px + width < game.width){
+                return snake.px += width
+            }
+            return snake.px = snake.px - game.width + 15
     }
 }
 
