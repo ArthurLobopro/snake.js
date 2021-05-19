@@ -63,4 +63,16 @@ const drawLingua = (snake) => {
     ctx.drawImage(lingua[direcao],  px , py )
 }
 
-export { drawBackground, drawFruit, drawLingua }
+const drawSnake = (snake, game) => {
+    const { px, py, cauda } = snake
+    const { unity } = game
+    
+    cauda.forEach( ({py,px}) => {
+        ctx.fillStyle = colors.cauda_snake
+        ctx.fillRect(px * unity, py * unity, unity, unity)
+    })
+    
+    ctx.fillStyle = colors.snake
+    ctx.fillRect(px * unity, py * unity, unity, unity)
+}
+export { drawBackground, drawFruit, drawLingua, drawSnake }
