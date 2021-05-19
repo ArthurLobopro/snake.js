@@ -38,6 +38,7 @@ const snake = {
     px: 10,
     direcao: null,
     ultima: null,
+    moveLock: false,
     cauda: [
         {
             py: 11,
@@ -54,6 +55,7 @@ const snake = {
     ],
     setDirecao(direcao){
         if(this.direcao === direcao) return
+        if(this.moveLock) return
         if(this.direcao === null) this.direcao = direcao
 
         if(this.direcao === "right"){
@@ -75,6 +77,7 @@ const snake = {
             if(direcao !== "up")
                 this.direcao = direcao
         }
+        this.moveLock = true
     }
 }
 
@@ -167,7 +170,7 @@ const colisao = async () => {
 
     cauda.forEach( q => {
         if(q.px === px && q.py === py){
-            //clearInterval(game.interval)
+            clearInterval(game.interval)
         }
     })
 }
@@ -178,6 +181,7 @@ const render = async () => {
     drawBackground()
     drawFruit()
     drawSnake()
+    snake.moveLock = false
 }
 
 window.onkeydown = event => {
