@@ -1,14 +1,6 @@
-import { drawBackground, drawFruit, drawLingua } from "./src/View.js"
+import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 
 const canvas = document.getElementById('game')
-const ctx = canvas.getContext("2d")
-
-const colors = {
-    background: "#303030",
-    snake: "#4AA96C",
-    cauda_snake: "#9FE6A0",
-    red_fruit: "#f55c47"
-}
 
 const buttons = {
     "ArrowLeft": () => snake.setDirecao("left"),
@@ -113,19 +105,6 @@ const move = async () => {
     }
 }
 
-const drawSnake = () => {
-    const { px, py, cauda } = snake
-    const { unity } = game
-    
-    cauda.forEach( ({py,px}) => {
-        ctx.fillStyle = colors.cauda_snake
-        ctx.fillRect(px * unity, py * unity, unity, unity)
-    })
-    
-    ctx.fillStyle = colors.snake
-    ctx.fillRect(px * unity, py * unity, unity, unity)
-}
-
 const spawFruit = async () => {
     const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     const { quantX, quantY } = game
@@ -174,13 +153,13 @@ const render = async () => {
         await move()
         drawBackground(game)
         drawFruit(game)
-        drawSnake()
+        drawSnake(snake, game)
         drawLingua(snake)
         snake.moveLock = false
     }else{
         drawBackground(game)
         drawFruit(game)
-        drawSnake()
+        drawSnake(snake, game)
         drawLingua(snake)
     }
 }
