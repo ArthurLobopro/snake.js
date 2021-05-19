@@ -151,13 +151,7 @@ const spawFruit = async () => {
             if(find.indexOf('t') === -1){
                 game.fruit.px = px
                 game.fruit.py = py
-                console.log('spaw')
-                console.log(snake);
-                console.log(game);
                 return
-            }else{
-                alert("errado")
-                
             }
         }
     }
@@ -167,9 +161,6 @@ const colisao = async () => {
     const { px , py, cauda } = snake
 
     if(game.fruit.px === px && game.fruit.py === py){
-        console.log("Colisão");
-        console.log(snake)
-        console.log(game)
         await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }
