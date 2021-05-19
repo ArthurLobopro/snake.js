@@ -1,3 +1,5 @@
+@import url(./public/css-import/Nunito-Regular.css);
+
 *{
     margin: 0;
     padding: 0;
@@ -12,4 +14,18 @@ body{
 
 canvas {
     border: 1px solid black;
+}
+
+#container{
+    display: grid;
+    place-items: center;
+}
+
+#canvas-top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    font-family: "Nunito";
+    font-size: 20px;
 }

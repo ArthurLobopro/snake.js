@@ -20,6 +20,7 @@ const game = {
     unity: 15,
     quantX: 21,
     quantY: 21,
+    pontos: 0,
     fruit:{
         py: 11,
         px: 10 + 5,
@@ -133,6 +134,7 @@ const colisao = async () => {
     const { px , py, cauda } = snake
 
     if(game.fruit.px === px && game.fruit.py === py){
+        game.pontos += 100
         await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }
@@ -162,6 +164,7 @@ const render = async () => {
         drawSnake(snake, game)
         drawLingua(snake)
     }
+    document.getElementById("pontos").innerText = game.pontos
 }
 
 window.onkeydown = event => {
