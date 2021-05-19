@@ -78,7 +78,7 @@ const snake = {
     }
 }
 
-const move = () => {
+const move = async () => {
     const { direcao } = snake
     const { quantX, quantY } = game
     
@@ -87,21 +87,25 @@ const move = () => {
         snake.ultima = snake.cauda.shift()
     }
 
-    switch(direcao){
-        case "up":
-            return snake.py = (snake.py - 1) >= 0 ? snake.py - 1 : quantY - 1
-        case "down":
-            if(snake.py + 1 < quantY){
-                return snake.py += 1
-            }
-            return snake.py = snake.py - quantY + 1
-        case "left":
-            return snake.px = (snake.px - 1) >= 0 ? snake.px - 1 : quantX - 1
-        case "right":
-            if(snake.px + 1 < quantX){
-                return snake.px += 1
-            }
-            return snake.px = snake.px - quantX + 1
+    if(direcao === "up"){
+        return snake.py = (snake.py - 1) >= 0 ? snake.py - 1 : quantY - 1
+    }
+    if(direcao === "left"){
+        return snake.px = (snake.px - 1) >= 0 ? snake.px - 1 : quantX - 1
+    }
+
+    if(direcao === "down"){
+        if(snake.py + 1 < quantY){
+            return snake.py += 1
+        }
+        return snake.py = snake.py - quantY + 1
+    }
+
+    if(direcao === "right"){
+        if(snake.px + 1 < quantX){
+            return snake.px += 1
+        }
+        return snake.px = snake.px - quantX + 1
     }
 }
 
@@ -133,8 +137,8 @@ const spawFruit = async () => {
     const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     const { quantX, quantY } = game
     while (true) {
-        const px = randint(0, quantX)
-        const py = randint(0, quantY)
+        const px = randint(0, quantX - 1)
+        const py = randint(0, quantY - 1)
         if(snake.px !== px && snake.py !== py){
             const { cauda } = snake
             let find = cauda.map( q => {
@@ -147,7 +151,13 @@ const spawFruit = async () => {
             if(find.indexOf('t') === -1){
                 game.fruit.px = px
                 game.fruit.py = py
-                break
+                console.log('spaw')
+                console.log(snake);
+                console.log(game);
+                return
+            }else{
+                alert("errado")
+                
             }
         }
     }
@@ -155,10 +165,15 @@ const spawFruit = async () => {
 
 const colisao = async () => {
     const { px , py, cauda } = snake
+
     if(game.fruit.px === px && game.fruit.py === py){
+        console.log("Colisão");
+        console.log(snake)
+        console.log(game)
         await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }
+
     cauda.forEach( q => {
         if(q.px === px && q.py === py){
             //clearInterval(game.interval)
@@ -168,7 +183,7 @@ const colisao = async () => {
 
 const render = async () => {
     await colisao()
-    move()
+    await move()
     drawBackground()
     drawFruit()
     drawSnake()
