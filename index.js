@@ -54,7 +54,7 @@ const game = {
 const snake = {
     py: 11,
     px: 10,
-    direcao: null,
+    direcao: "right",
     ultima: null,
     moveLock: false,
     cauda: [
@@ -74,7 +74,6 @@ const snake = {
     setDirecao(direcao){
         if(this.direcao === direcao) return
         if(this.moveLock) return
-        if(this.direcao === null) this.direcao = direcao
 
         if(this.direcao === "right"){
             if(direcao !== "left")
