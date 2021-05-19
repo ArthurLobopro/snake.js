@@ -1,6 +1,24 @@
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext("2d")
 
+const lingua = {}
+
+const upImg = new Image()
+upImg.src = "./assets/lingua-up.png"
+upImg.onload = () => lingua.up = upImg
+
+const downImg = new Image()
+downImg.src = "./assets/lingua-down.png"
+downImg.onload = () => lingua.down = downImg
+
+const leftImg = new Image()
+leftImg.src = "./assets/lingua-left.png"
+leftImg.onload = () => lingua.left = leftImg
+
+const rightImg = new Image()
+rightImg.src = "./assets/lingua-right.png"
+rightImg.onload = () => lingua.right = rightImg
+
 const colors = {
     background: "#303030",
     snake: "#4AA96C",
@@ -127,13 +145,14 @@ const drawFruit = () => {
 const drawSnake = () => {
     const { px, py, cauda } = snake
     const { unity } = game
-    ctx.fillStyle = colors.snake
-    ctx.fillRect(px * unity, py * unity, unity, unity)
-
+    
     cauda.forEach( ({py,px}) => {
         ctx.fillStyle = colors.cauda_snake
         ctx.fillRect(px * unity, py * unity, unity, unity)
     })
+    
+    ctx.fillStyle = colors.snake
+    ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 
 const spawFruit = async () => {
@@ -168,20 +187,55 @@ const colisao = async () => {
         snake.cauda.unshift(snake.ultima)
     }
 
-    cauda.forEach( q => {
-        if(q.px === px && q.py === py){
-            clearInterval(game.interval)
-        }
+    return new Promise( resolve => {
+        cauda.forEach( q => {
+            if(q.px === px && q.py === py){
+                resolve(true)
+                clearInterval(game.interval)
+            }
+        })
+        resolve(false)
     })
 }
 
+const getPosLingua =  () => {
+    let { direcao,px,py } = snake
+    direcao = direcao ?? "right"
+
+    if(direcao === "right")
+        return [((px + 1) * 15) - 10.5, py * 15]
+    
+    if(direcao === "left")
+        return [((px - 1) * 15) + 5, py * 15]
+
+    if(direcao === "up")
+        return [px * 15, ((py - 1) * 15) + 5]
+
+    if(direcao === "down")
+        return [px * 15, ((py + 1) * 15) - 10]
+}
+
+const drawLingua = () => {
+    let { direcao } = snake
+    direcao = direcao ?? "right"
+    const [ px, py ] = getPosLingua()
+    ctx.drawImage(lingua[direcao],  px , py )
+}
+
 const render = async () => {
-    await colisao()
-    await move()
-    drawBackground()
-    drawFruit()
-    drawSnake()
-    snake.moveLock = false
+    if(!(await colisao())){
+        await move()
+        drawBackground()
+        drawFruit()
+        drawSnake()
+        drawLingua()
+        snake.moveLock = false
+    }else{
+        drawBackground()
+        drawFruit()
+        drawSnake()
+        drawLingua()
+    }
 }
 
 window.onkeydown = event => {
