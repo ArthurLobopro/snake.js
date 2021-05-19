@@ -23,30 +23,33 @@ const game = {
     width: canvas.width,
     height: canvas.height,
     status: "inative",
+    unity: 15,
+    quantX: 21,
+    quantY: 21,
     fruit:{
-        py: 150,
-        px: 120 + 75,
+        py: 11,
+        px: 10 + 5,
     },
+    interval: null
 }
 
 const snake = {
-    py: 150,
-    px: 120,
-    width: 15,
+    py: 11,
+    px: 10,
     direcao: null,
     ultima: null,
     cauda: [
         {
-            py: 150,
-            px: 120 - 45,
+            py: 11,
+            px: 10 - 3,
         },
         {
-            py: 150,
-            px: 120 - 30,
+            py: 11,
+            px: 10 - 2,
         },
         {
-            py: 150,
-            px: 120 - 15,
+            py: 11,
+            px: 10 - 1,
         }
     ],
     setDirecao(direcao){
@@ -76,7 +79,8 @@ const snake = {
 }
 
 const move = () => {
-    const { direcao, width } = snake
+    const { direcao } = snake
+    const { quantX, quantY } = game
     
     if(direcao !== null){
         snake.cauda.push( {px: snake.px, py: snake.py})
@@ -85,19 +89,19 @@ const move = () => {
 
     switch(direcao){
         case "up":
-            return snake.py = (snake.py - width) >= 0 ? snake.py - width : game.height - width
+            return snake.py = (snake.py - 1) >= 0 ? snake.py - 1 : quantY - 1
         case "down":
-            if(snake.py + width < game.height){
-                return snake.py += width
+            if(snake.py + 1 < quantY){
+                return snake.py += 1
             }
-            return snake.py = snake.py - game.height + 15
+            return snake.py = snake.py - quantY + 1
         case "left":
-            return snake.px = (snake.px - width) >= 0 ? snake.px - width : game.width - width
+            return snake.px = (snake.px - 1) >= 0 ? snake.px - 1 : quantX - 1
         case "right":
-            if(snake.px + width < game.width){
-                return snake.px += width
+            if(snake.px + 1 < quantX){
+                return snake.px += 1
             }
-            return snake.px = snake.px - game.width + 15
+            return snake.px = snake.px - quantX + 1
     }
 }
 
@@ -108,53 +112,62 @@ const drawBackground = () => {
 
 const drawFruit = () => {
     const { py, px } = game.fruit
+    const { unity } = game
     ctx.fillStyle = colors.red_fruit
-    ctx.fillRect(px, py, snake.width, snake.width)
+    ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 
 const drawSnake = () => {
-    const { px, py, width, cauda } = snake
+    const { px, py, cauda } = snake
+    const { unity } = game
     ctx.fillStyle = colors.snake
-    ctx.fillRect(px , py, width, width)
+    ctx.fillRect(px * unity, py * unity, unity, unity)
 
     cauda.forEach( ({py,px}) => {
         ctx.fillStyle = colors.cauda_snake
-        ctx.fillRect(px , py, width, width)
+        ctx.fillRect(px * unity, py * unity, unity, unity)
     })
 }
 
-const spawFruit = () => {
+const spawFruit = async () => {
     const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
-    const limite = game.width/snake.width
-    let px = randint(0, limite) * snake.width
-    let py = randint(0, limite) * snake.width
-    if(snake.px !== px && snake.py !== py){
-        const { cauda } = snake
-        let find = cauda.map( q => {
-            if(q.px === px && q.py === py){
-                return 't'
+    const { quantX, quantY } = game
+    while (true) {
+        const px = randint(0, quantX)
+        const py = randint(0, quantY)
+        if(snake.px !== px && snake.py !== py){
+            const { cauda } = snake
+            let find = cauda.map( q => {
+                if(q.px === px && q.py === py){
+                    return 't'
+                }
+                return 'f'
+            } )
+            find = find.join('')
+            if(find.indexOf('t') === -1){
+                game.fruit.px = px
+                game.fruit.py = py
+                break
             }
-            return 'f'
-        } )
-        find = find.join('')
-        if(find.indexOf('t') === -1){
-            game.fruit = {px, py}
-        }else{
-            spawFruit()
         }
     }
 }
 
-const colisao = () => {
-    const { px , py } = snake
+const colisao = async () => {
+    const { px , py, cauda } = snake
     if(game.fruit.px === px && game.fruit.py === py){
-        spawFruit()
+        await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }
+    cauda.forEach( q => {
+        if(q.px === px && q.py === py){
+            //clearInterval(game.interval)
+        }
+    })
 }
 
-const render = () => {
-    colisao()
+const render = async () => {
+    await colisao()
     move()
     drawBackground()
     drawFruit()
@@ -167,7 +180,7 @@ window.onkeydown = event => {
         if(buttons[key]){
             game.status = "active"
             buttons[key]()
-            setInterval( render, 200)
+            game.interval = setInterval( render, 200)
         }
     }else{
         buttons[key]?.()
