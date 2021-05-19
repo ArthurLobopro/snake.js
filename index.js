@@ -1,23 +1,7 @@
+import { drawBackground, drawFruit, drawLingua } from "./src/View.js"
+
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext("2d")
-
-const lingua = {}
-
-const upImg = new Image()
-upImg.src = "./assets/lingua-up.png"
-upImg.onload = () => lingua.up = upImg
-
-const downImg = new Image()
-downImg.src = "./assets/lingua-down.png"
-downImg.onload = () => lingua.down = downImg
-
-const leftImg = new Image()
-leftImg.src = "./assets/lingua-left.png"
-leftImg.onload = () => lingua.left = leftImg
-
-const rightImg = new Image()
-rightImg.src = "./assets/lingua-right.png"
-rightImg.onload = () => lingua.right = rightImg
 
 const colors = {
     background: "#303030",
@@ -129,18 +113,6 @@ const move = async () => {
     }
 }
 
-const drawBackground = () => {
-    ctx.fillStyle = colors.background
-    ctx.fillRect(0, 0, game.width, game.height)
-}
-
-const drawFruit = () => {
-    const { py, px } = game.fruit
-    const { unity } = game
-    ctx.fillStyle = colors.red_fruit
-    ctx.fillRect(px * unity, py * unity, unity, unity)
-}
-
 const drawSnake = () => {
     const { px, py, cauda } = snake
     const { unity } = game
@@ -197,43 +169,19 @@ const colisao = async () => {
     })
 }
 
-const getPosLingua =  () => {
-    let { direcao,px,py } = snake
-    direcao = direcao ?? "right"
-
-    if(direcao === "right")
-        return [((px + 1) * 15) - 10.5, py * 15]
-    
-    if(direcao === "left")
-        return [((px - 1) * 15) + 5, py * 15]
-
-    if(direcao === "up")
-        return [px * 15, ((py - 1) * 15) + 5]
-
-    if(direcao === "down")
-        return [px * 15, ((py + 1) * 15) - 10]
-}
-
-const drawLingua = () => {
-    let { direcao } = snake
-    direcao = direcao ?? "right"
-    const [ px, py ] = getPosLingua()
-    ctx.drawImage(lingua[direcao],  px , py )
-}
-
 const render = async () => {
     if(!(await colisao())){
         await move()
-        drawBackground()
-        drawFruit()
+        drawBackground(game)
+        drawFruit(game)
         drawSnake()
-        drawLingua()
+        drawLingua(snake)
         snake.moveLock = false
     }else{
-        drawBackground()
-        drawFruit()
+        drawBackground(game)
+        drawFruit(game)
         drawSnake()
-        drawLingua()
+        drawLingua(snake)
     }
 }
 
