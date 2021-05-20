@@ -24,7 +24,19 @@ const game = {
     fruit:{
         py: 11,
         px: 10 + 5,
+        value: 100,
+        type: "maca"
     },
+    frutas:[
+        {
+            type: "maca",
+            value: 100
+        },
+        {
+            type: "laranja",
+            value: 250
+        }
+    ],
     interval: null
 }
 
@@ -75,6 +87,12 @@ const snake = {
     }
 }
 
+const randItem = arr => {
+    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
+    return arr[randint(0,arr.length - 1)]
+}
+
+
 const move = async () => {
     const { direcao } = snake
     const { quantX, quantY } = game
@@ -109,6 +127,7 @@ const move = async () => {
 const spawFruit = async () => {
     const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     const { quantX, quantY } = game
+    const { type, value } = randItem(game.frutas)
     while (true) {
         const px = randint(0, quantX - 1)
         const py = randint(0, quantY - 1)
@@ -122,8 +141,10 @@ const spawFruit = async () => {
             } )
             find = find.join('')
             if(find.indexOf('t') === -1){
-                game.fruit.px = px
-                game.fruit.py = py
+                game.fruit = { 
+                    px, py ,
+                    type, value
+                }
                 return
             }
         }
@@ -134,7 +155,7 @@ const colisao = async () => {
     const { px , py, cauda } = snake
 
     if(game.fruit.px === px && game.fruit.py === py){
-        game.pontos += 100
+        game.pontos += game.fruit.value
         await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }

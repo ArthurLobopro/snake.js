@@ -7,6 +7,15 @@ const colors = {
     cauda_snake: "#9FE6A0",
     red_fruit: "#f55c47"
 }
+const frutas = {}
+
+const laranja = new Image()
+laranja.src = "./assets/laranja.png"
+laranja.onload = () => frutas.laranja = laranja
+
+const maca = new Image()
+maca.src = "./assets/maca.png"
+maca.onload = () => frutas.maca = maca
 
 const lingua = {}
 //Imagens da lingua
@@ -51,9 +60,12 @@ const drawBackground = (game) => {
 
 const drawFruit = (game) => {
     const { py, px } = game.fruit
-    const { unity } = game
-    ctx.fillStyle = colors.red_fruit
-    ctx.fillRect(px * unity, py * unity, unity, unity)
+    const { unity, fruit } = game
+    let { type } = fruit
+    type = type ?? "maca"
+    // ctx.fillStyle = colors.red_fruit
+    // ctx.fillRect(px * unity, py * unity, unity, unity)
+    ctx.drawImage(frutas[type], px * unity, py * unity)
 }
 
 const drawLingua = (snake) => {
