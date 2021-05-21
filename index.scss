@@ -1,5 +1,5 @@
 @import url(./public/css-import/Nunito-Regular.css);
-
+@import url(./public/css-import/PressStart2P.css);
 *{
     margin: 0;
     padding: 0;
@@ -23,9 +23,17 @@ canvas {
 
 #canvas-top{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 5px;
-    font-family: "Nunito";
+    padding: 0 0;
+    display: grid;
+    grid-template-rows: auto auto;
+    background-color: #000;
+    grid-row-gap: 1px;
+    font-family: 'Press Start 2P',"Nunito";
     font-size: 20px;
+    & .line{
+        padding: 3px 0;
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+    }
 }
