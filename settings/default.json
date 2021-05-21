@@ -1,5 +1,7 @@
 {
     "game": {
+        "status": "inative",
+        "pontos": 0,
         "fruit": {
             "py": 11,
             "px": 15,
