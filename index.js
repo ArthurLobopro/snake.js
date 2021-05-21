@@ -1,6 +1,10 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
+import { getDefaultSnake, getDefaultGame } from "./src/Settings.js"
+import { getData, saveRecorde } from "./src/Data.js";
+const get = id => document.getElementById(id)
 
-const canvas = document.getElementById('game')
+const canvas = get('game')
+const recordDiv = get('recorde')
 
 const buttons = {
     "ArrowLeft": () => snake.setDirecao("left"),
@@ -21,6 +25,7 @@ const game = {
     quantX: 21,
     quantY: 21,
     pontos: 0,
+    recorde: 0,
     fruit:{
         py: 11,
         px: 10 + 5,
@@ -41,25 +46,6 @@ const game = {
 }
 
 const snake = {
-    py: 11,
-    px: 10,
-    direcao: "right",
-    ultima: null,
-    moveLock: false,
-    cauda: [
-        {
-            py: 11,
-            px: 10 - 3,
-        },
-        {
-            py: 11,
-            px: 10 - 2,
-        },
-        {
-            py: 11,
-            px: 10 - 1,
-        }
-    ],
     setDirecao(direcao){
         if(this.direcao === direcao) return
         if(this.moveLock) return
@@ -87,11 +73,39 @@ const snake = {
     }
 }
 
+const setSnakeSettings = async ()=> {
+    let settings = await getDefaultSnake()
+    settings = Object.entries(settings)
+    settings.forEach( s => snake[s[0]] = s[1])
+}
+
+const setGameSettings = async () => {
+    let settings = await getDefaultGame()
+    settings = Object.entries(settings)
+    settings.forEach( s => game[s[0]] = s[1])
+}
+
 const randItem = arr => {
     const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     return arr[randint(0,arr.length - 1)]
 }
 
+const gameOver = () => {
+    clearInterval(game.interval)
+    if(game.pontos > game.recorde){
+        game.recorde = game.pontos
+        saveRecorde(game.recorde)
+        recordDiv.innerText = game.recorde
+    }
+    setTimeout( newGame, 3000);
+}
+
+const newGame = async () => {
+    await setSnakeSettings()
+    await setGameSettings()
+    get("pontos").innerText = game.pontos
+    render()
+}
 
 const move = async () => {
     const { direcao } = snake
@@ -164,7 +178,7 @@ const colisao = async () => {
         cauda.forEach( q => {
             if(q.px === px && q.py === py){
                 resolve(true)
-                clearInterval(game.interval)
+                gameOver()
             }
         })
         resolve(false)
@@ -185,7 +199,7 @@ const render = async () => {
         drawSnake(snake, game)
         drawLingua(snake)
     }
-    document.getElementById("pontos").innerText = game.pontos
+    get("pontos").innerText = game.pontos
 }
 
 window.onkeydown = event => {
@@ -201,4 +215,9 @@ window.onkeydown = event => {
     }
 }
 
-window.onload = render
+window.onload = async () => {
+    game.recorde = await getData()
+    await setSnakeSettings()
+    render()
+    recordDiv.innerText = game.recorde
+}
