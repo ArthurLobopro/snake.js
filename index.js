@@ -1,9 +1,10 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getDefaultSnake, getDefaultGame } from "./src/Settings.js"
 import { getData, saveRecorde } from "./src/Data.js";
+import viewGameOver from "./src/telas/GameOver.js";
 const get = id => document.getElementById(id)
 
-const canvas = get('game')
+const canvas = get('canvas')
 const recordDiv = get('recorde')
 
 const buttons = {
@@ -90,14 +91,17 @@ const randItem = arr => {
     return arr[randint(0,arr.length - 1)]
 }
 
-const gameOver = () => {
+const gameOver = async () => {
     clearInterval(game.interval)
+    get('game').style.display = "none"
     if(game.pontos > game.recorde){
         game.recorde = game.pontos
         saveRecorde(game.recorde)
         recordDiv.innerText = game.recorde
     }
-    setTimeout( newGame, 3000);
+    await viewGameOver({pontos: game.pontos, recorde: game.recorde, img: canvas.toDataURL('image/png')})
+    get('game').style.display = ""
+    newGame()
 }
 
 const newGame = async () => {
