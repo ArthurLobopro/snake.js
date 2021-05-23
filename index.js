@@ -7,7 +7,7 @@ const get = id => document.getElementById(id)
 const canvas = get('canvas')
 const recordDiv = get('recorde')
 
-const buttons = {
+const moves = {
     "ArrowLeft": () => snake.setDirecao("left"),
     "ArrowDown": () => snake.setDirecao("down"),
     "ArrowRight": () => snake.setDirecao("right"),
@@ -209,13 +209,13 @@ const render = async () => {
 window.onkeydown = event => {
     const key = event.key.lenght == 1 ? event.key.toLowerCase() : event.key
     if(game.status === "inative"){
-        if(buttons[key]){
+        if(moves[key]){
             game.status = "active"
-            buttons[key]()
+            moves[key]()
             game.interval = setInterval( render, 200)
         }
     }else{
-        buttons[key]?.()
+        moves[key]?.()
     }
 }
 
