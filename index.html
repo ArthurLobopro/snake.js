@@ -9,17 +9,22 @@
 </head>
 <body>
     <div id="container">
-        <div id="canvas-top">
-            <div class="line">
-                <div>Pontuação:</div>
-                <div id="pontos">0</div>
+        <div id="tela">
+            <div id="game">
+                <canvas id="canvas" width="315" height="315"></canvas>
+                <div id="canvas-top">
+                    <div class="line">
+                        <div>Pontuação:</div>
+                        <div id="pontos">0</div>
+                    </div>
+                    <div class="line">
+                        <div>Recorde:</div>
+                        <div id="recorde">0</div>
+                    </div>
+                </div>
             </div>
-            <div class="line">
-                <div>Recorde:</div>
-                <div id="recorde">0</div>
-            </div>
+            
         </div>
-        <canvas id="game" width="315" height="315"></canvas>
     </div>
     <script src="index.js" type="module"></script>
 </body>
