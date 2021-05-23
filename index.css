@@ -67,6 +67,10 @@ fieldset {
   -ms-flex-item-align: center;
       align-self: center;
   width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 150px;
   padding: 0 5px;
   border: 2px solid  #ccc;
   color: #ccc;
@@ -83,6 +87,10 @@ fieldset legend {
   margin: 0 auto;
   font-family: 'Press Start 2P',"Nunito";
   padding-inline: 5px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 fieldset > img {
@@ -100,6 +108,10 @@ fieldset > button {
   margin: 25px auto;
   border: 2px solid;
   border-radius: 3px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 fieldset > button:active {
