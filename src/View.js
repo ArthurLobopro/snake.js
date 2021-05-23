@@ -7,6 +7,8 @@ const colors = {
     cauda_snake: "#9FE6A0",
     red_fruit: "#f55c47"
 }
+
+//#region Frutas
 const frutas = {}
 
 const laranja = new Image()
@@ -16,9 +18,11 @@ laranja.onload = () => frutas.laranja = laranja
 const maca = new Image()
 maca.src = "./assets/maca.png"
 maca.onload = () => frutas.maca = maca
+//#endregion
 
+//#region Lingua
 const lingua = {}
-//Imagens da lingua
+
 const upImg = new Image()
 upImg.src = "./assets/lingua-up.png"
 upImg.onload = () => lingua.up = upImg
@@ -34,7 +38,9 @@ leftImg.onload = () => lingua.left = leftImg
 const rightImg = new Image()
 rightImg.src = "./assets/lingua-right.png"
 rightImg.onload = () => lingua.right = rightImg
+//#endregion
 
+//#region Cálculos
 //Pega a posição da cabeça da cobra e calcula uma posição para a lingua
 const getPosLingua =  (snake) => {
     let { direcao, px, py } = snake
@@ -52,7 +58,9 @@ const getPosLingua =  (snake) => {
     if(direcao === "down")
         return [px * 15, ((py + 1) * 15) - 10]
 }
+//#endregion
 
+//#region Draw
 const drawBackground = (game) => {
     ctx.fillStyle = colors.background
     ctx.fillRect(0, 0, game.width, game.height)
@@ -87,4 +95,5 @@ const drawSnake = (snake, game) => {
     ctx.fillStyle = colors.snake
     ctx.fillRect(px * unity, py * unity, unity, unity)
 }
+//#endregion
 export { drawBackground, drawFruit, drawLingua, drawSnake }
