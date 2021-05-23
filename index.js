@@ -25,24 +25,6 @@ const game = {
     unity: 15,
     quantX: 21,
     quantY: 21,
-    pontos: 0,
-    recorde: 0,
-    fruit:{
-        py: 11,
-        px: 10 + 5,
-        value: 100,
-        type: "maca"
-    },
-    frutas:[
-        {
-            type: "maca",
-            value: 100
-        },
-        {
-            type: "laranja",
-            value: 250
-        }
-    ],
     interval: null
 }
 
@@ -222,6 +204,7 @@ window.onkeydown = event => {
 window.onload = async () => {
     game.recorde = await getData()
     await setSnakeSettings()
+    await setGameSettings()
     render()
     recordDiv.innerText = game.recorde
 }
