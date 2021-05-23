@@ -16,6 +16,9 @@ body{
 canvas {
     border: 1px solid black;
     width: 450px;
+    @media screen and (max-height: 700px){
+        width: 378px;
+    }
 }
 
 #container{

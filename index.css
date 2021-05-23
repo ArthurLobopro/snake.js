@@ -20,6 +20,12 @@ canvas {
   width: 450px;
 }
 
+@media screen and (max-height: 700px) {
+  canvas {
+    width: 378px;
+  }
+}
+
 #container {
   display: -ms-grid;
   display: grid;
