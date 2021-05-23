@@ -30,7 +30,7 @@ canvas {
   height: 100vh;
 }
 
-.table {
+.table, #canvas-top {
   width: 100%;
   padding: 0 0;
   display: -ms-grid;
@@ -43,7 +43,7 @@ canvas {
   font-size: 20px;
 }
 
-.table .line {
+.table .line, #canvas-top .line {
   padding: 3px 0;
   display: -webkit-box;
   display: -ms-flexbox;
