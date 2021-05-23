@@ -28,6 +28,25 @@ const game = {
     interval: null
 }
 
+const pause = ()=> {
+    if(game.status === "active"){
+        game.status = "paused"
+        clearInterval(game.interval)
+    }
+}
+
+const play = () => {
+    if(game.status === "paused"){
+        game.status = "active"
+        game.interval = setInterval(render, 200)
+    }
+}
+
+const comands = {
+    "Escape": pause,
+    " ": play
+}
+
 const snake = {
     setDirecao(direcao){
         if(this.direcao === direcao) return
@@ -198,6 +217,7 @@ window.onkeydown = event => {
         }
     }else{
         moves[key]?.()
+        comands[key]?.()
     }
 }
 
