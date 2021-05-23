@@ -10,23 +10,29 @@ body{
     display: grid;
     place-items: center;
     height: 100vh;
+    background: #000;
 }
 
 canvas {
     border: 1px solid black;
+    width: 450px;
 }
 
 #container{
     display: grid;
     place-items: center;
+    min-width: 450px;
+    background-color: #000;
+    padding: 0 5px;
+    height: 100vh;
 }
 
-#canvas-top{
+.table{
     width: 100%;
     padding: 0 0;
     display: grid;
     grid-template-rows: auto auto;
-    background-color: #000;
+    background-color: #ccc;
     grid-row-gap: 1px;
     font-family: 'Press Start 2P',"Nunito";
     font-size: 20px;
@@ -34,6 +40,43 @@ canvas {
         padding: 3px 0;
         display: flex;
         justify-content: space-between;
-        background-color: #fff;
+        background-color: #000;
+        color: #ccc;
+    }
+}
+#tela{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+fieldset{
+    align-self: center;
+    width: 100%;
+    padding: 0 5px;
+    border: 2px solid  #ccc;;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    & legend{
+        margin: 0 auto;
+        font-family: 'Press Start 2P',"Nunito";
+        padding-inline: 5px;
+    }
+    & > img{
+        margin: 25px auto;
+    }
+    & > button{
+        font-family: 'Press Start 2P',"Nunito";
+        background-color: #000;
+        color: #ccc;
+        width: max-content;
+        padding: 5px 10px;
+        margin: 25px auto;
+        border: 2px solid;
+        border-radius: 3px;
+        &:active{
+            color: #909090;
+        }
     }
 }
