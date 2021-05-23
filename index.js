@@ -1,7 +1,9 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getDefaultSnake, getDefaultGame } from "./src/Settings.js"
-import { getData, saveRecorde } from "./src/Data.js";
-import viewGameOver from "./src/telas/GameOver.js";
+import { getData, saveRecorde } from "./src/Data.js"
+import viewGameOver from "./src/telas/GameOver.js"
+import viewPause from "./src/telas/Pause.js"
+
 const get = id => document.getElementById(id)
 
 const canvas = get('canvas')
@@ -32,6 +34,7 @@ const pause = ()=> {
     if(game.status === "active"){
         game.status = "paused"
         clearInterval(game.interval)
+        viewPause({play, newGame})
     }
 }
 
