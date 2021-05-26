@@ -9,6 +9,7 @@ function createWindow () {
         height: 625,
         minWidth: 865,
         minHeight: 625,
+        resizable: false,
         frame: false,
         icon: path.join( __dirname, "../assets/icon32.png"),
         webPreferences: {
@@ -34,6 +35,6 @@ app.on('activate', () => {
     }
 })
 // Faz com que o programa não inicie várias vezes durante a instalação
-// if (require('electron-squirrel-startup')){
-//     return app.quit();
-// }
+if (require('electron-squirrel-startup')){
+    return app.quit();
+}
