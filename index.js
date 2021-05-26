@@ -47,7 +47,7 @@ const play = () => {
 
 const comands = {
     "Escape": pause,
-    " ": play
+    " ": () => get('continue').click()
 }
 
 const snake = {
