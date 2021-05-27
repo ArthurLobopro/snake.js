@@ -40,6 +40,7 @@ const pause = ()=> {
 
 const play = () => {
     if(game.status === "paused"){
+        window.onkeydown = mainKeyDown
         game.status = "active"
         game.interval = setInterval(render, 200)
     }
@@ -47,7 +48,6 @@ const play = () => {
 
 const comands = {
     "Escape": pause,
-    " ": () => get('continue').click()
 }
 
 const snake = {
@@ -210,7 +210,7 @@ const render = async () => {
     get("pontos").innerText = game.pontos
 }
 
-window.onkeydown = event => {
+const mainKeyDown = event => {
     const key = event.key.lenght == 1 ? event.key.toLowerCase() : event.key
     if(game.status === "inative"){
         if(moves[key]){
@@ -223,6 +223,8 @@ window.onkeydown = event => {
         comands[key]?.()
     }
 }
+
+window.onkeydown = mainKeyDown
 
 window.onload = async () => {
     game.recorde = await getData()
