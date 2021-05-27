@@ -80,12 +80,15 @@ fieldset{
         color: #ccc;
         width: max-content;
         padding: 5px 10px;
-        margin: 20px auto;
+        margin: 15px auto;
         border: 2px solid;
         border-radius: 3px;
         user-select: none;
         &:active{
             color: #909090;
+        }
+        &.focus{
+            color: #eee;
         }
     }
 }

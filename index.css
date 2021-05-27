@@ -115,7 +115,7 @@ fieldset > button {
   width: -moz-max-content;
   width: max-content;
   padding: 5px 10px;
-  margin: 20px auto;
+  margin: 15px auto;
   border: 2px solid;
   border-radius: 3px;
   -webkit-user-select: none;
@@ -126,5 +126,9 @@ fieldset > button {
 
 fieldset > button:active {
   color: #909090;
+}
+
+fieldset > button.focus {
+  color: #eee;
 }
 /*# sourceMappingURL=index.css.map */
