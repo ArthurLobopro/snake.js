@@ -37,7 +37,7 @@ export default function viewPause({play, newGame}) {
     const fieldset = document.createElement('fieldset')
     fieldset.innerHTML = `
     <legend>Pause</legend>
-    <button id="continue">CONTINUE</button>
+    <button id="continue" class="focus">CONTINUE</button>
     <button id="new-game">NEW GAME</button>`
     tela.insertBefore(fieldset, gameDiv)
     get('continue').onclick = () => {
@@ -48,4 +48,5 @@ export default function viewPause({play, newGame}) {
         tela.removeChild(fieldset)
         setTimeout( newGame, 150)
     }
+    window.onkeydown = event => functions[event.key]?.(fieldset)
 }
