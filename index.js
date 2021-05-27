@@ -109,6 +109,7 @@ const gameOver = async () => {
 }
 
 const newGame = async () => {
+    window.onkeydown = mainKeyDown
     await setSnakeSettings()
     await setGameSettings()
     get("pontos").innerText = game.pontos
