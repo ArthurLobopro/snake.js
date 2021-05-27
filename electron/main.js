@@ -22,6 +22,14 @@ function createWindow () {
 }
 
 app.whenReady().then(createWindow)
+}
+
+app.on('second-instance', () => {
+    const win = BrowserWindow.getAllWindows()[0]
+    if(win.isMinimized()) win.restore()
+    win.center()
+    win.focus()
+})
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
