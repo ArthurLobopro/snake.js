@@ -30,7 +30,7 @@ fieldset{
   }
   & .text{
       font-size: 17px;
-      font-family: "Nunito";
+      font-family: "Press Start 2P";
       color: #ccc;
   }
   & button{
@@ -52,12 +52,14 @@ fieldset{
   & .buttons{
       height: max-content;
       width: max-content;
-      justify-self: right;
-      justify-content: right;
-      align-self: center;
+      justify-content: flex-end;
+      align-self: flex-end;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column-gap: 5px;
+      & > button{
+        margin: 15px 0;
+      }
   }
 }
 

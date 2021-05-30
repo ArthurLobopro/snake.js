@@ -81,18 +81,19 @@ fieldset .buttons {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  -ms-grid-column-align: right;
-      justify-self: right;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
-  -ms-grid-row-align: center;
-      align-self: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  align-self: flex-end;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
   grid-column-gap: 5px;
+}
+
+fieldset .buttons > button {
+  margin: 15px 0;
 }
 
 @-webkit-keyframes top_down {
