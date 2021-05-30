@@ -8,7 +8,7 @@ const functions = {
     "ArrowUp": fieldset => {
         const { buttons, focused } = getButtons(fieldset)
         let previus = focused.previousElementSibling
-        if(previus.tagName !== "BUTTON"){
+        if(previus?.tagName !== "BUTTON"){
             previus = buttons[buttons.length - 1]
         }
         focused.classList.remove('focus')
@@ -17,7 +17,8 @@ const functions = {
     "ArrowDown": fieldset => {
         const { buttons, focused } = getButtons(fieldset)
         let next = focused.nextElementSibling
-        if(next.tagName !== "BUTTON"){
+        if( !next || next?.tagName !== "BUTTON" || next == focused ){
+            console.log('hey');
             next = buttons[0]
         }
         focused.classList.remove('focus')
