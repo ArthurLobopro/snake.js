@@ -9,34 +9,35 @@ export default async function config(game) {
     const fieldset = document.createElement('fieldset')
     const configs = {
         velocidade,
-        voltar: () => {
-            gameDiv.style.display = ""
-            pause.style.display = ""
-            tela.removeChild(fieldset)
-        }
     }
     fieldset.id = "config"
     fieldset.innerHTML = `
     <legend>CONFIGURAÇÃO</legend>
     <div>
         <div>
-            <button data-type="velocidade">Velocidade</button>
-            <button data-type="voltar" class="focus">Voltar</button>
+            <button data-type="velocidade" class="focus">Velocidade</button>
+            <button data-type="voltar">Voltar</button>
         </div>
     </div>`
     gameDiv.style.display = "none"
     pause.style.display = "none"
     tela.appendChild(fieldset)
-    let value
+    let value = []
     const buttons = fieldset.querySelectorAll('button')
-    buttons.forEach( e => {
-        e.onclick = async () => value = await configs[e.dataset.type](game)
-    })
+    window.onkeydown = event => functions[event.key]?.(fieldset)
     return new Promise( resolve => {
-        setInterval(() => {
-            if(typeof value === "object"){
-                resolve(value)
+        const voltar = () => {
+            gameDiv.style.display = ""
+            pause.style.display = ""
+            tela.removeChild(fieldset)
+            console.log(value);
+            resolve(value)
+        }
+        configs.voltar = voltar
+        buttons.forEach( e => {
+            e.onclick = async () => {
+                value.push(await configs[e.dataset.type](game))
             }
-        }, 150);
+        })
     })
 }
