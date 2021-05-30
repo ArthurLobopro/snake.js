@@ -1,6 +1,6 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getDefaultSnake, getDefaultGame } from "./src/Settings.js"
-import { getData, saveRecorde } from "./src/Data.js"
+import { getData, saveRecorde, saveVelocidade } from "./src/Data.js"
 import viewGameOver from "./src/telas/GameOver.js"
 import viewPause from "./src/telas/Pause.js"
 
@@ -30,19 +30,24 @@ const game = {
     interval: null
 }
 
+function setConfig(key,value){
+    game[key]=value
+}
+
 const pause = ()=> {
     if(game.status === "active"){
         game.status = "paused"
         clearInterval(game.interval)
-        viewPause({play, newGame})
+        viewPause({play, newGame, game, setConfig})
     }
 }
 
 const play = () => {
     if(game.status === "paused"){
+        saveVelocidade(game.velocidade)
         window.onkeydown = mainKeyDown
         game.status = "active"
-        game.interval = setInterval(render, 200)
+        game.interval = setInterval(render, game.velocidade)
     }
 }
 
@@ -217,7 +222,7 @@ const mainKeyDown = event => {
         if(moves[key]){
             game.status = "active"
             moves[key]()
-            game.interval = setInterval( render, 200)
+            game.interval = setInterval( render, game.velocidade)
         }
     }else{
         moves[key]?.()
@@ -228,9 +233,12 @@ const mainKeyDown = event => {
 window.onkeydown = mainKeyDown
 
 window.onload = async () => {
-    game.recorde = await getData()
-    await setSnakeSettings()
     await setGameSettings()
+    const data = Object.entries(await getData())
+    data.forEach( ([key, value]) => {
+        game[key]= value
+    })
+    await setSnakeSettings()
     render()
     recordDiv.innerText = game.recorde
 }
