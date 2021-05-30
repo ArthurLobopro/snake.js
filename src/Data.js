@@ -2,9 +2,10 @@ const getData = async () => {
     if(!localStorage.gameData){
         createData()
     }
-    let { recorde } = await JSON.parse(localStorage.gameData)
+    let { recorde, velocidade } = await JSON.parse(localStorage.gameData)
     recorde = recorde ?? 0
-    return  recorde 
+    velocidade = velocidade ?? 200
+    return  {recorde, velocidade} 
 }
 
 const saveRecorde = recorde => {
@@ -13,11 +14,18 @@ const saveRecorde = recorde => {
     localStorage.gameData = JSON.stringify(gameData)
 }
 
+const saveVelocidade = velocidade => {
+    const gameData = JSON.parse(localStorage.gameData)
+    gameData.velocidade = velocidade
+    localStorage.gameData = JSON.stringify(gameData)
+}
+
 const createData = () => {
     let data = {
-        recorde: 0
+        recorde: 0,
+        velocidade:200
     }
     localStorage.gameData = JSON.stringify(data)
 }
 
-export { saveRecorde, getData }
+export { saveRecorde, getData, saveVelocidade }
