@@ -1,5 +1,6 @@
 @import url(./public/css-import/Nunito-Regular.css);
 @import url(./public/css-import/PressStart2P.css);
+@import url(./src/browser-functions/style.css);
 * {
   margin: 0;
   padding: 0;
@@ -44,7 +45,7 @@ canvas {
   width: -moz-max-content;
   width: max-content;
   background-color: #000;
-  padding: 0 5px;
+  padding: 5px 5px;
   height: 100%;
 }
 
@@ -61,7 +62,7 @@ canvas {
   font-size: 20px;
 }
 
-.table .line, #canvas-top .line {
+.line {
   padding: 3px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -69,6 +70,9 @@ canvas {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #000;
   color: #ccc;
 }
@@ -107,7 +111,12 @@ fieldset > img {
   margin: 25px auto;
 }
 
-fieldset > button {
+fieldset > div {
+  overflow: auto;
+  height: 100%;
+}
+
+fieldset button {
   font-family: 'Press Start 2P',"Nunito";
   background-color: #000;
   color: #ccc;
@@ -115,7 +124,7 @@ fieldset > button {
   width: -moz-max-content;
   width: max-content;
   padding: 5px 10px;
-  margin: 20px auto;
+  margin: 15px auto;
   border: 2px solid;
   border-radius: 3px;
   -webkit-user-select: none;
@@ -124,7 +133,45 @@ fieldset > button {
           user-select: none;
 }
 
-fieldset > button:active {
+fieldset button:active {
   color: #909090;
+}
+
+fieldset button.focus {
+  color: #fff;
+}
+
+#config {
+  display: block;
+  min-height: 50%;
+}
+
+#config > div > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: auto;
+}
+
+#config > div > div > button {
+  width: 100%;
+}
+
+.check {
+  border: 1px solid #ccc;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+}
+
+.check[data-check=true] {
+  content: url(./assets/x.png);
 }
 /*# sourceMappingURL=index.css.map */

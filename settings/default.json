@@ -2,6 +2,7 @@
     "game": {
         "status": "inative",
         "pontos": 0,
+        "velocidade": 200,
         "fruit": {
             "py": 11,
             "px": 15,
