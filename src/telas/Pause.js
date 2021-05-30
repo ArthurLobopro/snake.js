@@ -1,14 +1,17 @@
 import functions from "./navegacao.js"
+import config from "./Config.js"
 
 const get = id => document.getElementById(id)
 const gameDiv = get('game')
 const tela = get('tela')
 
-export default function viewPause({play, newGame}) {
+export default function viewPause({play, newGame,game,setConfig}) {
     const fieldset = document.createElement('fieldset')
+    fieldset.id = "pause"
     fieldset.innerHTML = `
     <legend>Pause</legend>
     <button id="continue" class="focus">CONTINUE</button>
+    <button id="config">OPÇÕES</button>
     <button id="new-game">NEW GAME</button>`
     tela.insertBefore(fieldset, gameDiv)
     get('continue').onclick = () => {
@@ -18,6 +21,10 @@ export default function viewPause({play, newGame}) {
     get('new-game').onclick = () => {
         tela.removeChild(fieldset)
         setTimeout( newGame, 150)
+    }
+    get('config').onclick = async () => {
+        const value = await config(game)
+        setConfig(value[0],value[1])
     }
     window.onkeydown = event => functions[event.key]?.(fieldset)
 }
