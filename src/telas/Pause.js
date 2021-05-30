@@ -24,7 +24,11 @@ export default function viewPause({play, newGame,game,setConfig}) {
     }
     get('config').onclick = async () => {
         const value = await config(game)
-        setConfig(value[0],value[1])
+        window.onkeydown = event => functions[event.key]?.(fieldset)
+        value.filter( e => e !== undefined && e !== null)
+        .forEach( ([chave, valor]) => {
+            setConfig(chave,valor)
+        })
     }
     window.onkeydown = event => functions[event.key]?.(fieldset)
 }
