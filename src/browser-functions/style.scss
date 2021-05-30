@@ -1,0 +1,71 @@
+.full{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  & fieldset{
+    width: max-content;
+    min-width: 440px;
+  }
+}
+fieldset{
+  display: grid;
+  grid-template-rows: 35px auto 35px;
+  grid-row-gap: 5px;
+  border: 2px solid #ccc;
+  background-color: #000;
+  width: max-content;
+  min-width: 500px;
+  padding: 15px;
+  & legend{
+      font-size: 20px;
+      font-family: 'Press Start 2P';
+      color: #ccc;
+      user-select: none;
+  }
+  & .text{
+      font-size: 17px;
+      font-family: "Nunito";
+      color: #ccc;
+  }
+  & button{
+      //background: #3988fd;
+      border: 2px solid #ccc;
+      padding: 2px 7px;
+      font-size: 16px;
+      font-family: 'Press Start 2P';
+      border-radius: 3px;
+      justify-self: right;
+      align-self: center;
+      height: 30px;
+      cursor: pointer;
+      width: min-content;
+      &:hover{
+        color: #eee;
+      }
+  }
+  & .buttons{
+      height: max-content;
+      width: max-content;
+      justify-self: right;
+      justify-content: right;
+      align-self: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 5px;
+  }
+}
+
+@keyframes top_down{
+  from{
+      transform: translateY(-100px);
+  }
+  to{
+      transform: translateY(0);
+  }
+}

@@ -1,0 +1,119 @@
+.full {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.full fieldset {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 440px;
+}
+
+fieldset {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 35px auto 35px;
+      grid-template-rows: 35px auto 35px;
+  grid-row-gap: 5px;
+  border: 2px solid #ccc;
+  background-color: #000;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  min-width: 500px;
+  padding: 15px;
+}
+
+fieldset legend {
+  font-size: 20px;
+  font-family: 'Press Start 2P';
+  color: #ccc;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+fieldset .text {
+  font-size: 17px;
+  font-family: "Nunito";
+  color: #ccc;
+}
+
+fieldset button {
+  border: 2px solid #ccc;
+  padding: 2px 7px;
+  font-size: 16px;
+  font-family: 'Press Start 2P';
+  border-radius: 3px;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  height: 30px;
+  cursor: pointer;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+fieldset button:hover {
+  color: #eee;
+}
+
+fieldset .buttons {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  -ms-grid-row-align: center;
+      align-self: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+@-webkit-keyframes top_down {
+  from {
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes top_down {
+  from {
+    -webkit-transform: translateY(-100px);
+            transform: translateY(-100px);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+/*# sourceMappingURL=style.css.map */
