@@ -2,7 +2,7 @@ import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getData } from "./src/Data.js"
 import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
 import { 
-    game, setGameSettings, pause, gameOver, spawFruit
+    game, setGameSettings, pause, colisao
 } from "./src/Game.js"
 
 const get = id => document.getElementById(id)
@@ -11,26 +11,6 @@ const recordDiv = get('recorde')
 
 const comands = {
     "Escape": pause,
-}
-
-const colisao = async () => {
-    const { px , py, cauda } = snake
-
-    if(game.fruit.px === px && game.fruit.py === py){
-        game.pontos += game.fruit.value
-        await spawFruit()
-        snake.cauda.unshift(snake.ultima)
-    }
-
-    return new Promise( resolve => {
-        cauda.forEach( q => {
-            if(q.px === px && q.py === py){
-                resolve(true)
-                gameOver()
-            }
-        })
-        resolve(false)
-    })
 }
 
 const render = async () => {

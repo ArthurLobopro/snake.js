@@ -98,4 +98,24 @@ const spawFruit = async () => {
     }
 }
 
-export { game, setConfig, setGameSettings, pause, newGame, gameOver, spawFruit }
+const colisao = async () => {
+    const { px , py, cauda } = snake
+
+    if(game.fruit.px === px && game.fruit.py === py){
+        game.pontos += game.fruit.value
+        await spawFruit()
+        snake.cauda.unshift(snake.ultima)
+    }
+
+    return new Promise( resolve => {
+        cauda.forEach( q => {
+            if(q.px === px && q.py === py){
+                resolve(true)
+                gameOver()
+            }
+        })
+        resolve(false)
+    })
+}
+
+export { game, setConfig, setGameSettings, pause, newGame, spawFruit, colisao }
