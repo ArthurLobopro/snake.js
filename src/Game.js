@@ -22,7 +22,7 @@ const game = {
 const setGameSettings = async () => {
     let settings = await getDefaultGame()
     settings = Object.entries(settings)
-    settings.forEach( s => game[s[0]] = s[1])
+    settings.forEach( ([key, value]) => game[key] = value)
 }
 
 const setConfig = (key,value) =>{
