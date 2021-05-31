@@ -25,13 +25,13 @@ body #container {
   place-items: center;
 }
 
-canvas {
+#canvas {
   border: 1px solid black;
   width: 450px;
 }
 
 @media screen and (max-height: 700px) {
-  canvas {
+  #canvas {
     width: 378px;
   }
 }
@@ -95,11 +95,11 @@ fieldset {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  font-family: 'Press Start 2P',"Nunito";
 }
 
 fieldset legend {
   margin: 0 auto;
-  font-family: 'Press Start 2P',"Nunito";
   padding-inline: 5px;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -117,7 +117,6 @@ fieldset > div {
 }
 
 fieldset button {
-  font-family: 'Press Start 2P',"Nunito";
   background-color: #000;
   color: #ccc;
   width: -webkit-max-content;
@@ -162,6 +161,56 @@ fieldset button.focus {
 
 #config > div > div > button {
   width: 100%;
+}
+
+#color-config .container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: max-content auto;
+      grid-template-columns: -webkit-max-content auto;
+      grid-template-columns: max-content auto;
+  -ms-grid-rows: 100%;
+      grid-template-rows: 100%;
+}
+
+#color-config .inputs {
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+#color-config .inputs div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#color-config .inputs input[type="color"] {
+  background-color: transparent;
+  border: none;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+#color-config #snake-preview {
+  margin: 0 20px 0 5px;
+  background-color: #303030;
 }
 
 .check {
