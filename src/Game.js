@@ -1,6 +1,8 @@
 import { getDefaultGame } from "./Settings.js"
 import { mainKeyDown, render, setSnakeSettings, get } from "../index.js"
+import { saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
+import viewGameOver from "./telas/GameOver.js"
 
 const game = {
     width: canvas.width,
@@ -46,4 +48,17 @@ const newGame = async () => {
     render()
 }
 
-export { game, setConfig, setGameSettings, pause, newGame }
+const gameOver = async () => {
+    clearInterval(game.interval)
+    get('game').style.display = "none"
+    if(game.pontos > game.recorde){
+        game.recorde = game.pontos
+        saveRecorde(game.recorde)
+        recordDiv.innerText = game.recorde
+    }
+    await viewGameOver({pontos: game.pontos, recorde: game.recorde, img: canvas.toDataURL('image/png')})
+    await newGame()
+    get('game').style.display = ""
+}
+
+export { game, setConfig, setGameSettings, pause, newGame, gameOver }
