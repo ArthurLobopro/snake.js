@@ -96,4 +96,4 @@ const drawSnake = (snake, game) => {
     ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 //#endregion
-export { drawBackground, drawFruit, drawLingua, drawSnake }
+export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua }
