@@ -20,4 +20,12 @@ const setConfig = (key,value) =>{
     game[key]=value
 }
 
-export { game, setConfig, setGameSettings }
+const play = () => {
+    if(game.status === "paused"){
+        window.onkeydown = mainKeyDown
+        game.status = "active"
+        game.interval = setInterval(render, game.velocidade)
+    }
+}
+
+export { game, setConfig, setGameSettings, play }

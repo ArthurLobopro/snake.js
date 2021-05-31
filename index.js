@@ -1,10 +1,10 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getDefaultSnake } from "./src/Settings.js"
-import { getData, saveRecorde, saveVelocidade } from "./src/Data.js"
+import { getData, saveRecorde } from "./src/Data.js"
 import viewGameOver from "./src/telas/GameOver.js"
 import viewPause from "./src/telas/Pause.js"
 import { 
-    game, setConfig, setGameSettings 
+    game, setConfig, setGameSettings, play
 } from "./src/Game.js"
 
 const get = id => document.getElementById(id)
@@ -28,15 +28,6 @@ const pause = ()=> {
         game.status = "paused"
         clearInterval(game.interval)
         viewPause({play, newGame, game, setConfig})
-    }
-}
-
-const play = () => {
-    if(game.status === "paused"){
-        saveVelocidade(game.velocidade)
-        window.onkeydown = mainKeyDown
-        game.status = "active"
-        game.interval = setInterval(render, game.velocidade)
     }
 }
 
