@@ -1,19 +1,15 @@
 import functions from "./navegacao.js"
 import velocidade from "./configs/velocidade.js"
+import { game } from "../Game.js"
 
 const get = id => document.getElementById(id)
 const gameDiv = get('game')
 
 const configs = {
-    velocidade,
-    voltar: () => {
-        gameDiv.style.display = ""
-        pause.style.display = ""
-        tela.removeChild(fieldset)
-    }
+    velocidade, 
 }
 
-export default async function config(game) {
+export default async function config() {
     const pause = get("pause")
     const fieldset = document.createElement('fieldset')
     fieldset.id = "config"
@@ -25,6 +21,13 @@ export default async function config(game) {
             <button data-type="voltar">Voltar</button>
         </div>
     </div>`
+    const voltar = () => {
+        gameDiv.style.display = ""
+        pause.style.display = ""
+        tela.removeChild(fieldset)
+    }
+    configs.voltar = voltar
+
     gameDiv.style.display = "none"
     pause.style.display = "none"
     tela.appendChild(fieldset)
