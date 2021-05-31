@@ -5,7 +5,7 @@ const get = id => document.getElementById(id)
 const gameDiv = get('game')
 const tela = get('tela')
 
-export default function viewPause({play, newGame}) {
+export default async function viewPause({play, newGame}) {
     const fieldset = document.createElement('fieldset')
     fieldset.id = "pause"
     fieldset.innerHTML = `
@@ -22,7 +22,9 @@ export default function viewPause({play, newGame}) {
         tela.removeChild(fieldset)
         setTimeout( newGame, 150)
     }
-    get('config').onclick = config
-    
+    get('config').onclick = async () => {
+        await config()
+        window.onkeydown = event => functions[event.key]?.(fieldset)
+    }
     window.onkeydown = event => functions[event.key]?.(fieldset)
 }

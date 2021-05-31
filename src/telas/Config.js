@@ -21,21 +21,23 @@ export default async function config() {
             <button data-type="voltar">Voltar</button>
         </div>
     </div>`
-    const voltar = () => {
-        gameDiv.style.display = ""
-        pause.style.display = ""
-        tela.removeChild(fieldset)
-    }
-    configs.voltar = voltar
-
     gameDiv.style.display = "none"
     pause.style.display = "none"
     tela.appendChild(fieldset)
     const buttons = fieldset.querySelectorAll('button')
     window.onkeydown = event => functions[event.key]?.(fieldset)
-    buttons.forEach( e => {
-        e.onclick = () => {
-            configs[e.dataset.type](game)
-        }
+    return new Promise( resolve => {
+        buttons.forEach( e => {
+            e.onclick = () => {
+                const voltar = () => {
+                    gameDiv.style.display = ""
+                    pause.style.display = ""
+                    tela.removeChild(fieldset)
+                    resolve(true)
+                }
+                configs.voltar = voltar
+                configs[e.dataset.type](game)
+            }
+        })
     })
 }
