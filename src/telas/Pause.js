@@ -5,7 +5,7 @@ const get = id => document.getElementById(id)
 const gameDiv = get('game')
 const tela = get('tela')
 
-export default function viewPause({play, newGame,game}) {
+export default function viewPause({play, newGame}) {
     const fieldset = document.createElement('fieldset')
     fieldset.id = "pause"
     fieldset.innerHTML = `
