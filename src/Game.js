@@ -4,6 +4,8 @@ import { saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
 
+const canvas = get('canvas')
+
 const game = {
     width: canvas.width,
     height: canvas.height,

@@ -7,7 +7,6 @@ import {
 
 const get = id => document.getElementById(id)
 
-const canvas = get('canvas')
 const recordDiv = get('recorde')
 
 const moves = {
