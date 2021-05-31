@@ -4,12 +4,18 @@ import velocidade from "./configs/velocidade.js"
 const get = id => document.getElementById(id)
 const gameDiv = get('game')
 
+const configs = {
+    velocidade,
+    voltar: () => {
+        gameDiv.style.display = ""
+        pause.style.display = ""
+        tela.removeChild(fieldset)
+    }
+}
+
 export default async function config(game) {
     const pause = get("pause")
     const fieldset = document.createElement('fieldset')
-    const configs = {
-        velocidade,
-    }
     fieldset.id = "config"
     fieldset.innerHTML = `
     <legend>CONFIGURAÇÃO</legend>
@@ -22,22 +28,11 @@ export default async function config(game) {
     gameDiv.style.display = "none"
     pause.style.display = "none"
     tela.appendChild(fieldset)
-    let value = []
     const buttons = fieldset.querySelectorAll('button')
     window.onkeydown = event => functions[event.key]?.(fieldset)
-    return new Promise( resolve => {
-        const voltar = () => {
-            gameDiv.style.display = ""
-            pause.style.display = ""
-            tela.removeChild(fieldset)
-            console.log(value);
-            resolve(value)
+    buttons.forEach( e => {
+        e.onclick = () => {
+            configs[e.dataset.type](game)
         }
-        configs.voltar = voltar
-        buttons.forEach( e => {
-            e.onclick = async () => {
-                value.push(await configs[e.dataset.type](game))
-            }
-        })
     })
 }
