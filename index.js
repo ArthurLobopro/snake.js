@@ -1,6 +1,6 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
-import { getDefaultSnake } from "./src/Settings.js"
-import { getData, saveRecorde } from "./src/Data.js"
+import { getData } from "./src/Data.js"
+import { snake, setSnakeSettings } from "./src/Snake.js"
 import { 
     game, setGameSettings, pause, gameOver
 } from "./src/Game.js"
@@ -22,40 +22,6 @@ const moves = {
 
 const comands = {
     "Escape": pause,
-}
-
-const snake = {
-    setDirecao(direcao){
-        if(this.direcao === direcao) return
-        if(this.moveLock) return
-
-        if(this.direcao === "right"){
-            if(direcao !== "left")
-                this.direcao = direcao
-        }
-
-        if(this.direcao === "left"){
-            if(direcao !== "right")
-                this.direcao = direcao
-        }
-
-        if(this.direcao === "up"){
-            if(direcao !== "down")
-                this.direcao = direcao
-        }
-
-        if(this.direcao === "down"){
-            if(direcao !== "up")
-                this.direcao = direcao
-        }
-        this.moveLock = true
-    }
-}
-
-const setSnakeSettings = async ()=> {
-    let settings = await getDefaultSnake()
-    settings = Object.entries(settings)
-    settings.forEach( s => snake[s[0]] = s[1])
 }
 
 const randItem = arr => {
@@ -182,4 +148,4 @@ window.onload = async () => {
     recordDiv.innerText = game.recorde
 }
 
-export { mainKeyDown, render, snake, setSnakeSettings, get }
+export { mainKeyDown, render, get }
