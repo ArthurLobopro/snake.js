@@ -1,8 +1,10 @@
 import { getDefaultGame } from "./Settings.js"
-import { mainKeyDown, render, setSnakeSettings, get } from "../index.js"
+import { mainKeyDown, render, setSnakeSettings } from "../index.js"
 import { saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
+
+const get = id => document.getElementById(id)
 
 const canvas = get('canvas')
 
