@@ -4,6 +4,7 @@ import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
 import { 
     game, setGameSettings, pause, colisao
 } from "./src/Game.js"
+import cores from "./src/telas/configs/cores.js"
 
 const get = id => document.getElementById(id)
 
@@ -13,8 +14,8 @@ const comands = {
     "Escape": pause,
 }
 
-const render = async () => {
-    if(!await colisao()){
+const render = async (canMove = true) => {
+    if(!await colisao() && canMove){
         await move()
     }
 
@@ -53,5 +54,7 @@ window.onload = async () => {
     render()
     recordDiv.innerText = game.recorde
 }
+
+//window.onload = cores
 
 export { mainKeyDown, render, get }
