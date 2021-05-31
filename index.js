@@ -3,7 +3,7 @@ import { getDefaultSnake } from "./src/Settings.js"
 import { getData, saveRecorde } from "./src/Data.js"
 import viewGameOver from "./src/telas/GameOver.js"
 import { 
-    game, setConfig, setGameSettings, pause
+    game, setConfig, setGameSettings, pause, newGame
 } from "./src/Game.js"
 
 const get = id => document.getElementById(id)
@@ -76,14 +76,6 @@ const gameOver = async () => {
     await viewGameOver({pontos: game.pontos, recorde: game.recorde, img: canvas.toDataURL('image/png')})
     await newGame()
     get('game').style.display = ""
-}
-
-const newGame = async () => {
-    window.onkeydown = mainKeyDown
-    await setSnakeSettings()
-    await setGameSettings()
-    get("pontos").innerText = game.pontos
-    render()
 }
 
 const move = async () => {
@@ -205,4 +197,4 @@ window.onload = async () => {
     recordDiv.innerText = game.recorde
 }
 
-export { mainKeyDown, render }
+export { mainKeyDown, render, snake, setSnakeSettings, get }

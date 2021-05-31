@@ -1,5 +1,5 @@
 import { getDefaultGame } from "./Settings.js"
-import { mainKeyDown, render } from "../index.js"
+import { mainKeyDown, render, setSnakeSettings, get } from "../index.js"
 import viewPause from "./telas/Pause.js"
 
 const game = {
@@ -38,4 +38,12 @@ const pause = ()=> {
     }
 }
 
-export { game, setConfig, setGameSettings, pause }
+const newGame = async () => {
+    window.onkeydown = mainKeyDown
+    await setSnakeSettings()
+    await setGameSettings()
+    get("pontos").innerText = game.pontos
+    render()
+}
+
+export { game, setConfig, setGameSettings, pause, newGame }
