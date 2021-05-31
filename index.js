@@ -2,7 +2,7 @@ import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getData } from "./src/Data.js"
 import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
 import { 
-    game, setGameSettings, pause, gameOver
+    game, setGameSettings, pause, gameOver, spawFruit
 } from "./src/Game.js"
 
 const get = id => document.getElementById(id)
@@ -11,38 +11,6 @@ const recordDiv = get('recorde')
 
 const comands = {
     "Escape": pause,
-}
-
-const randItem = arr => {
-    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
-    return arr[randint(0,arr.length - 1)]
-}
-
-const spawFruit = async () => {
-    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
-    const { quantX, quantY } = game
-    const { type, value } = randItem(game.frutas)
-    while (true) {
-        const px = randint(0, quantX - 1)
-        const py = randint(0, quantY - 1)
-        if(snake.px !== px && snake.py !== py){
-            const { cauda } = snake
-            let find = cauda.map( q => {
-                if(q.px === px && q.py === py){
-                    return 't'
-                }
-                return 'f'
-            } )
-            find = find.join('')
-            if(find.indexOf('t') === -1){
-                game.fruit = { 
-                    px, py ,
-                    type, value
-                }
-                return
-            }
-        }
-    }
 }
 
 const colisao = async () => {

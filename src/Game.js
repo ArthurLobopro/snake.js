@@ -3,7 +3,7 @@ import { mainKeyDown, render } from "../index.js"
 import { saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
-import { setSnakeSettings } from "./Snake.js"
+import { setSnakeSettings, snake } from "./Snake.js"
 
 const get = id => document.getElementById(id)
 
@@ -27,6 +27,11 @@ const setGameSettings = async () => {
 
 const setConfig = (key,value) =>{
     game[key]=value
+}
+
+const randItem = arr => {
+    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
+    return arr[randint(0,arr.length - 1)]
 }
 
 const play = () => {
@@ -66,4 +71,31 @@ const gameOver = async () => {
     get('game').style.display = ""
 }
 
-export { game, setConfig, setGameSettings, pause, newGame, gameOver }
+const spawFruit = async () => {
+    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
+    const { quantX, quantY } = game
+    const { type, value } = randItem(game.frutas)
+    while (true) {
+        const px = randint(0, quantX - 1)
+        const py = randint(0, quantY - 1)
+        if(snake.px !== px && snake.py !== py){
+            const { cauda } = snake
+            let find = cauda.map( q => {
+                if(q.px === px && q.py === py){
+                    return 't'
+                }
+                return 'f'
+            } )
+            find = find.join('')
+            if(find.indexOf('t') === -1){
+                game.fruit = { 
+                    px, py ,
+                    type, value
+                }
+                return
+            }
+        }
+    }
+}
+
+export { game, setConfig, setGameSettings, pause, newGame, gameOver, spawFruit }
