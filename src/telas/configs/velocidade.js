@@ -1,6 +1,8 @@
+import { setConfig } from "../../Game.js"
+import { saveVelocidade } from "../../Data.js"
 
 const tela = document.getElementById('tela')
-export default async function velocidade(game){
+export default function velocidade(game){
     const {velocidade} = game
     const full = document.createElement('div')
     full.classList.add('full')
@@ -45,17 +47,15 @@ export default async function velocidade(game){
     })
     tela.appendChild(full)
     const buttons = fieldset.querySelectorAll('button')
-    return new Promise(resolve => {
-        buttons.forEach( e => {
-            e.onclick = event =>{
-                tela.removeChild(full)
-                if(event.target.value == "1"){
-                    const value = Number(Array.from(checks).find( e => e.dataset.check === "true").dataset.value)
-                    resolve(['velocidade', value])
-                }else{
-                    resolve([])
-                }
+    
+    buttons.forEach( e => {
+        e.onclick = event =>{
+            tela.removeChild(full)
+            if(event.target.value == "1"){
+                const value = Number(Array.from(checks).find( e => e.dataset.check === "true").dataset.value)
+                setConfig('velocidade',value)
+                saveVelocidade(value)
             }
-        })
+        }
     })
 }
