@@ -22,13 +22,7 @@ export default function viewPause({play, newGame,game}) {
         tela.removeChild(fieldset)
         setTimeout( newGame, 150)
     }
-    get('config').onclick = async () => {
-        const value = await config(game)
-        window.onkeydown = event => functions[event.key]?.(fieldset)
-        value.filter( e => e !== undefined && e !== null)
-        .forEach( ([chave, valor]) => {
-            setConfig(chave,valor)
-        })
-    }
+    get('config').onclick = config
+    
     window.onkeydown = event => functions[event.key]?.(fieldset)
 }
