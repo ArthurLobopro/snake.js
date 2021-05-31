@@ -7,7 +7,7 @@ const colors = {
     cauda_snake: "#9FE6A0",
     red_fruit: "#f55c47"
 }
-
+const setColors = (key,value) => colors[key] = value
 //#region Frutas
 const frutas = {}
 
@@ -96,4 +96,4 @@ const drawSnake = (snake, game) => {
     ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 //#endregion
-export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua }
+export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua, setColors }
