@@ -216,3 +216,5 @@ window.onload = async () => {
     render()
     recordDiv.innerText = game.recorde
 }
+
+export { mainKeyDown, render }

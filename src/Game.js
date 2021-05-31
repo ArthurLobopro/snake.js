@@ -1,4 +1,5 @@
 import { getDefaultGame } from "./Settings.js"
+import { mainKeyDown, render } from "../index.js"
 
 const game = {
     width: canvas.width,
