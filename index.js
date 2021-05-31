@@ -1,8 +1,11 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
-import { getDefaultSnake, getDefaultGame } from "./src/Settings.js"
+import { getDefaultSnake } from "./src/Settings.js"
 import { getData, saveRecorde, saveVelocidade } from "./src/Data.js"
 import viewGameOver from "./src/telas/GameOver.js"
 import viewPause from "./src/telas/Pause.js"
+import { 
+    game, setConfig, setGameSettings 
+} from "./src/Game.js"
 
 const get = id => document.getElementById(id)
 
@@ -18,20 +21,6 @@ const moves = {
     "a": () => snake.setDirecao("left"),
     "s": () => snake.setDirecao("down"),
     "d": () => snake.setDirecao("right")
-}
-
-const game = {
-    width: canvas.width,
-    height: canvas.height,
-    status: "inative",
-    unity: 15,
-    quantX: 21,
-    quantY: 21,
-    interval: null
-}
-
-function setConfig(key,value){
-    game[key]=value
 }
 
 const pause = ()=> {
@@ -87,12 +76,6 @@ const setSnakeSettings = async ()=> {
     let settings = await getDefaultSnake()
     settings = Object.entries(settings)
     settings.forEach( s => snake[s[0]] = s[1])
-}
-
-const setGameSettings = async () => {
-    let settings = await getDefaultGame()
-    settings = Object.entries(settings)
-    settings.forEach( s => game[s[0]] = s[1])
 }
 
 const randItem = arr => {
