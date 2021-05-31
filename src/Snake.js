@@ -34,4 +34,15 @@ const setSnakeSettings = async ()=> {
     settings.forEach( s => snake[s[0]] = s[1])
 }
 
-export { snake, setSnakeSettings }
+const moves = {
+    "ArrowLeft": () => snake.setDirecao("left"),
+    "ArrowDown": () => snake.setDirecao("down"),
+    "ArrowRight": () => snake.setDirecao("right"),
+    "ArrowUp": () => snake.setDirecao("up"),
+    "w": () => snake.setDirecao("up"),
+    "a": () => snake.setDirecao("left"),
+    "s": () => snake.setDirecao("down"),
+    "d": () => snake.setDirecao("right")
+}
+
+export { snake, setSnakeSettings, moves }

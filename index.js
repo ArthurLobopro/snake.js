@@ -1,6 +1,6 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getData } from "./src/Data.js"
-import { snake, setSnakeSettings } from "./src/Snake.js"
+import { snake, setSnakeSettings, moves } from "./src/Snake.js"
 import { 
     game, setGameSettings, pause, gameOver
 } from "./src/Game.js"
@@ -8,17 +8,6 @@ import {
 const get = id => document.getElementById(id)
 
 const recordDiv = get('recorde')
-
-const moves = {
-    "ArrowLeft": () => snake.setDirecao("left"),
-    "ArrowDown": () => snake.setDirecao("down"),
-    "ArrowRight": () => snake.setDirecao("right"),
-    "ArrowUp": () => snake.setDirecao("up"),
-    "w": () => snake.setDirecao("up"),
-    "a": () => snake.setDirecao("left"),
-    "s": () => snake.setDirecao("down"),
-    "d": () => snake.setDirecao("right")
-}
 
 const comands = {
     "Escape": pause,
