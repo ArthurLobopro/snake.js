@@ -1,5 +1,6 @@
 import { getDefaultGame } from "./Settings.js"
 import { mainKeyDown, render } from "../index.js"
+import viewPause from "./telas/Pause.js"
 
 const game = {
     width: canvas.width,
@@ -29,4 +30,12 @@ const play = () => {
     }
 }
 
-export { game, setConfig, setGameSettings, play }
+const pause = ()=> {
+    if(game.status === "active"){
+        game.status = "paused"
+        clearInterval(game.interval)
+        viewPause({ play, newGame })
+    }
+}
+
+export { game, setConfig, setGameSettings, pause }
