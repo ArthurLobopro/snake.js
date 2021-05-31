@@ -174,19 +174,16 @@ const colisao = async () => {
 }
 
 const render = async () => {
-    if(!(await colisao())){
+    if(!await colisao()){
         await move()
-        drawBackground(game)
-        drawFruit(game)
-        drawSnake(snake, game)
-        drawLingua(snake)
-        snake.moveLock = false
-    }else{
-        drawBackground(game)
-        drawFruit(game)
-        drawSnake(snake, game)
-        drawLingua(snake)
     }
+
+    drawBackground(game)
+    drawFruit(game)
+    drawSnake(snake, game)
+    drawLingua(snake)
+    
+    snake.moveLock = false
     get("pontos").innerText = game.pontos
 }
 
