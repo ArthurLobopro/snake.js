@@ -1,6 +1,6 @@
 {
   "name": "snake.js",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Clássico jogo da cobrinha feito com JS e canvas.",
   "main": "electron/main.js",
   "scripts": {
