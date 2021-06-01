@@ -138,6 +138,9 @@ fieldset{
             height: 25px;
             cursor: pointer;
         }
+        & button {
+            margin: 10px 5px;
+        }
     }
     & #snake-preview {
         margin: 0 20px 0 5px;

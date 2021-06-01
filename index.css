@@ -208,6 +208,10 @@ fieldset button.focus {
   cursor: pointer;
 }
 
+#color-config .inputs button {
+  margin: 10px 5px;
+}
+
 #color-config #snake-preview {
   margin: 0 20px 0 5px;
   background-color: #303030;
