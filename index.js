@@ -4,13 +4,20 @@ import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
 import { 
     game, setGameSettings, pause, colisao
 } from "./src/Game.js"
+import config from "./src/telas/Config.js"
 
 const get = id => document.getElementById(id)
 
 const recordDiv = get('recorde')
 
 const comands = {
-    "Escape": pause,
+    "Escape":async () => {
+        if(game.status === "active") return  pause()
+        if(game.status === "inative") {
+            await config()
+            window.onkeydown = mainKeyDown
+        }
+    }
 }
 
 const render = async (canMove = true) => {
@@ -37,8 +44,8 @@ const mainKeyDown = event => {
         }
     }else{
         moves[key]?.()
-        comands[key]?.()
     }
+    comands[key]?.()
 }
 
 window.onkeydown = mainKeyDown
