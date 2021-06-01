@@ -1,8 +1,9 @@
 import { colors, lingua, setColors} from "../../View.js"
 import { render } from "../../../index.js"
 import { saveColors } from "../../Data.js"
+import { getDefaultColors } from "../../Settings.js"
 
-const colorsTemp = colors
+const colorsTemp = {}
 
 const tela = document.getElementById('tela')
 
@@ -17,6 +18,24 @@ const renderPreview = () => {
         ctx.fillRect( i*15, 60, 15, 15)
     }
     ctx.drawImage(lingua.right,  ((6 * 15)- 10) ,60)
+}
+
+const funcs = {
+    reset: () => {
+        document.querySelector('#color-snake').value = colors.snake
+        document.querySelector('#color-cauda-snake').value = colors.cauda_snake
+        colorsTemp.snake = colors.snake
+        colorsTemp.cauda_snake = colors.cauda_snake
+        renderPreview()
+    },
+    default: async () => {
+        const {snake,cauda_snake} = await getDefaultColors()
+        document.querySelector('#color-snake').value = snake
+        document.querySelector('#color-cauda-snake').value = cauda_snake
+        colorsTemp.snake = snake
+        colorsTemp.cauda_snake = cauda_snake
+        renderPreview()
+    }
 }
 
 export default function cores(){
@@ -34,6 +53,10 @@ export default function cores(){
                 <div>
                     Cor da cobra: <input type="color" value="${colors.cauda_snake}" data-name="cauda_snake" id="color-cauda-snake">
                 </div>
+                <div>
+                    <button data-func="reset">Zerar</button>
+                    <button data-func="default">Usar Padrão</button>
+                </div>
             </div>
         </div>
         <div class="buttons">
@@ -45,6 +68,8 @@ export default function cores(){
             </button>
         </div>
     </fieldset>`
+    colorsTemp.snake = colors.snake
+    colorsTemp.cauda_snake = colors.cauda_snake
     tela.appendChild(full)
     const fieldset = full.querySelector('fieldset')
     renderPreview()
@@ -56,7 +81,15 @@ export default function cores(){
             renderPreview()
         }
     })
-    const buttons = fieldset.querySelectorAll('button')
+
+    const resetButtons = document.querySelectorAll('.inputs button')
+    resetButtons.forEach( e => {
+        e.onclick = event => {
+            funcs[event.target.dataset.func]()
+        }
+    })
+
+    const buttons = fieldset.querySelectorAll('.buttons button')
     buttons.forEach( e => {
         e.onclick = event =>{
             tela.removeChild(full)
