@@ -21,7 +21,7 @@ body{
     }
 }
 
-canvas {
+#canvas {
     border: 1px solid black;
     width: 450px;
     @media screen and (max-height: 700px){
@@ -69,9 +69,9 @@ fieldset{
     color: #ccc;
     display: flex;
     flex-direction: column;
+    font-family: 'Press Start 2P',"Nunito";
     & legend{
         margin: 0 auto;
-        font-family: 'Press Start 2P',"Nunito";
         padding-inline: 5px;
         user-select: none;
     }
@@ -83,7 +83,6 @@ fieldset{
         height: 100%;
     }
     &  button{
-        font-family: 'Press Start 2P',"Nunito";
         background-color: #000;
         color: #ccc;
         width: max-content;
@@ -112,6 +111,40 @@ fieldset{
         & > button {
             width: 100%;
         }
+    }
+}
+
+#color-config{
+    & .container{
+        display: grid;
+        grid-template-columns: max-content auto;
+        grid-template-rows: 100%;
+    }
+    & .inputs{
+        align-self: center;
+        width: 100%;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        & div {
+            display: flex;
+            justify-content: space-between;
+        }
+        & input[type="color"]{
+            background-color: transparent;
+            border: none;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+        & button {
+            margin: 10px 5px;
+        }
+    }
+    & #snake-preview {
+        margin: 0 20px 0 5px;
+        background-color: #303030;
     }
 }
 

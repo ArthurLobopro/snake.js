@@ -1,12 +1,27 @@
+import { getDefaultColors } from "./Settings.js"
+import { getData } from "./Data.js"
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext("2d")
 //Cores usadas no jogo
-const colors = {
-    background: "#303030",
-    snake: "#4AA96C",
-    cauda_snake: "#9FE6A0",
-    red_fruit: "#f55c47"
+const colors = {}
+const setColors = (key,value) => colors[key] = value
+
+const setDinamicColors = async () => {
+    const defaultColors = Object.entries(await getDefaultColors())
+    defaultColors.forEach( ([key, value]) => {
+        setColors(key,value)
+    })
+
+    const {colors} = await getData()
+    let dinamicColors = Object.entries(colors)
+    
+    console.log(dinamicColors);
+    dinamicColors.forEach( ([key, value]) => {
+        setColors(key,value)
+    })
 }
+
+setDinamicColors()
 
 //#region Frutas
 const frutas = {}
@@ -96,4 +111,4 @@ const drawSnake = (snake, game) => {
     ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 //#endregion
-export { drawBackground, drawFruit, drawLingua, drawSnake }
+export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua, setColors}

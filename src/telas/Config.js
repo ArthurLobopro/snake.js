@@ -1,5 +1,6 @@
 import functions from "./navegacao.js"
 import velocidade from "./configs/velocidade.js"
+import cores from "./configs/cores.js"
 import { game } from "../Game.js"
 
 const get = id => document.getElementById(id)
@@ -7,10 +8,11 @@ const gameDiv = get('game')
 
 const configs = {
     velocidade, 
+    cores
 }
 
 export default async function config() {
-    const pause = get("pause")
+    const pause = game.status === "paused" ? get("pause") : null
     const fieldset = document.createElement('fieldset')
     fieldset.id = "config"
     fieldset.innerHTML = `
@@ -18,11 +20,16 @@ export default async function config() {
     <div>
         <div>
             <button data-type="velocidade" class="focus">Velocidade</button>
+            <button data-type="cores">Cores</button>
             <button data-type="voltar">Voltar</button>
         </div>
     </div>`
     gameDiv.style.display = "none"
-    pause.style.display = "none"
+
+    if(game.status === "paused"){
+        pause.style.display = "none"
+    }
+
     tela.appendChild(fieldset)
     const buttons = fieldset.querySelectorAll('button')
     window.onkeydown = event => functions[event.key]?.(fieldset)
@@ -31,7 +38,9 @@ export default async function config() {
             e.onclick = () => {
                 const voltar = () => {
                     gameDiv.style.display = ""
-                    pause.style.display = ""
+                    if(game.status === "paused"){
+                        pause.style.display = ""
+                    }
                     tela.removeChild(fieldset)
                     resolve(true)
                 }
