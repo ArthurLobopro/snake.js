@@ -17,7 +17,6 @@ const setDinamicColors = async () => {
     
     console.log(dinamicColors);
     dinamicColors.forEach( ([key, value]) => {
-        console.log(`${key}   ${value}`);
         setColors(key,value)
     })
 }
