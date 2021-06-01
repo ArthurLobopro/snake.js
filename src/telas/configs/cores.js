@@ -1,5 +1,6 @@
 import { colors, lingua, setColors} from "../../View.js"
 import { render } from "../../../index.js"
+import { saveColors } from "../../Data.js"
 
 const colorsTemp = colors
 
@@ -66,6 +67,7 @@ export default function cores(){
                 values.forEach( ([key,value]) => {
                     setColors(key,value)
                 })
+                saveColors(colors)
                 render(false)
             }
         }
