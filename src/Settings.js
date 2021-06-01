@@ -16,4 +16,13 @@ const getDefaultGame = async () => {
     return game
 }
 
-export { getDefaultSnake, getDefaultGame }
+const getDefaultColors = async () => {
+    let { colors } = 
+    await fetch("./settings/default.json")
+    .then( data => {
+        return data.json()
+    })
+    return colors
+}
+
+export { getDefaultSnake, getDefaultGame, getDefaultColors }
