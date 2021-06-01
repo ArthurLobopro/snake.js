@@ -4,7 +4,6 @@ import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
 import { 
     game, setGameSettings, pause, colisao
 } from "./src/Game.js"
-import cores from "./src/telas/configs/cores.js"
 
 const get = id => document.getElementById(id)
 
