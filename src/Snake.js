@@ -49,33 +49,32 @@ const setSnakeSettings = async ()=> {
 const move = async () => {
     const { direcao } = snake
     const { quantX, quantY } = game
-
-    const directions = {
-        "up":{
-            dir:'py', quant: -1
-        },
-        "left":{
-            dir:'px', quant: -1
-        },
-        "down":{
-            dir:'py', quant: 1
-        },
-        "right":{
-            dir:'px', quant: 1
-        }
-    }
     
     if(direcao !== null){
         snake.cauda.push( {px: snake.px, py: snake.py})
         snake.ultima = snake.cauda.shift()
     }
 
-    snake[directions[direcao].dir] += directions[direcao].quant
+    if(direcao === "up"){
+        return snake.py = (snake.py - 1) >= 0 ? snake.py - 1 : quantY - 1
+    }
+    if(direcao === "left"){
+        return snake.px = (snake.px - 1) >= 0 ? snake.px - 1 : quantX - 1
+    }
 
-    if(snake.py > quantY) return snake.py = 0
-    if(snake.px > quantX) return snake.px = 0
-    if(snake.py < 0) return snake.py = quantY - 1
-    if(snake.px < 0) return snake.px = quantX - 1
+    if(direcao === "down"){
+        if(snake.py + 1 < quantY){
+            return snake.py += 1
+        }
+        return snake.py = snake.py - quantY + 1
+    }
+
+    if(direcao === "right"){
+        if(snake.px + 1 < quantX){
+            return snake.px += 1
+        }
+        return snake.px = snake.px - quantX + 1
+    }
 }
 
 export { snake, setSnakeSettings, moves, move }
