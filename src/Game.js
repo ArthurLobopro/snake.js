@@ -1,6 +1,6 @@
 import { getDefaultGame } from "./Settings.js"
 import { mainKeyDown, render } from "../index.js"
-import { saveRecorde } from "./Data.js"
+import { getData, saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
 import { setSnakeSettings, snake } from "./Snake.js"
@@ -23,6 +23,8 @@ const setGameSettings = async () => {
     let settings = await getDefaultGame()
     settings = Object.entries(settings)
     settings.forEach( ([key, value]) => game[key] = value)
+    let { velocidade } = await getData()
+    game.velocidade = velocidade ?? settings.velocidade
 }
 
 const setConfig = (key,value) =>{
@@ -54,6 +56,7 @@ const newGame = async () => {
     window.onkeydown = mainKeyDown
     await setSnakeSettings()
     await setGameSettings()
+
     get("pontos").innerText = game.pontos
     render()
 }
