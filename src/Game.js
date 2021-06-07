@@ -67,7 +67,7 @@ const gameOver = async () => {
     if(game.pontos > game.recorde){
         game.recorde = game.pontos
         saveRecorde(game.recorde)
-        recordDiv.innerText = game.recorde
+        get('recorde').innerText = game.recorde
     }
     await viewGameOver({pontos: game.pontos, recorde: game.recorde, img: canvas.toDataURL('image/png')})
     await newGame()
