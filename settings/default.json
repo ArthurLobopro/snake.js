@@ -17,6 +17,14 @@
             {
                 "type": "laranja",
                 "value": 250
+            },
+            {
+                "type": "cereja",
+                "value": 300
+            },
+            {
+                "type": "coco",
+                "value": 500
             }
         ]
     },

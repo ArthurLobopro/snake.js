@@ -33,6 +33,14 @@ laranja.onload = () => frutas.laranja = laranja
 const maca = new Image()
 maca.src = "./assets/maca.png"
 maca.onload = () => frutas.maca = maca
+
+const cereja = new Image()
+cereja.src = "./assets/cereja.png"
+cereja.onload = () => frutas.cereja = cereja
+
+const coco = new Image()
+coco.src = "./assets/coco.png"
+coco.onload = () => frutas.coco = coco
 //#endregion
 
 //#region Lingua
