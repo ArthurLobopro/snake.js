@@ -27,19 +27,19 @@ setDinamicColors()
 const frutas = {}
 
 const laranja = new Image()
-laranja.src = "./assets/laranja.png"
+laranja.src = "./assets/frutas/laranja.png"
 laranja.onload = () => frutas.laranja = laranja
 
 const maca = new Image()
-maca.src = "./assets/maca.png"
+maca.src = "./assets/frutas/maca.png"
 maca.onload = () => frutas.maca = maca
 
 const cereja = new Image()
-cereja.src = "./assets/cereja.png"
+cereja.src = "./assets/frutas/cereja.png"
 cereja.onload = () => frutas.cereja = cereja
 
 const coco = new Image()
-coco.src = "./assets/coco.png"
+coco.src = "./assets/frutas/coco.png"
 coco.onload = () => frutas.coco = coco
 //#endregion
 
