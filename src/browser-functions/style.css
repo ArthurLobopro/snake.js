@@ -1,6 +1,6 @@
 .full {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -19,6 +19,11 @@
   width: -moz-max-content;
   width: max-content;
   min-width: 440px;
+  max-width: 600px;
+}
+
+.full fieldset .text {
+  margin-top: 10px;
 }
 
 fieldset {

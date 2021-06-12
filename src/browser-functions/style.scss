@@ -1,6 +1,6 @@
 .full{
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,8 +11,13 @@
   & fieldset{
     width: max-content;
     min-width: 440px;
+    max-width: 600px;
+    & .text{
+      margin-top: 10px;
+    }
   }
 }
+
 fieldset{
   display: grid;
   grid-template-rows: 35px auto 35px;
