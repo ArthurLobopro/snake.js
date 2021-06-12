@@ -64,7 +64,7 @@ const newGame = async () => {
 const gameOver = async () => {
     clearInterval(game.interval)
     get('game').style.display = "none"
-    if(game.pontos > game.recorde){
+    if(game.pontos > game.recorde && game.canSaveRecord){
         game.recorde = game.pontos
         saveRecorde(game.recorde)
         get('recorde').innerText = game.recorde
