@@ -1,9 +1,8 @@
 import { drawBackground, drawFruit, drawLingua, drawSnake } from "./src/View.js"
 import { getData } from "./src/Data.js"
 import { snake, setSnakeSettings, moves, move } from "./src/Snake.js"
-import { 
-    game, setGameSettings, pause, colisao
-} from "./src/Game.js"
+import { game, setGameSettings, pause, colisao } from "./src/Game.js"
+import { loadCheat } from "./src/Cheats.js"
 import config from "./src/telas/Config.js"
 
 const get = id => document.getElementById(id)
@@ -46,6 +45,7 @@ const mainKeyDown = event => {
         moves[key]?.()
     }
     comands[key]?.()
+    loadCheat(event)
 }
 
 window.onkeydown = mainKeyDown

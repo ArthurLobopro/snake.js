@@ -109,7 +109,7 @@ const colisao = async () => {
         await spawFruit()
         snake.cauda.unshift(snake.ultima)
     }
-
+    if(game.imortal) return false
     return new Promise( resolve => {
         cauda.forEach( q => {
             if(q.px === px && q.py === py){

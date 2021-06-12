@@ -3,6 +3,7 @@
         "status": "inative",
         "pontos": 0,
         "velocidade": 200,
+        "imortal": false,
         "fruit": {
             "py": 11,
             "px": 15,
