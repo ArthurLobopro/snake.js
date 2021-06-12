@@ -15,7 +15,10 @@ const cheats = {
     python(){
         game.imortal = true
         game.canSaveRecord = false
-        alert({title: "Imortalidade Ativada",text: "Sua pontuação não será mais contabilizada, para desativar o modo imortal pause e inicie um novo jogo."})
+        alert({
+            title: "Imortalidade Ativada",
+            text: "Sua pontuação não será mais contabilizada como recorde, para desativar o modo imortal pause e inicie um novo jogo."
+        })
     }
 }
 
