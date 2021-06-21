@@ -10,7 +10,8 @@ const tela = document.getElementById('tela')
 const renderPreview = () => {
     const canvas = document.getElementById('snake-preview')
     const ctx = canvas.getContext('2d')
-    ctx.clearRect(0,0, 135, 135)
+    ctx.fillStyle = colorsTemp.background
+    ctx.fillRect(0,0, 135, 135)
     ctx.fillStyle = colorsTemp.snake
     ctx.fillRect(5*15, 60, 15, 15)
     ctx.fillStyle = colorsTemp.cauda_snake
@@ -24,16 +25,20 @@ const funcs = {
     reset: () => {
         document.querySelector('#color-snake').value = colors.snake
         document.querySelector('#color-cauda-snake').value = colors.cauda_snake
+        document.querySelector('#color-background').value = colors.background
         colorsTemp.snake = colors.snake
         colorsTemp.cauda_snake = colors.cauda_snake
+        colorsTemp.background = colors.background
         renderPreview()
     },
     default: async () => {
-        const {snake,cauda_snake} = await getDefaultColors()
+        const {snake, cauda_snake, background} = await getDefaultColors()
         document.querySelector('#color-snake').value = snake
         document.querySelector('#color-cauda-snake').value = cauda_snake
+        document.querySelector('#color-background').value = background
         colorsTemp.snake = snake
         colorsTemp.cauda_snake = cauda_snake
+        colorsTemp.background = background
         renderPreview()
     }
 }
@@ -54,6 +59,9 @@ export default function cores(){
                     Cor da cobra: <input type="color" value="${colors.cauda_snake}" data-name="cauda_snake" id="color-cauda-snake">
                 </div>
                 <div>
+                    Fundo: <input type="color" value="${colors.background}" data-name="background" id="color-background">
+                </div>
+                <div>
                     <button data-func="reset">Zerar</button>
                     <button data-func="default">Usar Padrão</button>
                 </div>
@@ -70,6 +78,7 @@ export default function cores(){
     </fieldset>`
     colorsTemp.snake = colors.snake
     colorsTemp.cauda_snake = colors.cauda_snake
+    colorsTemp.background = colors.background
     tela.appendChild(full)
     const fieldset = full.querySelector('fieldset')
     renderPreview()
