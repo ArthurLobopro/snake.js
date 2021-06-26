@@ -35,7 +35,12 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./build/icon32.ico"
+        "icon": "./build/icon32.ico",
+        "ignore": [
+          ".github",
+          ".gitignore",
+          ".gitattributes"
+        ]
       },
       "makers": [
         {
