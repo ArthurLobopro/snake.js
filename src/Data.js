@@ -1,4 +1,4 @@
-const getData = async () => {
+const oldGetData = async () => {
     if(!localStorage.gameData){
         createData()
     }
@@ -8,30 +8,40 @@ const getData = async () => {
     return  {recorde, velocidade, colors} 
 }
 
+const getData = () => {
+    const recorde = gameApi.getData('recorde') ?? 0
+    const velocidade = gameApi.getData('velocidade') ?? 200
+    const colors = gameApi.getData('colors')
+    return  { recorde, velocidade, colors }
+}
+
 const saveRecorde = recorde => {
-    const gameData = JSON.parse(localStorage.gameData)
-    gameData.recorde = recorde
-    localStorage.gameData = JSON.stringify(gameData)
+    gameApi.saveData( 'recorde', recorde )
 }
 
 const saveVelocidade = velocidade => {
-    const gameData = JSON.parse(localStorage.gameData)
-    gameData.velocidade = velocidade
-    localStorage.gameData = JSON.stringify(gameData)
+    gameApi.saveData( 'velocidade', velocidade )
 }
 
 const saveColors = colors => {
-    const gameData = JSON.parse(localStorage.gameData)
-    gameData.colors = colors
-    localStorage.gameData = JSON.stringify(gameData)
+    gameApi.saveData( 'colors', colors )
 }
 
-const createData = () => {
-    let data = {
-        recorde: 0,
-        velocidade:200
-    }
-    localStorage.gameData = JSON.stringify(data)
+//Código temporário para migração de dados
+const convertData = async () => {
+    const gameData = Object.entries(await oldGetData())
+    
+    gameData.forEach( ([key,value]) => {
+        gameApi.saveData( key, value )
+    })
+
+    localStorage.removeItem('gameData')
+
+}
+
+if(localStorage.getItem('gameData')){
+    console.log('teste');
+    window.addEventListener('load', convertData)
 }
 
 export { saveRecorde, getData, saveVelocidade, saveColors }
