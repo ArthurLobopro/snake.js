@@ -12,7 +12,7 @@ const configs = {
 }
 
 export default async function config() {
-    const pause = game.status === "paused" ? get("pause") : null
+    const pause = game.status === "paused" ? get("pause-wrapper") : null
     const fieldset = document.createElement('fieldset')
     fieldset.id = "config"
     fieldset.innerHTML = `
