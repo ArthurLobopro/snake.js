@@ -13,9 +13,11 @@ export default async function viewPause({play, newGame}) {
     pause_wrapper.innerHTML = `
     <fieldset id="pause">
         <legend>Pause</legend>
-        <button id="continue" class="focus">CONTINUE</button>
-        <button id="config">OPÇÕES</button>
-        <button id="new-game">NEW GAME</button>
+        <div class="button-wrapper">
+            <button id="continue" class="focus">CONTINUE</button>
+            <button id="config">OPÇÕES</button>
+            <button id="new-game">NEW GAME</button>
+        </div>
     </fieldset>`
 
     tela.appendChild(pause_wrapper)

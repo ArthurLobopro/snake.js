@@ -18,7 +18,7 @@ export default async function config() {
     fieldset.innerHTML = `
     <legend>CONFIGURAÇÃO</legend>
     <div>
-        <div>
+        <div class="button-wrapper">
             <button data-type="velocidade" class="focus">Velocidade</button>
             <button data-type="cores">Cores</button>
             <button data-type="voltar">Voltar</button>
