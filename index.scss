@@ -98,6 +98,14 @@ fieldset{
             color: #fff;
         }
     }
+    & .button-wrapper{
+        width: max-content;
+        align-self: center;
+        & button{
+            width: 100%;
+            min-width: max-content;
+        }
+    }
 }
 
 #pause-wrapper{
