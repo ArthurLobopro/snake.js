@@ -53,14 +53,17 @@ if (require('electron-squirrel-startup')){
 }
 
 const Store = require('electron-store')
+const storeOptions = {
+    cwd: "GameData/"
+}
 
 ipcMain.on('getData',(event, argKey) => {
-    const storage = new Store()
+    const storage = new Store(storeOptions)
     event.returnValue = storage.get(argKey)
 })
 
 ipcMain.on('saveData', (event, arg) => {
-    const storage = new Store()
+    const storage = new Store(storeOptions)
     const { key, value } = arg
     storage.set(key, value)
     event.returnValue = 200
