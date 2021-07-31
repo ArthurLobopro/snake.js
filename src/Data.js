@@ -39,8 +39,7 @@ const convertData = async () => {
 
 }
 
-if(localStorage.getItem('gameData')){
-    console.log('teste');
+if(localStorage.getItem('gameData') && window.gameApi){
     window.addEventListener('load', convertData)
 }
 
