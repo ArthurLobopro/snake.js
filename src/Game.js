@@ -20,8 +20,7 @@ const game = {
 }
 
 const setGameSettings = async () => {
-    let settings = await getDefaultGame()
-    settings = Object.entries(settings)
+    const settings = Object.entries(await getDefaultGame())
     settings.forEach( ([key, value]) => game[key] = value)
     let { velocidade } = await getData()
     game.velocidade = velocidade ?? settings.velocidade

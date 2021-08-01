@@ -6,8 +6,8 @@ Características:
 
 * Multiplataforma
 * Simples e fácil de jogar
-* [Site](https://arthurlobopro.github.io/snake.js/)
 * [Desktop](https://github.com/ArthurLobopro/snake.js/releases)
+<!-- * [Site](https://arthurlobopro.github.io/snake.js/) -->
 
 <div style="margin-top: 30px;text-align:center">
     <h2>Gameplay:</h2>

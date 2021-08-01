@@ -12,13 +12,13 @@ const configs = {
 }
 
 export default async function config() {
-    const pause = game.status === "paused" ? get("pause") : null
+    const pause = game.status === "paused" ? get("pause-wrapper") : null
     const fieldset = document.createElement('fieldset')
     fieldset.id = "config"
     fieldset.innerHTML = `
     <legend>CONFIGURAÇÃO</legend>
     <div>
-        <div>
+        <div class="button-wrapper">
             <button data-type="velocidade" class="focus">Velocidade</button>
             <button data-type="cores">Cores</button>
             <button data-type="voltar">Voltar</button>

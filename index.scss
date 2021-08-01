@@ -98,6 +98,31 @@ fieldset{
             color: #fff;
         }
     }
+    & .button-wrapper{
+        width: max-content;
+        align-self: center;
+        & button{
+            width: 100%;
+            min-width: max-content;
+        }
+    }
+}
+
+#pause-wrapper{
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0.8;
+    position: fixed;
+    top: 30px;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+    & fieldset{
+        width: max-content;
+        align-self: center;
+        justify-self: center;
+    }
 }
 
 #config{

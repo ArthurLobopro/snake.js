@@ -1,4 +1,4 @@
-const { app, BrowserWindow} = require('electron')
+const { app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 require('./header/header-actions-main.js')
@@ -51,3 +51,20 @@ app.on('activate', () => {
 if (require('electron-squirrel-startup')){
     return app.quit();
 }
+
+const Store = require('electron-store')
+const storeOptions = {
+    cwd: "GameData/"
+}
+
+ipcMain.on('getData',(event, argKey) => {
+    const storage = new Store(storeOptions)
+    event.returnValue = storage.get(argKey)
+})
+
+ipcMain.on('saveData', (event, arg) => {
+    const storage = new Store(storeOptions)
+    const { key, value } = arg
+    storage.set(key, value)
+    event.returnValue = 200
+})
