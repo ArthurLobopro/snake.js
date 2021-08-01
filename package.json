@@ -51,7 +51,8 @@
             "name": "snake.js",
             "setupExe": "${name}-${version}-setup.exe",
             "setupIcon": "./build/icon32.ico",
-            "iconUrl": "https://raw.githubusercontent.com/ArthurLobopro/snake.js/main/build/icon32.ico"
+            "iconUrl": "https://raw.githubusercontent.com/ArthurLobopro/snake.js/main/build/icon32.ico",
+            "loadingGif": "./build/snake.gif"
           }
         },
         {
