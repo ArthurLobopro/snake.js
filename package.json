@@ -40,7 +40,8 @@
         "ignore": [
           ".github",
           ".gitignore",
-          ".gitattributes"
+          ".gitattributes",
+          "build"
         ]
       },
       "makers": [
