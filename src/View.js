@@ -69,17 +69,14 @@ const getPosLingua =  (snake) => {
     let { direcao, px, py } = snake
     direcao = direcao ?? "right"
 
-    if(direcao === "right")
-        return [((px + 1) * 15) - 10.5, py * 15]
-    
-    if(direcao === "left")
-        return [((px - 1) * 15) + 5, py * 15]
+    const positions = {
+        right: () => [((px + 1) * 15) - 10.5, py * 15],
+        left: () => [((px - 1) * 15) + 5, py * 15],
+        up: () => [px * 15, ((py - 1) * 15) + 5],
+        down: () => [px * 15, ((py + 1) * 15) - 10]
+    }
 
-    if(direcao === "up")
-        return [px * 15, ((py - 1) * 15) + 5]
-
-    if(direcao === "down")
-        return [px * 15, ((py + 1) * 15) - 10]
+    return positions[direcao]()
 }
 //#endregion
 
