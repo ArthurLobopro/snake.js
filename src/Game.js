@@ -4,6 +4,7 @@ import { getData, saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
 import { setSnakeSettings, snake } from "./Snake.js"
+import { randint } from "./Util.js"
 
 const get = id => document.getElementById(id)
 
@@ -31,7 +32,6 @@ const setConfig = (key,value) =>{
 }
 
 const randItem = arr => {
-    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     return arr[randint(0,arr.length - 1)]
 }
 
@@ -74,7 +74,6 @@ const gameOver = async () => {
 }
 
 const spawFruit = async () => {
-    const randint = (min,max) => Math.floor(Math.random() * (max-min+1)) + min
     const { quantX, quantY } = game
     const { type, value } = randItem(game.frutas)
     while (true) {
