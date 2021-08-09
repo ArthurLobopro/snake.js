@@ -1,6 +1,7 @@
 import { getDefaultColors } from "./Settings.js"
 import { getData } from "./Data.js"
-const canvas = document.getElementById('canvas')
+import { loadImage } from "./Util.js"
+const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 //Cores usadas no jogo
 const colors = {}
@@ -23,45 +24,19 @@ const setDinamicColors = async () => {
 
 setDinamicColors()
 
-//#region Frutas
-const frutas = {}
+const frutas = {
+    laranja: await loadImage("./assets/frutas/laranja.png"),
+    maca: await loadImage("./assets/frutas/maca.png"),
+    cereja: await loadImage("./assets/frutas/cereja.png"),
+    coco: await loadImage("./assets/frutas/coco.png")
+}
 
-const laranja = new Image()
-laranja.src = "./assets/frutas/laranja.png"
-laranja.onload = () => frutas.laranja = laranja
-
-const maca = new Image()
-maca.src = "./assets/frutas/maca.png"
-maca.onload = () => frutas.maca = maca
-
-const cereja = new Image()
-cereja.src = "./assets/frutas/cereja.png"
-cereja.onload = () => frutas.cereja = cereja
-
-const coco = new Image()
-coco.src = "./assets/frutas/coco.png"
-coco.onload = () => frutas.coco = coco
-//#endregion
-
-//#region Lingua
-const lingua = {}
-
-const upImg = new Image()
-upImg.src = "./assets/lingua-up.png"
-upImg.onload = () => lingua.up = upImg
-
-const downImg = new Image()
-downImg.src = "./assets/lingua-down.png"
-downImg.onload = () => lingua.down = downImg
-
-const leftImg = new Image()
-leftImg.src = "./assets/lingua-left.png"
-leftImg.onload = () => lingua.left = leftImg
-
-const rightImg = new Image()
-rightImg.src = "./assets/lingua-right.png"
-rightImg.onload = () => lingua.right = rightImg
-//#endregion
+const lingua = {
+    upImg: await loadImage("./assets/lingua-up.png"),
+    downImg: await loadImage("./assets/lingua-down.png"),
+    leftImg: await loadImage("./assets/lingua-left.png"),
+    rightImg: await loadImage("./assets/lingua-right.png")
+}
 
 //#region Cálculos
 //Pega a posição da cabeça da cobra e calcula uma posição para a lingua
@@ -116,4 +91,5 @@ const drawSnake = (snake, game) => {
     ctx.fillRect(px * unity, py * unity, unity, unity)
 }
 //#endregion
+
 export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua, setColors}
