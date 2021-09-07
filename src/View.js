@@ -32,10 +32,10 @@ const frutas = {
 }
 
 const lingua = {
-    upImg: await loadImage("./assets/lingua-up.png"),
-    downImg: await loadImage("./assets/lingua-down.png"),
-    leftImg: await loadImage("./assets/lingua-left.png"),
-    rightImg: await loadImage("./assets/lingua-right.png")
+    up: await loadImage("./assets/lingua/lingua-up.png"),
+    down: await loadImage("./assets/lingua/lingua-down.png"),
+    left: await loadImage("./assets/lingua/lingua-left.png"),
+    right: await loadImage("./assets/lingua/lingua-right.png")
 }
 
 //#region Cálculos
