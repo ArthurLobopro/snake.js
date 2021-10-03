@@ -1,5 +1,5 @@
-import { colors, lingua, setColors} from "../../View.js"
-import { render } from "../../../index.js"
+import { colors, lingua, setColors } from "../../View.js"
+import { render } from "../../Controller.js"
 import { saveColors } from "../../Data.js"
 import { getDefaultColors } from "../../Settings.js"
 
@@ -11,14 +11,14 @@ const renderPreview = () => {
     const canvas = document.getElementById('snake-preview')
     const ctx = canvas.getContext('2d')
     ctx.fillStyle = colorsTemp.background
-    ctx.fillRect(0,0, 135, 135)
+    ctx.fillRect(0, 0, 135, 135)
     ctx.fillStyle = colorsTemp.snake
-    ctx.fillRect(5*15, 60, 15, 15)
+    ctx.fillRect(5 * 15, 60, 15, 15)
     ctx.fillStyle = colorsTemp.cauda_snake
-    for(let i = 2; i< 5; i++){
-        ctx.fillRect( i*15, 60, 15, 15)
+    for (let i = 2; i < 5; i++) {
+        ctx.fillRect(i * 15, 60, 15, 15)
     }
-    ctx.drawImage(lingua.right,  ((6 * 15)- 10) ,60)
+    ctx.drawImage(lingua.right, ((6 * 15) - 10), 60)
 }
 
 const funcs = {
@@ -32,7 +32,7 @@ const funcs = {
         renderPreview()
     },
     default: async () => {
-        const {snake, cauda_snake, background} = await getDefaultColors()
+        const { snake, cauda_snake, background } = await getDefaultColors()
         document.querySelector('#color-snake').value = snake
         document.querySelector('#color-cauda-snake').value = cauda_snake
         document.querySelector('#color-background').value = background
@@ -43,7 +43,7 @@ const funcs = {
     }
 }
 
-export default function cores(){
+export default function cores() {
     const full = document.createElement('div')
     full.className = "full"
     full.innerHTML = `
@@ -83,31 +83,31 @@ export default function cores(){
     const fieldset = full.querySelector('fieldset')
     renderPreview()
     const colorInputs = fieldset.querySelectorAll('input[type=color]')
-    colorInputs.forEach( e => {
+    colorInputs.forEach(e => {
         e.oninput = event => {
             const name = event.target.dataset.name
-            colorsTemp[name]= event.target.value
+            colorsTemp[name] = event.target.value
             renderPreview()
         }
     })
 
     const resetButtons = document.querySelectorAll('.inputs button')
-    resetButtons.forEach( e => {
+    resetButtons.forEach(e => {
         e.onclick = event => {
             funcs[event.target.dataset.func]()
         }
     })
 
     const buttons = fieldset.querySelectorAll('.buttons button')
-    buttons.forEach( e => {
-        e.onclick = event =>{
+    buttons.forEach(e => {
+        e.onclick = event => {
             tela.removeChild(full)
-            if(event.target.value == "1"){
-                const values = Array.from(colorInputs).map( e =>{
+            if (event.target.value == "1") {
+                const values = Array.from(colorInputs).map(e => {
                     return [e.dataset.name, e.value]
                 })
-                values.forEach( ([key,value]) => {
-                    setColors(key,value)
+                values.forEach(([key, value]) => {
+                    setColors(key, value)
                 })
                 saveColors(colors)
                 render(false)

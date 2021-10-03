@@ -1,29 +1,18 @@
 import { getDefaultColors } from "./Settings.js"
-import { getData } from "./Data.js"
+import { getData , getColors } from "./Data.js"
 import { loadImage } from "./Util.js"
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 //Cores usadas no jogo
-const colors = {}
+const colors = getColors()
 const setColors = (key,value) => colors[key] = value
 
-const setDinamicColors = async () => {
-    const defaultColors = Object.entries(await getDefaultColors())
-    defaultColors.forEach( ([key, value]) => {
-        setColors(key,value)
-    })
-
-    const {colors} = await getData()
-    let dinamicColors = Object.entries(colors)
+// const setDinamicColors = async () => {
     
-    console.log(dinamicColors);
-    dinamicColors.forEach( ([key, value]) => {
-        setColors(key,value)
-    })
-}
+// }
 
-setDinamicColors()
-
+// setDinamicColors()
+console.log(colors);
 const frutas = {
     laranja: await loadImage("./assets/frutas/laranja.png"),
     maca: await loadImage("./assets/frutas/maca.png"),

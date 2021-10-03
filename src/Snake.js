@@ -26,6 +26,10 @@ const snake = {
                 this.direcao = direcao
         }
         this.moveLock = true
+    },
+    cauda: [],
+    get length(){
+        return this.cauda.length + 1
     }
 }
 

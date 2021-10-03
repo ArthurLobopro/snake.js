@@ -8,7 +8,6 @@ const clean = () => {
     while(keys.length != 0){
         keys.shift()
     }
-    console.log(keys);
 }
 
 const cheats = {

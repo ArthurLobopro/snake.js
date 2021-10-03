@@ -1,5 +1,5 @@
 import functions from "../telas/navegacao.js"
-import { mainKeyDown } from "../../index.js"
+import { mainKeyDown } from "../Controller.js"
 const target = document.getElementById("container")
 
 function alert({title, text, center = true, animation = true}) {

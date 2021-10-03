@@ -1,5 +1,5 @@
 import { getDefaultGame } from "./Settings.js"
-import { mainKeyDown, render } from "../index.js"
+import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
@@ -11,14 +11,21 @@ const get = id => document.getElementById(id)
 const canvas = get('canvas')
 
 const game = {
-    width: canvas.width,
-    height: canvas.height,
     status: "inative",
     unity: 15,
     quantX: 21,
     quantY: 21,
-    interval: null
+    interval: null,
+    width: 0,
+    height: 0,
+    init(){
+        this.height = this.quantY * this.unity
+        this.width = this.quantX * this.unity
+        canvas.width = this.width
+        canvas.height = this.height
+    }
 }
+game.init()
 
 const setGameSettings = async () => {
     const settings = Object.entries(await getDefaultGame())
@@ -101,6 +108,11 @@ const spawFruit = async () => {
 
 const colisao = async () => {
     const { px , py, cauda } = snake
+
+    if(snake.length == game.width * game.height){
+        gameOver()
+        return true
+    }
 
     if(game.fruit.px === px && game.fruit.py === py){
         game.pontos += game.fruit.value
