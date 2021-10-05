@@ -7,12 +7,6 @@ const ctx = canvas.getContext("2d")
 const colors = getColors()
 const setColors = (key,value) => colors[key] = value
 
-// const setDinamicColors = async () => {
-    
-// }
-
-// setDinamicColors()
-console.log(colors);
 const frutas = {
     laranja: await loadImage("./assets/frutas/laranja.png"),
     maca: await loadImage("./assets/frutas/maca.png"),
