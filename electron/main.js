@@ -1,8 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require('path')
 
-require('./header/header-actions-main.js')
-
 require('./Store')
 
 function createWindow () {

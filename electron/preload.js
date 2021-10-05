@@ -13,10 +13,9 @@ contextBridge.exposeInMainWorld( 'gameApi' , gameApi )
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    require("./header/header-actions-renderer.js")
-
     const gameScript = document.createElement('script')
     gameScript.src = "./src/Controller.js"
     gameScript.type = "module"
     document.head.appendChild(gameScript)
+    
 })
