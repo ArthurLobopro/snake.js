@@ -1,6 +1,6 @@
 {
   "name": "snake.js",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Clássico jogo da cobrinha feito com JS e canvas.",
   "main": "electron/main.js",
   "scripts": {
@@ -39,10 +39,9 @@
       "packagerConfig": {
         "icon": "./build/icon32.ico",
         "ignore": [
-          ".github",
-          ".gitignore",
-          ".gitattributes",
-          "build/"
+          "\\.git",
+          "build/",
+          "\\.scss"
         ]
       },
       "makers": [
