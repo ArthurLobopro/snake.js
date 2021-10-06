@@ -6,7 +6,7 @@ const colorType = {
 const colorsSchema = {
     background: {
         ...colorType,
-        default: "#1E1E1E"
+        default: "#141414"
     },
     snake: {
         ...colorType,

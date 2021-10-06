@@ -52,7 +52,7 @@
         ]
     },
     "colors":{
-        "background": "#1E1E1E",
+        "background": "#141414",
         "snake": "#4AA96C",
         "cauda_snake": "#9FE6A0",
         "red_fruit": "#f55c47"
