@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
+const { insertFrame } = require('electron-frame/renderer')
 
 const gameApi = {
     getColors: () => ipcRenderer.sendSync('getColors'),
@@ -9,7 +10,7 @@ const gameApi = {
     getPreferences: () => ipcRenderer.sendSync('getPreferences')
 }
 
-contextBridge.exposeInMainWorld( 'gameApi' , gameApi )
+contextBridge.exposeInMainWorld('gameApi', gameApi)
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -17,5 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
     gameScript.src = "./src/Controller.js"
     gameScript.type = "module"
     document.head.appendChild(gameScript)
-    
+
+    insertFrame()
 })
