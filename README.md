@@ -2,7 +2,7 @@
  
 Clássico jogo da cobrinha feito com JS e canvas.
 
-Características: 
+## Características: 
 
 * Multiplataforma
 * Simples e fácil de jogar
@@ -13,3 +13,8 @@ Características:
     <h2>Gameplay:</h2>
     <img src="./.github/gameplay.gif">
 </div>
+
+## Créditos
+
+Texturas da laranja e maçã: [@KayGreenLeaf](https://github.com/KayGreenLeaf) <br>
+Textura do coco: Violator Studio 
