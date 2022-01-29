@@ -1,6 +1,7 @@
-import { getDefaultColors } from "./Settings.js"
 import { getData , getColors } from "./Data.js"
 import { loadImage } from "./Util.js"
+import { game } from "./Game.js"
+import { snake } from "./Snake.js"
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 //Cores usadas no jogo
@@ -39,12 +40,12 @@ const getPosLingua =  (snake) => {
 //#endregion
 
 //#region Draw
-const drawBackground = (game) => {
+const drawBackground = () => {
     ctx.fillStyle = colors.background
     ctx.fillRect(0, 0, game.width, game.height)
 }
 
-const drawFruit = (game) => {
+const drawFruit = () => {
     const { py, px } = game.fruit
     const { unity, fruit } = game
     let { type } = fruit
@@ -54,14 +55,14 @@ const drawFruit = (game) => {
     ctx.drawImage(frutas[type], px * unity, py * unity)
 }
 
-const drawLingua = (snake) => {
+const drawLingua = () => {
     let { direcao } = snake
     direcao = direcao ?? "right"
     const [ px, py ] = getPosLingua(snake)
     ctx.drawImage(lingua[direcao],  px , py )
 }
 
-const drawSnake = (snake, game) => {
+const drawSnake = () => {
     const { px, py, cauda } = snake
     const { unity } = game
     
@@ -75,4 +76,11 @@ const drawSnake = (snake, game) => {
 }
 //#endregion
 
-export { drawBackground, drawFruit, drawLingua, drawSnake, colors, lingua, setColors}
+const renderAll = () => {
+    drawBackground()
+    drawFruit()
+    drawSnake()
+    drawLingua()
+}
+
+export { renderAll, colors, lingua, setColors}

@@ -1,4 +1,4 @@
-import { drawBackground, drawFruit, drawLingua, drawSnake } from "./View.js"
+import { renderAll } from "./View.js"
 import { getData } from "./Data.js"
 import { snake, setSnakeSettings, moves, move } from "./Snake.js"
 import { game, setGameSettings, pause, colisao } from "./Game.js"
@@ -24,10 +24,7 @@ const render = async (canMove = true) => {
         await move()
     }
 
-    drawBackground(game)
-    drawFruit(game)
-    drawSnake(snake, game)
-    drawLingua(snake)
+    renderAll()
 
     snake.moveLock = false
     get("pontos").innerText = game.pontos
