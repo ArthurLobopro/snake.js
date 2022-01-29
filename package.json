@@ -22,17 +22,17 @@
   },
   "homepage": "https://github.com/ArthurLobopro/snake.js#readme",
   "dependencies": {
-    "electron-frame": "^0.5.0",
+    "electron-frame": "^0.6.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.0"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.61",
-    "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "^15.1.1"
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "^16.0.7"
   },
   "config": {
     "forge": {
