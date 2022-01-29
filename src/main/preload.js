@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('gameApi', gameApi)
 window.addEventListener('DOMContentLoaded', () => {
 
     const gameScript = document.createElement('script')
-    gameScript.src = "./src/Controller.js"
+    gameScript.src = "./src/render/Controller.js"
     gameScript.type = "module"
     document.head.appendChild(gameScript)
 

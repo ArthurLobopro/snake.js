@@ -1,10 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
-const { mainWindowControlEvents } = require('electron-frame/main')
 
-mainWindowControlEvents.init()
-
+require('electron-frame/main')
 require('./Store')
+
+const appPath = app.getAppPath()
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -14,7 +14,7 @@ function createWindow() {
         minHeight: 625,
         frame: false,
         show: false,
-        icon: path.join(__dirname, "../assets/icon32.png"),
+        icon: path.resolve(appPath, "assets/icon32.png"),
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
