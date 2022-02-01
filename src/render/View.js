@@ -9,17 +9,17 @@ const colors = getColors()
 const setColors = (key,value) => colors[key] = value
 
 const frutas = {
-    laranja: await loadImage("./assets/frutas/laranja.png"),
-    maca: await loadImage("./assets/frutas/maca.png"),
-    cereja: await loadImage("./assets/frutas/cereja.png"),
-    coco: await loadImage("./assets/frutas/coco.png")
+    laranja: await loadImage(appPath, "assets/frutas/laranja.png"),
+    maca: await loadImage(appPath, "assets/frutas/maca.png"),
+    cereja: await loadImage(appPath, "assets/frutas/cereja.png"),
+    coco: await loadImage(appPath, "assets/frutas/coco.png")
 }
 
 const lingua = {
-    up: await loadImage("./assets/lingua/lingua-up.png"),
-    down: await loadImage("./assets/lingua/lingua-down.png"),
-    left: await loadImage("./assets/lingua/lingua-left.png"),
-    right: await loadImage("./assets/lingua/lingua-right.png")
+    up: await loadImage(appPath, "assets/lingua/lingua-up.png"),
+    down: await loadImage(appPath, "assets/lingua/lingua-down.png"),
+    left: await loadImage(appPath, "assets/lingua/lingua-left.png"),
+    right: await loadImage(appPath, "assets/lingua/lingua-right.png")
 }
 
 //#region Cálculos

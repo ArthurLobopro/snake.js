@@ -1,6 +1,6 @@
 const getDefaultSnake = async ()=> {
     let { snake } = 
-    await fetch("./settings/default.json")
+    await fetch("../settings/default.json")
     .then( data => {
         return data.json()
     })
@@ -9,7 +9,7 @@ const getDefaultSnake = async ()=> {
 
 const getDefaultGame = async () => {
     let { game } = 
-    await fetch("./settings/default.json")
+    await fetch("../settings/default.json")
     .then( data => {
         return data.json()
     })
@@ -18,7 +18,7 @@ const getDefaultGame = async () => {
 
 const getDefaultColors = async () => {
     let { colors } = 
-    await fetch("./settings/default.json")
+    await fetch("../settings/default.json")
     .then( data => {
         return data.json()
     })

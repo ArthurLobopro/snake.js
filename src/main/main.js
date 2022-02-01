@@ -21,7 +21,7 @@ function createWindow() {
         }
     })
     win.setMenuBarVisibility(null)
-    win.loadFile('index.html')
+    win.loadFile('public/index.html')
     win.once('ready-to-show', () => { win.show(); win.focus() })
 }
 
