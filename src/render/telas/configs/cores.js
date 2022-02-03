@@ -1,4 +1,4 @@
-import { colors, lingua, setColors } from "../../View.js"
+import { colors, lang, setColors } from "../../View.js"
 import { render } from "../../Controller.js"
 import { saveColors } from "../../Data.js"
 import { getDefaultColors } from "../../Settings.js"
@@ -18,10 +18,10 @@ const renderPreview = () => {
     for (let i = 2; i < 5; i++) {
         ctx.fillRect(i * 15, 60, 15, 15)
     }
-    ctx.drawImage(lingua.right, ((6 * 15) - 10), 60)
+    ctx.drawImage(lang.right, ((6 * 15) - 10), 60)
 }
 
-const funcs = {
+const functions = {
     reset: () => {
         document.querySelector('#color-snake').value = colors.snake
         document.querySelector('#color-cauda-snake').value = colors.cauda_snake
@@ -94,7 +94,7 @@ export default function cores() {
     const resetButtons = document.querySelectorAll('.inputs button')
     resetButtons.forEach(e => {
         e.onclick = event => {
-            funcs[event.target.dataset.func]()
+            functions[event.target.dataset.func]()
         }
     })
 
