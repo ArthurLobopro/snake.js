@@ -2,7 +2,7 @@ import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
 import viewPause from "./telas/Pause.js"
 import viewGameOver from "./telas/GameOver.js"
-import { setSnakeSettings, snake } from "./Snake.js"
+import { snake } from "./Snake.js"
 import { randint } from "./Util.js"
 
 const get = id => document.getElementById(id)
@@ -95,7 +95,7 @@ const pause = () => {
 
 const newGame = async () => {
     window.onkeydown = mainKeyDown
-    await setSnakeSettings()
+    snake.reset()
     game.reset()
     get("pontos").innerText = game.points
     render()
@@ -121,7 +121,7 @@ const spawFruit = async () => {
         const px = randint(0, quantX - 1)
         const py = randint(0, quantY - 1)
         if (snake.px !== px && snake.py !== py) {
-            const { cauda } = snake
+            const { tail: cauda } = snake
             let find = cauda.map(q => {
                 if (q.px === px && q.py === py) {
                     return 't'
@@ -141,7 +141,7 @@ const spawFruit = async () => {
 }
 
 const colisao = async () => {
-    const { px, py, cauda } = snake
+    const { px, py, tail: cauda } = snake
 
     if (snake.length == game.width * game.height) {
         gameOver()
@@ -151,7 +151,7 @@ const colisao = async () => {
     if (game.fruit.px === px && game.fruit.py === py) {
         game.points += game.fruit.value
         await spawFruit()
-        snake.cauda.unshift(snake.ultima)
+        snake.tail.unshift(snake.last)
     }
     if (game.imortal) return false
     return new Promise(resolve => {

@@ -56,14 +56,14 @@ const drawFruit = () => {
 }
 
 const drawLang = () => {
-    let { direcao } = snake
+    let { direction: direcao } = snake
     direcao = direcao ?? "right"
     const [ px, py ] = getLangPosition(snake)
     ctx.drawImage(lang[direcao],  px , py )
 }
 
 const drawSnake = () => {
-    const { px, py, cauda } = snake
+    const { px, py, tail: cauda } = snake
     const { unity } = game
     
     cauda.forEach( ({py,px}) => {
