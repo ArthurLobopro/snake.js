@@ -1,7 +1,7 @@
 import { renderAll } from "./View.js"
 import { getData } from "./Data.js"
 import { snake, setSnakeSettings, moves, move } from "./Snake.js"
-import { game, setGameSettings, pause, colisao } from "./Game.js"
+import { game, pause, colisao } from "./Game.js"
 import { loadCheat } from "./Cheats.js"
 import config from "./telas/Config.js"
 
@@ -27,7 +27,7 @@ const render = async (canMove = true) => {
     renderAll()
 
     snake.moveLock = false
-    get("pontos").innerText = game.pontos
+    get("pontos").innerText = game.points
 }
 
 const mainKeyDown = event => {
@@ -48,11 +48,6 @@ const mainKeyDown = event => {
 window.onkeydown = mainKeyDown
 
 window.onload = async () => {
-    await setGameSettings()
-    const data = Object.entries(await getData())
-    data.forEach(([key, value]) => {
-        game[key] = value
-    })
     await setSnakeSettings()
     render()
     recordDiv.innerText = game.recorde
