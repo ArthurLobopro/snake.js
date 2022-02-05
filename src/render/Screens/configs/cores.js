@@ -1,7 +1,6 @@
 import { colors, lang, setColors } from "../../View.js"
 import { render } from "../../Controller.js"
 import { saveColors } from "../../Data.js"
-import { getDefaultColors } from "../../Settings.js"
 
 const colorsTemp = {}
 
