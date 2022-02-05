@@ -1,16 +1,27 @@
 import { renderAll } from "./View.js"
-import { snake, moves, move } from "./Snake.js"
-import { game, pause, colisao } from "./Game.js"
+import { snake } from "./Snake.js"
+import { game, colisao } from "./Game.js"
 import { loadCheat } from "./Cheats.js"
-import config from "./telas/Config.js"
+import config from "./Screens/Config.js"
 
 const get = id => document.getElementById(id)
 
 const recordDiv = get('recorde')
 
+const moves = {
+    "ArrowLeft": () => snake.setDirection("left"),
+    "ArrowDown": () => snake.setDirection("down"),
+    "ArrowRight": () => snake.setDirection("right"),
+    "ArrowUp": () => snake.setDirection("up"),
+    "w": () => snake.setDirection("up"),
+    "a": () => snake.setDirection("left"),
+    "s": () => snake.setDirection("down"),
+    "d": () => snake.setDirection("right")
+}
+
 const comands = {
     "Escape": async () => {
-        if (game.status === "active") return pause()
+        if (game.status === "active") return game.pause()
         if (game.status === "inative") {
             await config()
             window.onkeydown = mainKeyDown
@@ -20,7 +31,7 @@ const comands = {
 
 const render = async (canMove = true) => {
     if (!await colisao() && canMove) {
-        await move()
+        snake.move()
     }
 
     renderAll()

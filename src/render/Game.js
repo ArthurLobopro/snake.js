@@ -1,7 +1,7 @@
 import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
-import viewPause from "./telas/Pause.js"
-import viewGameOver from "./telas/GameOver.js"
+import viewPause from "./Screens/Pause.js"
+import viewGameOver from "./Screens/GameOver.js"
 import { snake } from "./Snake.js"
 import { randint } from "./Util.js"
 
@@ -18,7 +18,7 @@ class Game {
     width = 0
     height = 0
 
-    frutas = [
+    fruits = [
         {
             type: "maca",
             value: 100
@@ -62,6 +62,41 @@ class Game {
         })
     }
 
+    async spawFruit() {
+        const { quantX, quantY } = this
+        const { type, value } = randItem(this.fruits)
+        while (true) {
+            const px = randint(0, quantX - 1)
+            const py = randint(0, quantY - 1)
+            if (snake.px !== px && snake.py !== py) {
+                let find = snake.tail.map(q => q.px === px && q.py === py)
+                if (find.indexOf(true) === -1) {
+                    this.fruit = {
+                        px, py,
+                        type, value
+                    }
+                    return
+                }
+            }
+        }
+    }
+
+    play() {
+        if (this.status === "paused") {
+            window.onkeydown = mainKeyDown
+            this.status = "active"
+            this.interval = setInterval(render, this.velocidade)
+        }
+    }
+
+    pause() {
+        if (this.status === "active") {
+            this.status = "paused"
+            clearInterval(this.interval)
+            viewPause()
+        }
+    }
+
     reset() {
         this.setDefaultValues()
     }
@@ -75,22 +110,6 @@ const setConfig = (key, value) => {
 
 const randItem = arr => {
     return arr[randint(0, arr.length - 1)]
-}
-
-const play = () => {
-    if (game.status === "paused") {
-        window.onkeydown = mainKeyDown
-        game.status = "active"
-        game.interval = setInterval(render, game.velocidade)
-    }
-}
-
-const pause = () => {
-    if (game.status === "active") {
-        game.status = "paused"
-        clearInterval(game.interval)
-        viewPause({ play, newGame })
-    }
 }
 
 const newGame = async () => {
@@ -114,48 +133,26 @@ const gameOver = async () => {
     get('game').style.display = ""
 }
 
-const spawFruit = async () => {
-    const { quantX, quantY } = game
-    const { type, value } = randItem(game.frutas)
-    while (true) {
-        const px = randint(0, quantX - 1)
-        const py = randint(0, quantY - 1)
-        if (snake.px !== px && snake.py !== py) {
-            const { tail: cauda } = snake
-            let find = cauda.map(q => {
-                if (q.px === px && q.py === py) {
-                    return 't'
-                }
-                return 'f'
-            })
-            find = find.join('')
-            if (find.indexOf('t') === -1) {
-                game.fruit = {
-                    px, py,
-                    type, value
-                }
-                return
-            }
-        }
-    }
-}
-
 const colisao = async () => {
-    const { px, py, tail: cauda } = snake
+    const { px, py, tail } = snake
 
+    //Tamanho máximo da cobra
     if (snake.length == game.width * game.height) {
         gameOver()
         return true
     }
-
+    //Colisão com frutas
     if (game.fruit.px === px && game.fruit.py === py) {
         game.points += game.fruit.value
-        await spawFruit()
+        await game.spawFruit()
         snake.tail.unshift(snake.last)
     }
+
     if (game.imortal) return false
+
+    //Colisão com a cauda
     return new Promise(resolve => {
-        cauda.forEach(q => {
+        tail.forEach(q => {
             if (q.px === px && q.py === py) {
                 resolve(true)
                 gameOver()
@@ -165,4 +162,4 @@ const colisao = async () => {
     })
 }
 
-export { game, setConfig, pause, newGame, spawFruit, colisao }
+export { game, setConfig, newGame, colisao }
