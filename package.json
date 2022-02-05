@@ -1,6 +1,6 @@
 {
   "name": "snake.js",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Clássico jogo da cobrinha feito com JS e canvas.",
   "main": "src/main/main.js",
   "scripts": {
@@ -24,7 +24,7 @@
   "dependencies": {
     "electron-frame": "^0.6.0",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^8.0.0"
+    "electron-store": "^8.0.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",
@@ -32,7 +32,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "electron": "^16.0.7"
+    "electron": "^17.0.0"
   },
   "config": {
     "forge": {
