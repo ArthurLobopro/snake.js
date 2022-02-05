@@ -1,8 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
+const Store = require('electron-store')
+
+Store.initRenderer()
 
 require('electron-frame/main')
-require('./Store')
 
 const appPath = app.getAppPath()
 

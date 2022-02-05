@@ -1,17 +1,20 @@
-const { contextBridge, ipcRenderer } = require('electron')
+const { contextBridge } = require('electron')
 const { insertFrame } = require('electron-frame/renderer')
+const { colors, data, preferences } = require("./Store")
 
 const gameApi = {
-    getColors: () => ipcRenderer.sendSync('getColors'),
-    saveColors: (colors) => ipcRenderer.send("saveColors", colors),
-    getData: () => ipcRenderer.sendSync('getData'),
-    saveData: (data) => ipcRenderer.send('saveData', data),
-    savePreferences: (preferences) => ipcRenderer.send('savePreferences', preferences),
-    getPreferences: () => ipcRenderer.sendSync('getPreferences')
+    getColors: () => { return colors.store.colors },
+    saveColors: (newColors) => colors.set("colors", newColors),
+
+    getData: () => data.store,
+    saveData: (newData) => data.store = newData,
+
+    savePreferences: (newPreferences) => preferences.store = newPreferences,
+    getPreferences: () => preferences.store
 }
 
 const getArg = (argName) => {
-    const argValue = process.argv.find( arg => arg.split("=")[0] == argName).split("=")[1]
+    const argValue = process.argv.find(arg => arg.split("=")[0] == argName).split("=")[1]
     return argValue
 }
 

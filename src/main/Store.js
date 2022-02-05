@@ -1,5 +1,4 @@
 const Store = require('electron-store')
-const { ipcMain } = require("electron")
 const { colorsSchema, preferencesSchema, dataSchema } = require("./Schemas")
 
 const storeFolderName = "data"
@@ -7,7 +6,24 @@ const storeFolderName = "data"
 const colors = new Store({
     cwd: storeFolderName,
     name: "colors",
-    schema: colorsSchema
+    schema: colorsSchema,
+    migrations: {
+        "1.5.0": store => {
+            if (store.has("background") || store.has("snake") || store.has("cauda_snake")) {
+                const oldColors = store.store
+                delete oldColors.colors
+                delete oldColors.default
+                store.clear()
+
+                if(oldColors.cauda_snake){
+                    oldColors.snake_tail = oldColors.cauda_snake
+                    delete oldColors.cauda_snake
+                }
+                
+                store.set("colors", {...store.store.colors ,...oldColors})
+            }
+        }
+    }
 })
 
 const preferences = new Store({
@@ -22,24 +38,4 @@ const data = new Store({
     schema: dataSchema
 })
 
-ipcMain.on('getColors', (event) => {
-    event.returnValue = colors.store
-})
-
-ipcMain.on('saveColors', (event, argColors) => {
-    colors.set(argColors)
-})
-
-ipcMain.on('getPreferences', event => {
-    event.returnValue = preferences.store
-})
-
-ipcMain.on('savePreferences', (event, argPreferences) => {
-    preferences.set(argPreferences)
-})
-
-ipcMain.on('getData', event => event.returnValue = data.store)
-
-ipcMain.on('saveData', (event, argData) => {
-    data.set(argData)
-})
+module.exports = { colors, data, preferences }
