@@ -1,21 +1,23 @@
 import functions from "./navegacao.js"
+import { game, canvas } from "../Game.js"
 
 const tela = document.getElementById('tela')
-export default async function viewGameOver({pontos, recorde, img}) {
+export default async function viewGameOver() {
+    
     const telaGameOver = document.createElement('fieldset')
     telaGameOver.innerHTML = `
     <legend>GAME OVER</legend>
     <div class="table">
         <div class="line">
             <div>Pontuação:</div>
-            <div>${pontos}</div>
+            <div>${game.points}</div>
         </div>
         <div class="line">
             <div>Recorde:</div>
-            <div>${recorde}</div>
+            <div>${game.recorde}</div>
         </div>
     </div>
-    <img src="${img}" id="game-over-print">
+    <img src="${canvas.toDataURL('image/png')}" id="game-over-print">
     <button class="focus">NEW GAME</button>`
     tela.appendChild(telaGameOver)
     const button = telaGameOver.getElementsByTagName('button')[0]

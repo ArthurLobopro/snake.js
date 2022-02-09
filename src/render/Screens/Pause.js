@@ -1,6 +1,6 @@
 import functions from "./navegacao.js"
 import config from "./Config.js"
-import { game, newGame } from "../Game.js"
+import { game } from "../Game.js"
 
 const get = id => document.getElementById(id)
 const tela = get('tela')
@@ -28,7 +28,7 @@ export default async function viewPause() {
     }
     get('new-game').onclick = () => {
         tela.removeChild(pause_wrapper)
-        setTimeout(newGame, 150)
+        setTimeout(() => game.newGame(), 150)
     }
     get('config').onclick = async () => {
         await config()

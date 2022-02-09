@@ -97,6 +97,27 @@ class Game {
         }
     }
 
+    async gameOver() {
+        clearInterval(this.interval)
+        get('game').style.display = "none"
+        if (this.points > this.recorde && this.canSaveRecord) {
+            this.recorde = this.points
+            saveRecorde(this.recorde)
+            get('recorde').innerText = this.recorde
+        }
+        await viewGameOver()
+        await newGame()
+        get('game').style.display = ""
+    }
+
+    async newGame ()  {
+        window.onkeydown = mainKeyDown
+        snake.reset()
+        this.reset()
+        get("pontos").innerText = this.points
+        render()
+    }
+
     reset() {
         this.setDefaultValues()
     }
@@ -108,36 +129,15 @@ const setConfig = (key, value) => {
     game[key] = value
 }
 
-
-const newGame = async () => {
-    window.onkeydown = mainKeyDown
-    snake.reset()
-    game.reset()
-    get("pontos").innerText = game.points
-    render()
-}
-
-const gameOver = async () => {
-    clearInterval(game.interval)
-    get('game').style.display = "none"
-    if (game.points > game.recorde && game.canSaveRecord) {
-        game.recorde = game.points
-        saveRecorde(game.recorde)
-        get('recorde').innerText = game.recorde
-    }
-    await viewGameOver({ pontos: game.points, recorde: game.recorde, img: canvas.toDataURL('image/png') })
-    await newGame()
-    get('game').style.display = ""
-}
-
 const colisao = async () => {
     const { px, py, tail } = snake
 
     //Tamanho máximo da cobra
     if (snake.length == game.width * game.height) {
-        gameOver()
+        game.gameOver()
         return true
     }
+    
     //Colisão com frutas
     if (game.fruit.px === px && game.fruit.py === py) {
         game.points += game.fruit.value
@@ -152,7 +152,7 @@ const colisao = async () => {
         tail.forEach(q => {
             if (q.px === px && q.py === py) {
                 resolve(true)
-                gameOver()
+                game.gameOver()
             }
         })
         resolve(false)
