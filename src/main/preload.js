@@ -5,6 +5,7 @@ const { colors, data, preferences } = require("./Store")
 const gameApi = {
     getColors: () => { return colors.store.colors },
     saveColors: (newColors) => colors.set("colors", newColors),
+    getDefaultColors: () => colors.store.default,
 
     getData: () => data.store,
     saveData: (newData) => data.store = newData,
