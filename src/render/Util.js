@@ -12,4 +12,6 @@ const loadImage = async (...pathSegments) => {
 
 const randint = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-export { loadImage, randint }
+const randItem = arr => arr[randint(0, arr.length - 1)]
+
+export { loadImage, randint, randItem }

@@ -3,7 +3,7 @@ import { getData, saveRecorde } from "./Data.js"
 import viewPause from "./Screens/Pause.js"
 import viewGameOver from "./Screens/GameOver.js"
 import { snake } from "./Snake.js"
-import { randint } from "./Util.js"
+import { randint, randItem } from "./Util.js"
 
 const get = id => document.getElementById(id)
 
@@ -108,9 +108,6 @@ const setConfig = (key, value) => {
     game[key] = value
 }
 
-const randItem = arr => {
-    return arr[randint(0, arr.length - 1)]
-}
 
 const newGame = async () => {
     window.onkeydown = mainKeyDown
@@ -162,4 +159,4 @@ const colisao = async () => {
     })
 }
 
-export { game, setConfig, newGame, colisao }
+export { game, setConfig, colisao, canvas }
