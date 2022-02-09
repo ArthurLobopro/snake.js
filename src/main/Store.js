@@ -13,12 +13,14 @@ const colors = new Store({
                 const oldColors = store.store
                 delete oldColors.colors
                 delete oldColors.default
-                store.clear()
+                
 
                 if(oldColors.cauda_snake){
                     oldColors.snake_tail = oldColors.cauda_snake
                     delete oldColors.cauda_snake
                 }
+
+                store.clear()
                 
                 store.set("colors", {...store.store.colors ,...oldColors})
             }
