@@ -8,6 +8,7 @@ import { randint, randItem } from "./Util.js"
 const get = id => document.getElementById(id)
 
 const canvas = get('canvas')
+const points_div = document.getElementById("pontos")
 
 class Game {
     //Atributes
@@ -110,12 +111,49 @@ class Game {
         get('game').style.display = ""
     }
 
-    async newGame ()  {
+    async newGame() {
         window.onkeydown = mainKeyDown
         snake.reset()
         this.reset()
         get("pontos").innerText = this.points
         render()
+    }
+
+    async collision() {
+        if(this.status == "inative") return false
+        const { px, py, tail } = snake
+
+        //Tamanho máximo da cobra
+        if (snake.length == this.width * this.height) {
+            this.gameOver()
+            return true
+        }
+
+        //Colisão com frutas
+        if (this.fruit.px === px && this.fruit.py === py) {
+            this.points += this.fruit.value
+            await this.spawFruit()
+            snake.tail.unshift(snake.last)
+        }
+
+        if (this.imortal) return false
+
+        //Colisão com a cauda
+        return new Promise(resolve => {
+            tail.forEach(q => {
+                if (q.px === px && q.py === py) {
+                    resolve(true)
+                    this.gameOver()
+                }
+            })
+            resolve(false)
+        })
+    }
+
+    async loadTurn(){
+        if (!await game.collision()) {
+            snake.move()
+        }
     }
 
     reset() {
@@ -129,34 +167,4 @@ const setConfig = (key, value) => {
     game[key] = value
 }
 
-const colisao = async () => {
-    const { px, py, tail } = snake
-
-    //Tamanho máximo da cobra
-    if (snake.length == game.width * game.height) {
-        game.gameOver()
-        return true
-    }
-    
-    //Colisão com frutas
-    if (game.fruit.px === px && game.fruit.py === py) {
-        game.points += game.fruit.value
-        await game.spawFruit()
-        snake.tail.unshift(snake.last)
-    }
-
-    if (game.imortal) return false
-
-    //Colisão com a cauda
-    return new Promise(resolve => {
-        tail.forEach(q => {
-            if (q.px === px && q.py === py) {
-                resolve(true)
-                game.gameOver()
-            }
-        })
-        resolve(false)
-    })
-}
-
-export { game, setConfig, colisao, canvas }
+export { game, setConfig, canvas }

@@ -1,6 +1,6 @@
 import { renderAll } from "./View.js"
 import { snake } from "./Snake.js"
-import { game, colisao } from "./Game.js"
+import { game } from "./Game.js"
 import { loadCheat } from "./Cheats.js"
 import config from "./Screens/Config.js"
 
@@ -29,10 +29,8 @@ const comands = {
     }
 }
 
-const render = async (canMove = true) => {
-    if (!await colisao() && canMove) {
-        snake.move()
-    }
+const render = async () => {
+    game.loadTurn()
 
     renderAll()
 
