@@ -7,7 +7,21 @@ const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
 //Cores usadas no jogo
-const colors = getColors()
+class Colors {
+    snake = ""
+    background = ""
+    snake_tail = ""
+
+    constructor() {
+        const colors = getColors()
+        for(const colorName in colors){
+            this[colorName] = colors[colorName]
+        }
+    }
+}
+
+const colors = new Colors()
+
 const setColors = (key, value) => colors[key] = value
 
 const fruits = {
