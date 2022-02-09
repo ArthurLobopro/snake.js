@@ -31,11 +31,7 @@ const comands = {
 
 const render = async () => {
     game.loadTurn()
-
     renderAll()
-
-    snake.moveLock = false
-    get("pontos").innerText = game.points
 }
 
 const mainKeyDown = event => {

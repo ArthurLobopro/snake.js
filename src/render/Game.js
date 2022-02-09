@@ -38,6 +38,11 @@ class Game {
         }
     ]
 
+    addPoints(points) {
+        this.points += points
+        points_div.innerText = this.points
+    }
+
     constructor() {
         this.height = this.quantY * this.unity
         this.width = this.quantX * this.unity
@@ -46,7 +51,7 @@ class Game {
         this.setDefaultValues()
     }
 
-    async setDefaultValues() {
+    setDefaultValues() {
         this.status = "inative"
         this.points = 0
         this.imortal = false
@@ -57,7 +62,7 @@ class Game {
             value: 100,
             type: "maca"
         }
-        const data = Object.entries(await getData())
+        const data = Object.entries(getData())
         data.forEach(([key, value]) => {
             this[key] = value
         })
@@ -115,12 +120,11 @@ class Game {
         window.onkeydown = mainKeyDown
         snake.reset()
         this.reset()
-        get("pontos").innerText = this.points
         render()
     }
 
     async collision() {
-        if(this.status == "inative") return false
+        if (this.status == "inative") return false
         const { px, py, tail } = snake
 
         //Tamanho máximo da cobra
@@ -131,7 +135,7 @@ class Game {
 
         //Colisão com frutas
         if (this.fruit.px === px && this.fruit.py === py) {
-            this.points += this.fruit.value
+            this.addPoints(this.fruit.value)
             await this.spawFruit()
             snake.tail.unshift(snake.last)
         }
@@ -150,10 +154,11 @@ class Game {
         })
     }
 
-    async loadTurn(){
+    async loadTurn() {
         if (!await game.collision()) {
             snake.move()
         }
+        snake.moveLock = false
     }
 
     reset() {
