@@ -9,7 +9,7 @@ const saveRecorde = recorde => {
 }
 
 const saveVelocity = velocity => {
-    gameApi.savePreferences({ velocidade: velocity })
+    gameApi.savePreferences({ velocity })
 }
 
 const saveColors = colors => {

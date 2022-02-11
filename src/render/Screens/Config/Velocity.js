@@ -51,12 +51,12 @@ export default class VelocityScreen extends ConfigScreenBase {
             })
 
             const buttons = velocity_screen.querySelectorAll('button')
-            buttons.forEach(e => {
-                e.onclick = event => {
+            buttons.forEach(button => {
+                button.onclick = event => {
                     if (event.target.value == "1") {
-                        const value = Number(Array.from(checks).find(e => e.dataset.check === "true").dataset.value)
-                        game.velocity = value
-                        saveVelocity(value)
+                        const changed_velocity = Number(Array.from(checks).find(check => check.dataset.check === "true").dataset.value)
+                        game.velocity = changed_velocity
+                        saveVelocity(changed_velocity)
                     }
                     this.close()
                     screens.config.addNavigation()
