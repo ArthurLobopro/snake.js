@@ -15,9 +15,9 @@ export default class ConfigScreen extends Screen {
                 <legend>CONFIGURAÇÕES</legend>
                 
                 <div class="button-wrapper">
-                    <button data-type="velocidade" class="focus">Velocidade</button>
-                    <button data-type="cores">Cores</button>
-                    <button data-type="voltar">Voltar</button>
+                    <button data-action="velocidade" class="focus">Velocidade</button>
+                    <button data-action="cores">Cores</button>
+                    <button data-action="voltar">Voltar</button>
                 </div>
             </fieldset>`
 
@@ -28,17 +28,15 @@ export default class ConfigScreen extends Screen {
                 cores() {
                     screens.config_screens.colors.show()
                 },
-                voltar: () => this.close()
+                
             }
 
-            for(const func in configs){
-                configs[func] = configs[func].bind(this)
-            }
+            configs.voltar = () => this.close()
 
             const buttons = config_screen.querySelectorAll('button')
             buttons.forEach(button => {
                 button.onclick = () => {
-                    configs[button.dataset.type](game)
+                    configs[button.dataset.action](game)
                 }
             })
 

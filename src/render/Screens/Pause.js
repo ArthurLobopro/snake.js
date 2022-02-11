@@ -19,9 +19,10 @@ export default class PauseScreen extends Screen {
             <fieldset id="pause">
                 <legend>Pause</legend>
                 <div class="button-wrapper">
-                    <button id="continue" class="focus">CONTINUE</button>
-                    <button id="config">OPÇÕES</button>
-                    <button id="new-game">NEW GAME</button>
+                    <button data-action="continue" class="focus">CONTINUE</button>
+                    <button data-action="config">OPÇÕES</button>
+                    <button data-action="new-game">NOVO JOGO</button>
+                    <button data-action="init">IR PARA O INICIO</button>
                 </div>
             </fieldset>`
 
@@ -42,10 +43,16 @@ export default class PauseScreen extends Screen {
                 this.hide()
             }
 
+            buttonsFunctions.init = () => {
+                this.close()
+                game.status = "inative"
+                screens.init.show()
+            }
+
             const buttons = pause_screen.querySelectorAll("button")
             buttons.forEach( button => {
                 button.onclick = () => {
-                    buttonsFunctions[button.id]()
+                    buttonsFunctions[button.dataset.action]()
                 }
             })
 

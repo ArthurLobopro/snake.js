@@ -39,8 +39,8 @@ export default class ColorsScreen extends ConfigScreenBase {
                             Fundo: <input type="color" value="${colors.background}" data-name="background" id="color-background">
                         </div>
                         <div>
-                            <button data-func="reset">Zerar</button>
-                            <button data-func="default">Usar Padrão</button>
+                            <button data-action="reset">Zerar</button>
+                            <button data-action="default">Usar Padrão</button>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ export default class ColorsScreen extends ConfigScreenBase {
             const resetButtons = colors_screen.querySelectorAll('.inputs button')
             resetButtons.forEach(button => {
                 button.onclick = () => {
-                    resetFunctions?.[button.dataset.func]?.()
+                    resetFunctions?.[button.dataset.action]?.()
                 }
             })
 

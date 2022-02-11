@@ -14,9 +14,9 @@ export default class InitScreen extends Screen {
             <fieldset id="init">
                 <legend>Início</legend>
                 <div class="button-wrapper">
-                    <button id="start" class="focus">START</button>
-                    <button id="config">CONFIGURAÇÕES</button>
-                    <button id="exit">SAIR</button>
+                    <button data-action="start" class="focus">START</button>
+                    <button data-action="config">CONFIGURAÇÕES</button>
+                    <button data-action="exit">SAIR</button>
                 </div>
             </fieldset>`
 
@@ -37,7 +37,7 @@ export default class InitScreen extends Screen {
             
             buttons.forEach(button => {
                 button.onclick = () => {
-                    functions?.[button.id]?.call(this)
+                    functions?.[button.dataset.action]?.call(this)
                 }
             })
 
