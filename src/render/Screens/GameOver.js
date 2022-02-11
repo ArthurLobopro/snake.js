@@ -28,7 +28,7 @@ export default class GameOverScreen extends Screen {
 
                 <img src="${canvas.toDataURL('image/png')}" id="game-over-print">
 
-                <button class="focus">NEW GAME</button>
+                <button class="focus">NOVO JOGO</button>
             </fieldset>`
 
             const button = game_over_screen.getElementsByTagName('button')[0]
