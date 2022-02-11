@@ -1,0 +1,147 @@
+.screen-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+}
+
+#pause-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.line {
+    padding: 3px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #ccc;
+}
+
+fieldset {
+    user-select: none;
+    align-self: center;
+    width: max-content;
+    min-width: 400px;
+    height: max-content;
+    padding: 0 5px;
+    border: 2px solid #ccc;
+    color: #ccc;
+    display: flex;
+    flex-direction: column;
+    font-family: "Press Start 2P", "Nunito";
+    font-size: 14px;
+    & legend {
+        margin: 0 auto;
+        padding-inline: 5px;
+        user-select: none;
+    }
+    & > img {
+        margin: 25px auto;
+    }
+    & > div {
+        overflow: auto;
+        height: 100%;
+    }
+    & .buttons,
+    .button-wrapper > button {
+        margin: 15px auto;
+    }
+    & button {
+        background-color: #000;
+        color: #ccc;
+        width: max-content;
+        padding: 5px 10px;
+        border: 2px solid;
+        border-radius: 3px;
+        user-select: none;
+        font-family: "Press Start 2P", "Nunito";
+        &:active {
+            color: #909090;
+        }
+        &.focus {
+            color: #fff;
+        }
+    }
+    & div.divided {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        margin: 10px;
+        grid-column-gap: 15px;
+    }
+    & .button-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+        align-self: center;
+        & button {
+            width: 100%;
+            min-width: max-content;
+        }
+    }
+    
+    &#game-over {
+        max-height: 90%;
+    }
+}
+
+/*Inputs tipo range*/
+
+input[type="range"],
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type="range"] {
+    cursor: pointer;
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 10px;
+        background: #ddd;
+    }
+    &::-webkit-slider-thumb {
+        width: 10px;
+        height: 20px;
+        margin-top: -4.5px;
+        background-color: #bbb;
+        border-radius: 0px;
+    }
+}
+
+input[type="color"] {
+    background-color: transparent;
+    border: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.check {
+    border: 1px solid #ccc;
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    &[data-check="true"] {
+        content: url(../../assets/check.png);
+    }
+}
+
+.radio {
+    @extend .check;
+    &[data-check="true"] {
+        content: url(../../assets/x.png);
+    }
+}
