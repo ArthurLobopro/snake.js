@@ -18,11 +18,20 @@ class Colors {
             this[colorName] = colors[colorName]
         }
     }
+
+    /**
+     * @param {{ snake: string; background: string; snake_tail: string; }} colors
+     */
+    set colors(colors){
+        console.log(colors);
+        Object.entries(colors).forEach( ([name, color]) => {
+            this[name] = color
+        })
+    }
 }
 
 const colors = new Colors()
 
-const setColors = (key, value) => colors[key] = value
 
 const fruits = {
     laranja: await loadImage(appPath, "assets/frutas/laranja.png"),
@@ -95,4 +104,4 @@ const renderAll = () => {
     drawLang()
 }
 
-export { renderAll, colors, lang, setColors }
+export { renderAll, colors, lang }
