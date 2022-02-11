@@ -1,6 +1,5 @@
 @import url(../fonts/css-import/Nunito-Regular.css);
 @import url(../fonts/css-import/PressStart2P.css);
-@import url(../../src/render/browser-functions/style.css);
 @import url(./screens.css);
 
 * {
@@ -29,6 +28,16 @@ body {
     width: 450px;
     @media screen and (max-height: 700px) {
         width: 378px;
+    }
+}
+
+#alert {
+    max-width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > button {
+        margin: 10px 0;
     }
 }
 
@@ -120,5 +129,18 @@ body {
     & #snake-preview {
         margin: 0 20px 0 5px;
         background-color: #303030;
+    }
+}
+
+.down {
+    animation: top_down 300ms;
+}
+
+@keyframes top_down {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(0);
     }
 }
