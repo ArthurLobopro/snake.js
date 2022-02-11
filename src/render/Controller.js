@@ -2,7 +2,7 @@ import { renderAll } from "./View.js"
 import { snake } from "./Snake.js"
 import { game } from "./Game.js"
 import { loadCheat } from "./Cheats.js"
-import config from "./Screens/Config.js"
+import { screens } from "./ScreenManager.js"
 
 const get = id => document.getElementById(id)
 
@@ -23,7 +23,7 @@ const comands = {
     "Escape": async () => {
         if (game.status === "active") return game.pause()
         if (game.status === "inative") {
-            await config()
+            screens.config.show()
             window.onkeydown = mainKeyDown
         }
     }
@@ -49,11 +49,9 @@ const mainKeyDown = event => {
     loadCheat(event)
 }
 
-window.onkeydown = mainKeyDown
-
 window.onload = async () => {
-    render()
     recordDiv.innerText = game.recorde
+    screens.init.show()
 }
 
 export { mainKeyDown, render, get }
