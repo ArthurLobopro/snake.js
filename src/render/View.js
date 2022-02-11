@@ -72,8 +72,7 @@ const drawBackground = () => {
 const drawFruit = () => {
     const { py, px } = game.fruit
     const { unity, fruit } = game
-    let { type } = fruit
-    type = type ?? "maca"
+    let { type = "maca" } = fruit
     ctx.drawImage(fruits[type], px * unity, py * unity)
 }
 
