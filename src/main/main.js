@@ -1,10 +1,12 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
-const { mainWindowControlEvents } = require('electron-frame/main')
+const Store = require('electron-store')
 
-mainWindowControlEvents.init()
+Store.initRenderer()
 
-require('./Store')
+require('electron-frame/main')
+
+const appPath = app.getAppPath()
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -14,14 +16,14 @@ function createWindow() {
         minHeight: 625,
         frame: false,
         show: false,
-        icon: path.join(__dirname, "../assets/icon32.png"),
+        icon: path.resolve(appPath, "assets/icon32.png"),
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
         }
     })
     win.setMenuBarVisibility(null)
-    win.loadFile('index.html')
+    win.loadFile('public/index.html')
     win.once('ready-to-show', () => { win.show(); win.focus() })
 }
 

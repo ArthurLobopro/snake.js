@@ -1,5 +1,5 @@
 import { game } from "./Game.js"
-import alert from "./browser-functions/alert.js"
+import Alert from "./Screens/Alert.js"
 
 const keys = []
 let timeout = null
@@ -14,10 +14,11 @@ const cheats = {
     python(){
         game.imortal = true
         game.canSaveRecord = false
-        alert({
+        const alert = new Alert({
             title: "Imortalidade Ativada",
             text: "Sua pontuação não será mais contabilizada como recorde, para desativar o modo imortal pause e inicie um novo jogo."
         })
+        alert.show()
     }
 }
 
