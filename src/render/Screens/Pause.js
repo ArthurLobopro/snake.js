@@ -1,38 +1,57 @@
-import functions from "./navegacao.js"
-import config from "./Config.js"
+import navigation from "./navigation.js"
 import { game } from "../Game.js"
+import { Screen } from "./Screen.js"
+import { screens } from "../ScreenManager.js"
 
 const get = id => document.getElementById(id)
 const tela = get('tela')
 
-export default async function viewPause() {
-    const pause_wrapper = document.createElement('div')
+export default class PauseScreen extends Screen {
+    constructor() {
+        super()
 
+        this.buildFunction = () => {
+            const pause_screen = document.createElement('div')
+            pause_screen.className = "screen-wrapper"
+            pause_screen.id = "pause-wrapper"
 
-    pause_wrapper.id = "pause-wrapper"
+            pause_screen.innerHTML = `
+            <fieldset id="pause">
+                <legend>Pause</legend>
+                <div class="button-wrapper">
+                    <button id="continue" class="focus">CONTINUE</button>
+                    <button id="config">OPÇÕES</button>
+                    <button id="new-game">NEW GAME</button>
+                </div>
+            </fieldset>`
 
-    pause_wrapper.innerHTML = `
-    <fieldset id="pause">
-        <legend>Pause</legend>
-        <div class="button-wrapper">
-            <button id="continue" class="focus">CONTINUE</button>
-            <button id="config">OPÇÕES</button>
-            <button id="new-game">NEW GAME</button>
-        </div>
-    </fieldset>`
+            const buttonsFunctions = {}
 
-    tela.appendChild(pause_wrapper)
-    get('continue').onclick = () => {
-        tela.removeChild(pause_wrapper)
-        setTimeout(() => game.play(), 150)
+            buttonsFunctions.continue = () => {
+                this.close()
+                setTimeout(() => game.play(), 150)
+            }
+
+            buttonsFunctions['new-game'] = () => {
+                this.close()
+                setTimeout(() => game.newGame(), 150)
+            }
+
+            buttonsFunctions.config = () => {
+                screens.config.show(this)
+                this.hide()
+            }
+
+            const buttons = pause_screen.querySelectorAll("button")
+            buttons.forEach( button => {
+                button.onclick = () => {
+                    buttonsFunctions[button.id]()
+                }
+            })
+
+            return pause_screen
+        }
+
+        this.reset()
     }
-    get('new-game').onclick = () => {
-        tela.removeChild(pause_wrapper)
-        setTimeout(() => game.newGame(), 150)
-    }
-    get('config').onclick = async () => {
-        await config()
-        window.onkeydown = event => functions[event.key]?.(pause_wrapper)
-    }
-    window.onkeydown = event => functions[event.key]?.(pause_wrapper)
 }
