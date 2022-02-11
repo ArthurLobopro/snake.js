@@ -1,9 +1,9 @@
 import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
-import viewPause from "./Screens/Pause.js"
-import viewGameOver from "./Screens/GameOver.js"
 import { snake } from "./Snake.js"
 import { randint, randItem } from "./Util.js"
+import { screens } from "./ScreenManager.js"
+import { renderAll } from "./View.js"
 
 const get = id => document.getElementById(id)
 
@@ -38,6 +38,11 @@ class Game {
         }
     ]
 
+    setPoints(points) {
+        this.points = points
+        points_div.innerText = this.points
+    }
+
     addPoints(points) {
         this.points += points
         points_div.innerText = this.points
@@ -53,7 +58,7 @@ class Game {
 
     setDefaultValues() {
         this.status = "inative"
-        this.points = 0
+        this.setPoints(0)
         this.imortal = false
         this.canSaveRecord = true
         this.fruit = {
@@ -89,9 +94,9 @@ class Game {
 
     play() {
         if (this.status === "paused") {
-            window.onkeydown = mainKeyDown
             this.status = "active"
             this.interval = setInterval(render, this.velocidade)
+            window.onkeydown = mainKeyDown
         }
     }
 
@@ -99,7 +104,7 @@ class Game {
         if (this.status === "active") {
             this.status = "paused"
             clearInterval(this.interval)
-            viewPause()
+            screens.pause.show()
         }
     }
 
@@ -111,8 +116,7 @@ class Game {
             saveRecorde(this.recorde)
             get('recorde').innerText = this.recorde
         }
-        await viewGameOver()
-        await newGame()
+        screens.gameOver.show()
         get('game').style.display = ""
     }
 
@@ -121,6 +125,7 @@ class Game {
         snake.reset()
         this.reset()
         render()
+        document.getElementById("recorde").innerText = this.recorde
     }
 
     async collision() {
@@ -147,6 +152,7 @@ class Game {
             tail.forEach(q => {
                 if (q.px === px && q.py === py) {
                     resolve(true)
+                    renderAll()
                     this.gameOver()
                 }
             })
