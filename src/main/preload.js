@@ -1,4 +1,4 @@
-const { contextBridge } = require('electron')
+const { contextBridge, ipcRenderer } = require('electron')
 const { insertFrame } = require('electron-frame/renderer')
 const { colors, data, preferences } = require("./Store")
 
@@ -22,6 +22,7 @@ const getArg = (argName) => {
 contextBridge.exposeInMainWorld("appPath", getArg("--app-path"))
 contextBridge.exposeInMainWorld('gameApi', gameApi)
 contextBridge.exposeInMainWorld("require", require)
+contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer)
 
 window.addEventListener('DOMContentLoaded', () => {
 
