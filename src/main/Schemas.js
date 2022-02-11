@@ -59,10 +59,9 @@ const dataSchema = {
 }
 
 const preferencesSchema = {
-    velocidade: {
+    velocity: {
         enum: [100, 200, 300],
-        default: 200,
-
+        default: 200
     }
 }
 

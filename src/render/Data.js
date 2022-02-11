@@ -8,8 +8,8 @@ const saveRecorde = recorde => {
     gameApi.saveData({ recorde })
 }
 
-const saveVelocidade = velocidade => {
-    gameApi.savePreferences({ velocidade })
+const saveVelocity = velocity => {
+    gameApi.savePreferences({ velocidade: velocity })
 }
 
 const saveColors = colors => {
@@ -18,4 +18,4 @@ const saveColors = colors => {
 
 const getColors = () => gameApi.getColors()
 
-export { saveRecorde, getData, saveVelocidade, saveColors, getColors }
+export { saveRecorde, getData, saveVelocity , saveColors, getColors }

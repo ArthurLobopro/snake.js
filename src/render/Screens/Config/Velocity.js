@@ -1,5 +1,4 @@
-import { setConfig } from "../../Game.js"
-import { saveVelocidade } from "../../Data.js"
+import { saveVelocity } from "../../Data.js"
 import { ConfigScreenBase } from "../Screen.js"
 import { game } from "../../Game.js"
 import { screens } from "../../ScreenManager.js"
@@ -9,7 +8,7 @@ export default class VelocityScreen extends ConfigScreenBase {
         super()
 
         this.buildFunction = () => {
-            const { velocidade } = game
+            const { velocity } = game
             const velocity_screen = document.createElement('div')
 
             velocity_screen.className = "screen-wrapper"
@@ -20,15 +19,15 @@ export default class VelocityScreen extends ConfigScreenBase {
                     <div class="text">
                         <div class="line">
                             <div>Lento</div>
-                            <div class="check" data-check="${velocidade === 300 ? true : false}" data-value="300"></div>
+                            <div class="check" data-check="${velocity === 300 ? true : false}" data-value="300"></div>
                         </div>
                         <div class="line">
                             <div>Médio</div>
-                            <div class="check" data-check="${velocidade === 200 ? true : false}" data-value="200"></div>
+                            <div class="check" data-check="${velocity === 200 ? true : false}" data-value="200"></div>
                         </div>
                         <div class="line">
                             <div>Rápido</div>
-                            <div class="check" data-check="${velocidade === 100 ? true : false}" data-value="100"></div>
+                            <div class="check" data-check="${velocity === 100 ? true : false}" data-value="100"></div>
                         </div>
                     </div>
                     <div class="buttons">
@@ -56,8 +55,8 @@ export default class VelocityScreen extends ConfigScreenBase {
                 e.onclick = event => {
                     if (event.target.value == "1") {
                         const value = Number(Array.from(checks).find(e => e.dataset.check === "true").dataset.value)
-                        setConfig('velocidade', value)
-                        saveVelocidade(value)
+                        game.velocity = value
+                        saveVelocity(value)
                     }
                     this.close()
                     screens.config.addNavigation()

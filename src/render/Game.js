@@ -18,6 +18,7 @@ class Game {
     interval = null
     width = 0
     height = 0
+    velocity = 200
 
     fruits = [
         {
@@ -95,7 +96,7 @@ class Game {
     play() {
         if (this.status === "paused") {
             this.status = "active"
-            this.interval = setInterval(render, this.velocidade)
+            this.interval = setInterval(render, this.velocity)
             window.onkeydown = mainKeyDown
         }
     }
@@ -174,8 +175,4 @@ class Game {
 
 const game = new Game()
 
-const setConfig = (key, value) => {
-    game[key] = value
-}
-
-export { game, setConfig, canvas }
+export { game, canvas }

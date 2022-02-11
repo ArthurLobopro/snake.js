@@ -40,7 +40,7 @@ const mainKeyDown = event => {
         if (moves[key]) {
             game.status = "active"
             moves[key]()
-            game.interval = setInterval(render, game.velocidade)
+            game.interval = setInterval(render, game.velocity)
         }
     } else {
         moves[key]?.()

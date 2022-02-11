@@ -31,7 +31,16 @@ const colors = new Store({
 const preferences = new Store({
     cwd: storeFolderName,
     name: "preferences",
-    schema: preferencesSchema
+    schema: preferencesSchema,
+    migrations: {
+        "1.5.0": store => {
+            if(store.has("velocidade")){
+                const velocity_saved = store.store.velocidade
+                store.clear()
+                store.set("velocity", velocity_saved)
+            }
+        }
+    }
 })
 
 const data = new Store({
