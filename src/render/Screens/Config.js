@@ -1,52 +1,60 @@
-import functions from "./navegacao.js"
-import velocidade from "./configs/velocidade.js"
-import cores from "./configs/cores.js"
 import { game } from "../Game.js"
+import { Screen } from "./Screen.js"
+import { screens } from "../ScreenManager.js"
+export default class ConfigScreen extends Screen {
+    constructor() {
+        super()
 
-const get = id => document.getElementById(id)
-const gameDiv = get('game')
+        this.buildFunction = () => {
+            const config_screen = document.createElement('div')
+            config_screen.className = "screen-wrapper"
+            config_screen.id = "config"
 
-const configs = {
-    velocidade, 
-    cores
-}
+            config_screen.innerHTML = `
+            <fieldset>
+                <legend>CONFIGURAÇÕES</legend>
+                
+                <div class="button-wrapper">
+                    <button data-type="velocidade" class="focus">Velocidade</button>
+                    <button data-type="cores">Cores</button>
+                    <button data-type="voltar">Voltar</button>
+                </div>
+            </fieldset>`
 
-export default async function config() {
-    const pause = game.status === "paused" ? get("pause-wrapper") : null
-    const fieldset = document.createElement('fieldset')
-    fieldset.id = "config"
-    fieldset.innerHTML = `
-    <legend>CONFIGURAÇÃO</legend>
-    <div>
-        <div class="button-wrapper">
-            <button data-type="velocidade" class="focus">Velocidade</button>
-            <button data-type="cores">Cores</button>
-            <button data-type="voltar">Voltar</button>
-        </div>
-    </div>`
-    gameDiv.style.display = "none"
+            const configs = {
+                velocidade(){
+                    screens.config_screens.velocity.show()
+                },
+                cores() {
+                    screens.config_screens.colors.show()
+                },
+                voltar: () => this.close()
+            }
 
-    if(game.status === "paused"){
-        pause.style.display = "none"
+            for(const func in configs){
+                configs[func] = configs[func].bind(this)
+            }
+
+            const buttons = config_screen.querySelectorAll('button')
+            buttons.forEach(button => {
+                button.onclick = () => {
+                    configs[button.dataset.type](game)
+                }
+            })
+
+            return config_screen
+        }
+
+        this.reset()
     }
 
-    tela.appendChild(fieldset)
-    const buttons = fieldset.querySelectorAll('button')
-    window.onkeydown = event => functions[event.key]?.(fieldset)
-    return new Promise( resolve => {
-        buttons.forEach( e => {
-            e.onclick = () => {
-                const voltar = () => {
-                    gameDiv.style.display = ""
-                    if(game.status === "paused"){
-                        pause.style.display = ""
-                    }
-                    tela.removeChild(fieldset)
-                    resolve(true)
-                }
-                configs.voltar = voltar
-                configs[e.dataset.type](game)
-            }
-        })
-    })
+    close() {
+        super.close()
+        this.afterScreen.show()
+    }
+
+    show(afterScreen) {
+        this.afterScreen = afterScreen
+        super.show()
+    }
 }
