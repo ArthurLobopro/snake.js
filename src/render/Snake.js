@@ -79,6 +79,4 @@ class Snake {
     }
 }
 
-const snake = new Snake()
-
-export { snake }
+export const snake = new Snake()
