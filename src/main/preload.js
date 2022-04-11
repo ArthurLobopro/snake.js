@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const { insertFrame } = require('electron-frame/renderer')
-const { colors, data, preferences } = require("./Store")
+const { colors, data, preferences } = require("../Store/Store")
 
 const gameApi = {
     getColors: () => { return colors.store.colors },
