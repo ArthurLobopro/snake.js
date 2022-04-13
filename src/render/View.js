@@ -2,8 +2,10 @@ import { getColors } from "./Data.js"
 import { loadImage } from "./Util.js"
 import { game } from "./Game.js"
 import { snake } from "./Snake.js"
+import {  game_screen_components } from "./ScreenManager.js"
 
-const canvas = document.getElementById("canvas")
+
+const canvas = game_screen_components.canvas
 const ctx = canvas.getContext("2d")
 
 //Cores usadas no jogo
