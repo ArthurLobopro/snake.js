@@ -4,6 +4,7 @@ import { snake } from "./Snake.js"
 import { randint, randItem } from "./Util.js"
 import { screens, game_screen_components } from "./ScreenManager.js"
 import { renderAll } from "./View.js"
+import "./Debug.js"
 
 const { canvas, points_div, record_div } = game_screen_components
 
