@@ -23,6 +23,7 @@ export default class InitScreen extends Screen {
             const functions = {
                 start() {
                     this.close()
+                    screens.gameScreen.show()
                     game.newGame()
                 },
                 config() {

@@ -2,10 +2,6 @@ import navigation from "./navigation.js"
 import { game } from "../Game.js"
 import { Screen } from "./Screen.js"
 import { screens } from "../ScreenManager.js"
-
-const get = id => document.getElementById(id)
-const tela = get('tela')
-
 export default class PauseScreen extends Screen {
     constructor() {
         super()

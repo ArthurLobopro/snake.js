@@ -2,11 +2,9 @@ import { renderAll } from "./View.js"
 import { snake } from "./Snake.js"
 import { game } from "./Game.js"
 import { loadCheat } from "./Cheats.js"
-import { screens } from "./ScreenManager.js"
+import { game_screen_components, screens } from "./ScreenManager.js"
 
-const get = id => document.getElementById(id)
-
-const recordDiv = get('recorde')
+const recordDiv = game_screen_components.record_div
 
 const moves = {
     "ArrowLeft": () => snake.setDirection("left"),
@@ -54,4 +52,4 @@ window.onload = async () => {
     screens.init.show()
 }
 
-export { mainKeyDown, render, get }
+export { mainKeyDown, render }

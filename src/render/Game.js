@@ -2,13 +2,11 @@ import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
 import { snake } from "./Snake.js"
 import { randint, randItem } from "./Util.js"
-import { screens } from "./ScreenManager.js"
+import { screens, game_screen_components } from "./ScreenManager.js"
 import { renderAll } from "./View.js"
+import "./Debug.js"
 
-const get = id => document.getElementById(id)
-
-const canvas = get('canvas')
-const points_div = document.getElementById("pontos")
+const { canvas, points_div, record_div } = game_screen_components
 
 class Game {
     //Atributes
@@ -111,14 +109,12 @@ class Game {
 
     async gameOver() {
         clearInterval(this.interval)
-        get('game').style.display = "none"
         if (this.points > this.recorde && this.canSaveRecord) {
             this.recorde = this.points
             saveRecorde(this.recorde)
-            get('recorde').innerText = this.recorde
+            record_div.innerText = this.recorde
         }
         screens.gameOver.show()
-        get('game').style.display = ""
     }
 
     async newGame() {
@@ -126,7 +122,7 @@ class Game {
         snake.reset()
         this.reset()
         render()
-        document.getElementById("recorde").innerText = this.recorde
+        record_div.innerText = this.recorde
     }
 
     async collision() {
