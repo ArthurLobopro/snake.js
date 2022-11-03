@@ -13,13 +13,13 @@ export default class Alert extends Screen {
             style="align-self:${center ? "center;" : "flex-start;margin-top: 5px;"}">
                 <legend>${title}</legend>
                 <div class="text"> ${text}</div>
-                <button id="remove-alert">
+                <button id="remove-alert" class="focus">
                     OK
                 </button>
             </fieldset>`
-            
+
             alert_screen.querySelector("#remove-alert").onclick = () => this.close()
-            
+
             return alert_screen
         }
 
@@ -33,6 +33,6 @@ export default class Alert extends Screen {
 
     show(afterScreen) {
         this.afterScreen = afterScreen
-        super.show(false)
+        super.show()
     }
 }
