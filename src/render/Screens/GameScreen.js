@@ -1,4 +1,5 @@
-import { Screen } from "./Screen.js";
+import { mainKeyDown } from "../Controller.js"
+import { Screen } from "./Screen.js"
 
 export default class GameScreen extends Screen {
     constructor() {
@@ -29,11 +30,16 @@ export default class GameScreen extends Screen {
         this.reset()
     }
 
-    get components(){
+    get components() {
         return {
             canvas: this.screen.querySelector('canvas'),
             points_div: this.screen.querySelector("#points"),
             record_div: this.screen.querySelector('#record')
         }
+    }
+
+    show() {
+        super.show()
+        window.onkeydown = mainKeyDown
     }
 }

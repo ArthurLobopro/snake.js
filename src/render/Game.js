@@ -119,8 +119,8 @@ class Game {
 
     async newGame() {
         window.onkeydown = mainKeyDown
-        snake.reset()
         this.reset()
+        snake.reset()
         render()
         record_div.innerText = this.recorde
     }
@@ -146,8 +146,8 @@ class Game {
 
         //Colisão com a cauda
         return new Promise(resolve => {
-            tail.forEach(q => {
-                if (q.px === px && q.py === py) {
+            tail.forEach(tail_segment => {
+                if (tail_segment.px === px && tail_segment.py === py) {
                     resolve(true)
                     renderAll()
                     this.gameOver()
