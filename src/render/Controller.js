@@ -7,10 +7,10 @@ import { game_screen_components, screens } from "./ScreenManager.js"
 const recordDiv = game_screen_components.record_div
 
 const moves = {
-    "ArrowLeft": () => snake.setDirection("left"),
-    "ArrowDown": () => snake.setDirection("down"),
-    "ArrowRight": () => snake.setDirection("right"),
-    "ArrowUp": () => snake.setDirection("up"),
+    "arrowleft": () => snake.setDirection("left"),
+    "arrowdown": () => snake.setDirection("down"),
+    "arrowright": () => snake.setDirection("right"),
+    "arrowup": () => snake.setDirection("up"),
     "w": () => snake.setDirection("up"),
     "a": () => snake.setDirection("left"),
     "s": () => snake.setDirection("down"),
@@ -18,7 +18,7 @@ const moves = {
 }
 
 const comands = {
-    "Escape": async () => {
+    "escape": async () => {
         if (game.status === "active") return game.pause()
         if (game.status === "inative") {
             screens.config.show()
@@ -33,7 +33,7 @@ const render = async () => {
 }
 
 const mainKeyDown = event => {
-    const key = event.key.lenght == 1 ? event.key.toLowerCase() : event.key
+    const key = event.key.toLowerCase()
     if (game.status === "inative") {
         if (moves[key]) {
             game.status = "active"
