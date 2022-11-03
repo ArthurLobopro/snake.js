@@ -1,32 +1,32 @@
-import { game } from "./Game.js";
-import { screens } from "./ScreenManager.js";
-import { snake } from "./Snake.js";
-import { renderAll } from "./View.js";
+import { game } from "./Game.js"
+import { screens } from "./ScreenManager.js"
+import { snake } from "./Snake.js"
+import { renderAll } from "./View.js"
 
 async function appendDebug() {
     const Debug = {
-        pause(){
+        pause() {
             game.pause()
         },
-        newGame(){
+        newGame() {
             game.newGame()
         },
-        continueGame(){
+        continueGame() {
             game.play()
         },
         renderAll,
-        showGame(){
+        showGame() {
             console.log(game)
         },
-        showSnake(){
+        showSnake() {
             console.log(snake)
         },
-        showScreens(){
+        showScreens() {
             console.log(screens)
         }
     }
-    
+
     window.Debug = Debug
 }
 
-setTimeout(appendDebug, 1000);
+setTimeout(appendDebug, 1000)
