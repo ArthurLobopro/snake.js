@@ -41,7 +41,7 @@ const getLangPosition = () => {
     let { direction = "right", px, py } = snake
 
     const positions = {
-        right: () => [((px + 1) * 15) - 10.5, py * 15],
+        right: () => [((px + 1) * 15) - 10, py * 15],
         left: () => [((px - 1) * 15) + 5, py * 15],
         up: () => [px * 15, ((py - 1) * 15) + 5],
         down: () => [px * 15, ((py + 1) * 15) - 10]
@@ -52,43 +52,57 @@ const getLangPosition = () => {
 //#endregion
 
 //#region Draw
-const drawBackground = () => {
-    ctx.fillStyle = colors.background
-    ctx.fillRect(0, 0, game.width, game.height)
-}
+const draw = {
+    background() {
+        const { width, height } = game
+        ctx.fillStyle = colors.background
+        ctx.fillRect(0, 0, width, height)
+    },
 
-const drawFruit = () => {
-    const { py, px } = game.fruit
-    const { unity, fruit } = game
-    let { type = "maca" } = fruit
-    ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
-}
+    fruit() {
+        const { py, px } = game.fruit
+        const { unity, fruit } = game
+        let { type = "maca" } = fruit
+        ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
+    },
 
-const drawLang = () => {
-    const { direction = "right" } = snake
-    const [px, py] = getLangPosition()
-    ctx.drawImage(sprites.lang[direction], px, py)
-}
+    lang() {
+        const { direction = "right" } = snake
+        const [px, py] = getLangPosition()
+        ctx.drawImage(sprites.lang[direction], px, py)
+    },
 
-const drawSnake = () => {
-    const { px, py, tail } = snake
-    const { unity } = game
+    snake() {
+        const { px, py, tail } = snake
+        const { unity } = game
 
-    tail.forEach(({ py, px }) => {
-        ctx.fillStyle = colors.snake_tail
+        tail.forEach(({ py, px }) => {
+            ctx.fillStyle = colors.snake_tail
+            ctx.fillRect(px * unity, py * unity, unity, unity)
+        })
+
+        ctx.fillStyle = colors.snake
         ctx.fillRect(px * unity, py * unity, unity, unity)
-    })
+    },
 
-    ctx.fillStyle = colors.snake
-    ctx.fillRect(px * unity, py * unity, unity, unity)
+    renderAll() {
+        const render_order = [
+            "background",
+            "fruit",
+            "snake",
+            "lang"
+        ]
+
+        render_order.forEach(render => {
+            this[render]()
+        })
+    }
 }
+
 //#endregion
 
 const renderAll = () => {
-    drawBackground()
-    drawFruit()
-    drawSnake()
-    drawLang()
+    draw.renderAll()
 }
 
 export { renderAll, colors }
