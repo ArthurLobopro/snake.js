@@ -1,50 +1,49 @@
-import { Screen } from "./Screen.js";
-import { screens } from "../ScreenManager.js";
-import { game } from "../Game.js";
+import { Screen } from "./Screen.js"
+import { screens } from "../ScreenManager.js"
+import { game } from "../Game.js"
 
 export default class InitScreen extends Screen {
-    constructor(){
+    constructor() {
         super()
+        this.reset()
+    }
 
-        this.buildFunction = () => {
-            const init_screen = document.createElement('div')
-            init_screen.className = "screen-wrapper"
-            
-            init_screen.innerHTML = `
-            <fieldset id="init">
-                <legend>Início</legend>
-                <div class="button-wrapper">
-                    <button data-action="start" class="focus">START</button>
-                    <button data-action="config">CONFIGURAÇÕES</button>
-                    <button data-action="exit">SAIR</button>
-                </div>
-            </fieldset>`
+    buildFunction() {
+        const init_screen = document.createElement('div')
+        init_screen.className = "screen-wrapper"
 
-            const functions = {
-                start() {
-                    this.close()
-                    screens.gameScreen.show()
-                    game.newGame()
-                },
-                config() {
-                    screens.config.show(this)
-                },
-                exit() {
-                    ipcRenderer.send('close')
-                }
+        init_screen.innerHTML = `
+        <fieldset id="init">
+            <legend>Início</legend>
+            <div class="button-wrapper">
+                <button data-action="start" class="focus">START</button>
+                <button data-action="config">CONFIGURAÇÕES</button>
+                <button data-action="exit">SAIR</button>
+            </div>
+        </fieldset>`
+
+        const functions = {
+            start() {
+                this.close()
+                screens.gameScreen.show()
+                game.newGame()
+            },
+            config() {
+                screens.config.show(this)
+            },
+            exit() {
+                ipcRenderer.send('close')
             }
-
-            const buttons = init_screen.querySelectorAll('button')
-            
-            buttons.forEach(button => {
-                button.onclick = () => {
-                    functions?.[button.dataset.action]?.call(this)
-                }
-            })
-
-            return init_screen
         }
 
-        this.reset()
+        const buttons = init_screen.querySelectorAll('button')
+
+        buttons.forEach(button => {
+            button.onclick = () => {
+                functions?.[button.dataset.action]?.call(this)
+            }
+        })
+
+        return init_screen
     }
 }
