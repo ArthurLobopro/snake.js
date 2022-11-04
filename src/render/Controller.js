@@ -21,7 +21,7 @@ const comands = {
     "escape": async () => {
         if (game.status === "active") return game.pause()
         if (game.status === "inative") {
-            screens.config.show()
+            screens.config.show(screens.gameScreen)
             window.onkeydown = mainKeyDown
         }
     }

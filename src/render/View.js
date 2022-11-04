@@ -1,12 +1,13 @@
 import { getColors } from "./Data.js"
-import { loadImage } from "./Util.js"
 import { game } from "./Game.js"
 import { snake } from "./Snake.js"
-import {  game_screen_components } from "./ScreenManager.js"
+import { game_screen_components } from "./ScreenManager.js"
+import { sprites } from "./Sprites.js"
 
 
 const canvas = game_screen_components.canvas
 const ctx = canvas.getContext("2d")
+
 
 //Cores usadas no jogo
 class Colors {
@@ -16,7 +17,7 @@ class Colors {
 
     constructor() {
         const colors = getColors()
-        for(const colorName in colors){
+        for (const colorName in colors) {
             this[colorName] = colors[colorName]
         }
     }
@@ -24,9 +25,9 @@ class Colors {
     /**
      * @param {{ snake: string; background: string; snake_tail: string; }} colors
      */
-    set colors(colors){
-        console.log(colors);
-        Object.entries(colors).forEach( ([name, color]) => {
+    set colors(colors) {
+        console.log(colors)
+        Object.entries(colors).forEach(([name, color]) => {
             this[name] = color
         })
     }
@@ -34,28 +35,13 @@ class Colors {
 
 const colors = new Colors()
 
-
-const fruits = {
-    laranja: await loadImage(appPath, "assets/frutas/laranja.png"),
-    maca: await loadImage(appPath, "assets/frutas/maca.png"),
-    cereja: await loadImage(appPath, "assets/frutas/cereja.png"),
-    coco: await loadImage(appPath, "assets/frutas/coco.png")
-}
-
-const lang = {
-    up: await loadImage(appPath, "assets/lingua/lingua-up.png"),
-    down: await loadImage(appPath, "assets/lingua/lingua-down.png"),
-    left: await loadImage(appPath, "assets/lingua/lingua-left.png"),
-    right: await loadImage(appPath, "assets/lingua/lingua-right.png")
-}
-
 //#region Calcs
 //Pega a posição da cabeça da cobra e calcula uma posição para a lingua
 const getLangPosition = () => {
     let { direction = "right", px, py } = snake
 
     const positions = {
-        right: () => [((px + 1) * 15) - 10.5, py * 15],
+        right: () => [((px + 1) * 15) - 10, py * 15],
         left: () => [((px - 1) * 15) + 5, py * 15],
         up: () => [px * 15, ((py - 1) * 15) + 5],
         down: () => [px * 15, ((py + 1) * 15) - 10]
@@ -66,43 +52,57 @@ const getLangPosition = () => {
 //#endregion
 
 //#region Draw
-const drawBackground = () => {
-    ctx.fillStyle = colors.background
-    ctx.fillRect(0, 0, game.width, game.height)
-}
+const draw = {
+    background() {
+        const { width, height } = game
+        ctx.fillStyle = colors.background
+        ctx.fillRect(0, 0, width, height)
+    },
 
-const drawFruit = () => {
-    const { py, px } = game.fruit
-    const { unity, fruit } = game
-    let { type = "maca" } = fruit
-    ctx.drawImage(fruits[type], px * unity, py * unity)
-}
+    fruit() {
+        const { py, px } = game.fruit
+        const { unity, fruit } = game
+        let { type = "maca" } = fruit
+        ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
+    },
 
-const drawLang = () => {
-    const { direction = "right" } = snake
-    const [px, py] = getLangPosition()
-    ctx.drawImage(lang[direction], px, py)
-}
+    lang() {
+        const { direction = "right" } = snake
+        const [px, py] = getLangPosition()
+        ctx.drawImage(sprites.lang[direction], px, py)
+    },
 
-const drawSnake = () => {
-    const { px, py, tail } = snake
-    const { unity } = game
+    snake() {
+        const { px, py, tail } = snake
+        const { unity } = game
 
-    tail.forEach(({ py, px }) => {
-        ctx.fillStyle = colors.snake_tail
+        tail.forEach(({ py, px }) => {
+            ctx.fillStyle = colors.snake_tail
+            ctx.fillRect(px * unity, py * unity, unity, unity)
+        })
+
+        ctx.fillStyle = colors.snake
         ctx.fillRect(px * unity, py * unity, unity, unity)
-    })
+    },
 
-    ctx.fillStyle = colors.snake
-    ctx.fillRect(px * unity, py * unity, unity, unity)
+    renderAll() {
+        const render_order = [
+            "background",
+            "fruit",
+            "snake",
+            "lang"
+        ]
+
+        render_order.forEach(render => {
+            this[render]()
+        })
+    }
 }
+
 //#endregion
 
 const renderAll = () => {
-    drawBackground()
-    drawFruit()
-    drawSnake()
-    drawLang()
+    draw.renderAll()
 }
 
-export { renderAll, colors, lang }
+export { renderAll, colors }
