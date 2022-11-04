@@ -22,13 +22,13 @@ export default class ConfigScreen extends Screen {
             </fieldset>`
 
             const configs = {
-                velocidade(){
+                velocidade() {
                     screens.config_screens.velocity.show()
                 },
                 cores() {
                     screens.config_screens.colors.show()
                 },
-                
+
             }
 
             configs.voltar = () => this.close()
@@ -48,7 +48,7 @@ export default class ConfigScreen extends Screen {
 
     close() {
         super.close()
-        this.afterScreen.show()
+        this.afterScreen?.show()
     }
 
     show(afterScreen) {
