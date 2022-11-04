@@ -1,6 +1,6 @@
 import { game } from "./Game.js"
 import { screens } from "./ScreenManager.js"
-import Alert from "./Screens/Alert.js"
+import { Alert } from "./Screens/Alert.js"
 
 const keys = []
 let timeout = null

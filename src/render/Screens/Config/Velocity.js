@@ -3,7 +3,7 @@ import { ConfigScreenBase } from "../Screen.js"
 import { game } from "../../Game.js"
 import { screens } from "../../ScreenManager.js"
 
-export default class VelocityScreen extends ConfigScreenBase {
+export class VelocityScreen extends ConfigScreenBase {
     constructor() {
         super()
     }

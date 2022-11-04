@@ -4,7 +4,7 @@ import { ConfigScreenBase } from "../Screen.js"
 import { screens } from "../../ScreenManager.js"
 import { sprites } from "../../Sprites.js"
 
-export default class ColorsScreen extends ConfigScreenBase {
+export class ColorsScreen extends ConfigScreenBase {
     constructor() {
         super()
     }

@@ -1,7 +1,7 @@
 import { mainKeyDown } from "../Controller.js"
 import { Screen } from "./Screen.js"
 
-export default class GameScreen extends Screen {
+export class GameScreen extends Screen {
     constructor() {
         super()
         this.reset()

@@ -1,10 +1,10 @@
-import PauseScreen from "./Screens/Pause.js";
-import GameOverScreen from "./Screens/GameOver.js";
-import ConfigScreen from "./Screens/Config.js";
-import InitScreen from "./Screens/Init.js";
-import ColorsScreen from "./Screens/Config/Colors.js";
-import VelocityScreen from "./Screens/Config/Velocity.js";
-import GameScreen from "./Screens/GameScreen.js";
+import { PauseScreen } from "./Screens/Pause.js"
+import { GameOverScreen } from "./Screens/GameOver.js"
+import { ConfigScreen } from "./Screens/Config.js"
+import { InitScreen } from "./Screens/Init.js"
+import { ColorsScreen } from "./Screens/Config/Colors.js"
+import { VelocityScreen } from "./Screens/Config/Velocity.js"
+import { GameScreen } from "./Screens/GameScreen.js"
 
 export const screens = {
     pause: new PauseScreen(),

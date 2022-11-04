@@ -1,6 +1,6 @@
 import { Screen } from "./Screen.js"
 
-export default class Alert extends Screen {
+export class Alert extends Screen {
     constructor({ title, text, center = true, animation = true }) {
         super()
         this.reset()

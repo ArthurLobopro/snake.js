@@ -3,7 +3,7 @@ import { Screen } from "./Screen.js"
 
 const tela = document.getElementById('tela')
 
-export default class GameOverScreen extends Screen {
+export class GameOverScreen extends Screen {
     constructor() {
         super()
     }
