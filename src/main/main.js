@@ -15,16 +15,13 @@ function createWindow() {
         minWidth: 865,
         minHeight: 625,
         frame: false,
-        show: false,
         icon: path.resolve(appPath, "assets/icon32.png"),
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, 'preload.js')
         }
     })
-    win.setMenuBarVisibility(null)
     win.loadFile('public/index.html')
-    win.once('ready-to-show', () => { win.show(); win.focus() })
 }
 
 const isUnicWindow = app.requestSingleInstanceLock()
@@ -55,5 +52,5 @@ app.on('activate', () => {
 })
 // Faz com que o programa não inicie várias vezes durante a instalação
 if (require('electron-squirrel-startup')) {
-    app.quit();
+    app.quit()
 }
