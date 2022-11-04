@@ -1,7 +1,8 @@
-import { colors, sprites, renderAll } from "../../View.js"
+import { colors, renderAll } from "../../View.js"
 import { saveColors } from "../../Data.js"
 import { ConfigScreenBase } from "../Screen.js"
 import { screens } from "../../ScreenManager.js"
+import { sprites } from "../../Sprites.js"
 
 export default class ColorsScreen extends ConfigScreenBase {
     constructor() {

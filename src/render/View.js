@@ -1,14 +1,13 @@
 import { getColors } from "./Data.js"
-import { loadImage } from "./Util.js"
 import { game } from "./Game.js"
 import { snake } from "./Snake.js"
 import { game_screen_components } from "./ScreenManager.js"
+import { sprites } from "./Sprites.js"
 
 
 const canvas = game_screen_components.canvas
 const ctx = canvas.getContext("2d")
 
-const appPath = window.appPath
 
 //Cores usadas no jogo
 class Colors {
@@ -36,22 +35,6 @@ class Colors {
 
 const colors = new Colors()
 
-const sprites = {
-    lang: {
-        up: await loadImage(appPath, "assets/lingua/lingua-up.png"),
-        down: await loadImage(appPath, "assets/lingua/lingua-down.png"),
-        left: await loadImage(appPath, "assets/lingua/lingua-left.png"),
-        right: await loadImage(appPath, "assets/lingua/lingua-right.png")
-    }
-}
-
-const fruits = {
-    laranja: await loadImage(appPath, "assets/frutas/laranja.png"),
-    maca: await loadImage(appPath, "assets/frutas/maca.png"),
-    cereja: await loadImage(appPath, "assets/frutas/cereja.png"),
-    coco: await loadImage(appPath, "assets/frutas/coco.png")
-}
-
 //#region Calcs
 //Pega a posição da cabeça da cobra e calcula uma posição para a lingua
 const getLangPosition = () => {
@@ -78,7 +61,7 @@ const drawFruit = () => {
     const { py, px } = game.fruit
     const { unity, fruit } = game
     let { type = "maca" } = fruit
-    ctx.drawImage(fruits[type], px * unity, py * unity)
+    ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
 }
 
 const drawLang = () => {
@@ -108,4 +91,4 @@ const renderAll = () => {
     drawLang()
 }
 
-export { renderAll, colors, sprites }
+export { renderAll, colors }
