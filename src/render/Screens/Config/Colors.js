@@ -1,4 +1,4 @@
-import { colors, lang, renderAll } from "../../View.js"
+import { colors, sprites, renderAll } from "../../View.js"
 import { saveColors } from "../../Data.js"
 import { ConfigScreenBase } from "../Screen.js"
 import { screens } from "../../ScreenManager.js"
@@ -71,7 +71,7 @@ export default class ColorsScreen extends ConfigScreenBase {
             for (let i = 2; i < 5; i++) {
                 ctx.fillRect(i * 15, 60, 15, 15)
             }
-            ctx.drawImage(lang.right, ((6 * 15) - 10), 60)
+            ctx.drawImage(sprites.lang.right, ((6 * 15) - 10), 60)
         }
 
         renderPreview()

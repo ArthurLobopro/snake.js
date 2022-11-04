@@ -2,11 +2,13 @@ import { getColors } from "./Data.js"
 import { loadImage } from "./Util.js"
 import { game } from "./Game.js"
 import { snake } from "./Snake.js"
-import {  game_screen_components } from "./ScreenManager.js"
+import { game_screen_components } from "./ScreenManager.js"
 
 
 const canvas = game_screen_components.canvas
 const ctx = canvas.getContext("2d")
+
+const appPath = window.appPath
 
 //Cores usadas no jogo
 class Colors {
@@ -16,7 +18,7 @@ class Colors {
 
     constructor() {
         const colors = getColors()
-        for(const colorName in colors){
+        for (const colorName in colors) {
             this[colorName] = colors[colorName]
         }
     }
@@ -24,9 +26,9 @@ class Colors {
     /**
      * @param {{ snake: string; background: string; snake_tail: string; }} colors
      */
-    set colors(colors){
-        console.log(colors);
-        Object.entries(colors).forEach( ([name, color]) => {
+    set colors(colors) {
+        console.log(colors)
+        Object.entries(colors).forEach(([name, color]) => {
             this[name] = color
         })
     }
@@ -34,19 +36,20 @@ class Colors {
 
 const colors = new Colors()
 
+const sprites = {
+    lang: {
+        up: await loadImage(appPath, "assets/lingua/lingua-up.png"),
+        down: await loadImage(appPath, "assets/lingua/lingua-down.png"),
+        left: await loadImage(appPath, "assets/lingua/lingua-left.png"),
+        right: await loadImage(appPath, "assets/lingua/lingua-right.png")
+    }
+}
 
 const fruits = {
     laranja: await loadImage(appPath, "assets/frutas/laranja.png"),
     maca: await loadImage(appPath, "assets/frutas/maca.png"),
     cereja: await loadImage(appPath, "assets/frutas/cereja.png"),
     coco: await loadImage(appPath, "assets/frutas/coco.png")
-}
-
-const lang = {
-    up: await loadImage(appPath, "assets/lingua/lingua-up.png"),
-    down: await loadImage(appPath, "assets/lingua/lingua-down.png"),
-    left: await loadImage(appPath, "assets/lingua/lingua-left.png"),
-    right: await loadImage(appPath, "assets/lingua/lingua-right.png")
 }
 
 //#region Calcs
@@ -81,7 +84,7 @@ const drawFruit = () => {
 const drawLang = () => {
     const { direction = "right" } = snake
     const [px, py] = getLangPosition()
-    ctx.drawImage(lang[direction], px, py)
+    ctx.drawImage(sprites.lang[direction], px, py)
 }
 
 const drawSnake = () => {
@@ -105,4 +108,4 @@ const renderAll = () => {
     drawLang()
 }
 
-export { renderAll, colors, lang }
+export { renderAll, colors, sprites }
