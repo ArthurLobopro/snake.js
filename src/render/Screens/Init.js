@@ -18,6 +18,7 @@ export class InitScreen extends Screen {
             <div class="button-wrapper">
                 <button data-action="start" class="focus">START</button>
                 <button data-action="config">CONFIGURAÇÕES</button>
+                <button data-action="controls">CONTROLES</button>
                 <button data-action="exit">SAIR</button>
             </div>
         </fieldset>`
@@ -30,6 +31,9 @@ export class InitScreen extends Screen {
             },
             config() {
                 screens.config.show(this)
+            },
+            controls() {
+                screens.controls.show(this)
             },
             exit() {
                 ipcRenderer.send('close')
