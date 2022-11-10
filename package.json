@@ -1,12 +1,13 @@
 {
   "name": "snake.js",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Clássico jogo da cobrinha feito com JS e canvas.",
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "repository": {
     "type": "git",
@@ -24,15 +25,18 @@
   "dependencies": {
     "electron-frame": "^0.6.2",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^8.0.1"
+    "electron-store": "^8.0.1",
+    "update-electron-app": "^2.0.1"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.63",
-    "@electron-forge/maker-deb": "^6.0.0-beta.63",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
-    "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "electron": "^18.0.3"
+    "@electron-forge/cli": "^6.0.1",
+    "@electron-forge/maker-deb": "^6.0.1",
+    "@electron-forge/maker-rpm": "^6.0.1",
+    "@electron-forge/maker-squirrel": "^6.0.1",
+    "@electron-forge/maker-zip": "^6.0.1",
+    "@electron-forge/publisher-github": "6.0.0",
+    "electron": "^18.0.3",
+    "sass-compiler": "^1.2.3"
   },
   "config": {
     "forge": {
@@ -68,6 +72,18 @@
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ArthurLobopro",
+              "name": "snake.js"
+            },
+            "prerelease": true
+          }
         }
       ]
     }
