@@ -5,6 +5,7 @@ import { InitScreen } from "./Screens/Init.js"
 import { ColorsScreen } from "./Screens/Config/Colors.js"
 import { VelocityScreen } from "./Screens/Config/Velocity.js"
 import { GameScreen } from "./Screens/GameScreen.js"
+import { ControlsScreen } from "./Screens/Controls.js"
 
 export const screens = {
     pause: new PauseScreen(),
@@ -12,7 +13,7 @@ export const screens = {
     config: new ConfigScreen(),
     init: new InitScreen(),
     gameScreen: new GameScreen(),
-
+    controls: new ControlsScreen(),
     config_screens: {
         colors: new ColorsScreen(),
         velocity: new VelocityScreen()

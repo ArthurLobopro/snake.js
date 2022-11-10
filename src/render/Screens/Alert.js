@@ -3,6 +3,7 @@ import { Screen } from "./Screen.js"
 export class Alert extends Screen {
     constructor({ title, text, center = true, animation = true }) {
         super()
+        this.options = { title, text, center, animation }
         this.reset()
     }
 
@@ -19,6 +20,8 @@ export class Alert extends Screen {
     buildFunction() {
         const alert_screen = document.createElement('div')
         alert_screen.className = "screen-wrapper"
+
+        const { text, animation, center, title } = this.options
 
         alert_screen.innerHTML = `
         <fieldset id="alert" class="${animation ? "down" : ""}"
