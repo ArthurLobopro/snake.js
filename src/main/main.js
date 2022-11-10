@@ -6,6 +6,10 @@ Store.initRenderer()
 
 require('electron-frame/main')
 
+require('update-electron-app')({
+    notifyUser: false
+})
+
 const appPath = app.getAppPath()
 
 function createWindow() {
