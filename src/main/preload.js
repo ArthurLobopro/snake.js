@@ -31,5 +31,9 @@ window.addEventListener('DOMContentLoaded', () => {
     gameScript.type = "module"
     document.head.appendChild(gameScript)
 
-    insertFrame()
+    insertFrame({
+        colors: {
+            background: "#000000",
+        },
+    })
 })
