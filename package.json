@@ -35,7 +35,7 @@
     "@electron-forge/maker-squirrel": "^6.0.3",
     "@electron-forge/maker-zip": "^6.0.3",
     "@electron-forge/publisher-github": "^6.0.3",
-    "electron": "^18.0.3",
+    "electron": "^24",
     "sass-compiler": "^1.2.3"
   },
   "config": {
