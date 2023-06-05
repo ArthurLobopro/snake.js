@@ -2,10 +2,6 @@ import { getColors } from "./Data.js"
 import { snake } from "./Snake.js"
 import { game_screen_components } from "./ScreenManager.js"
 import { sprites } from "./Sprites.js"
-import { game } from "./Global.js"
-
-const canvas = game_screen_components.canvas
-const ctx = canvas.getContext("2d")
 
 //Cores usadas no jogo
 class Colors {
@@ -50,38 +46,47 @@ const getLangPosition = () => {
 //#endregion
 
 //#region Draw
-const draw = {
+export class Drawer {
+    constructor(game) {
+        this.game = game
+    }
+
+    get ctx() {
+        const canvas = game_screen_components.canvas
+        return canvas.getContext("2d")
+    }
+
     background() {
-        const { width, height } = game
-        ctx.fillStyle = colors.background
-        ctx.fillRect(0, 0, width, height)
-    },
+        const { width, height } = this.game
+        this.ctx.fillStyle = colors.background
+        this.ctx.fillRect(0, 0, width, height)
+    }
 
     fruit() {
-        const { py, px } = game.fruit
-        const { unity, fruit } = game
+        const { py, px } = this.game.fruit
+        const { unity, fruit } = this.game
         let { type = "maca" } = fruit
-        ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
-    },
+        this.ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
+    }
 
     lang() {
         const { direction = "right" } = snake
         const [px, py] = getLangPosition()
-        ctx.drawImage(sprites.lang[direction], px, py)
-    },
+        this.ctx.drawImage(sprites.lang[direction], px, py)
+    }
 
     snake() {
         const { px, py, tail } = snake
-        const { unity } = game
+        const { unity } = this.game
 
         tail.forEach(({ py, px }) => {
-            ctx.fillStyle = colors.snake_tail
-            ctx.fillRect(px * unity, py * unity, unity, unity)
+            this.ctx.fillStyle = colors.snake_tail
+            this.ctx.fillRect(px * unity, py * unity, unity, unity)
         })
 
-        ctx.fillStyle = colors.snake
-        ctx.fillRect(px * unity, py * unity, unity, unity)
-    },
+        this.ctx.fillStyle = colors.snake
+        this.ctx.fillRect(px * unity, py * unity, unity, unity)
+    }
 
     renderAll() {
         const render_order = [
@@ -99,8 +104,6 @@ const draw = {
 
 //#endregion
 
-const renderAll = () => {
-    draw.renderAll()
-}
 
-export { renderAll, colors }
+
+export { colors }

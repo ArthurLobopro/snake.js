@@ -1,7 +1,6 @@
-import { game } from "./Global.js"
+import { draw, game } from "./Global.js"
 import { screens } from "./ScreenManager.js"
 import { snake } from "./Snake.js"
-import { renderAll } from "./View.js"
 
 async function appendDebug() {
     const Debug = {
@@ -14,7 +13,9 @@ async function appendDebug() {
         continueGame() {
             game.play()
         },
-        renderAll,
+        renderAll() {
+            draw.renderAll()
+        },
         showGame() {
             console.log(game)
         },

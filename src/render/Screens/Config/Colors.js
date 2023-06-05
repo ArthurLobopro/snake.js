@@ -1,8 +1,9 @@
-import { colors, renderAll } from "../../View.js"
+import { colors } from "../../View.js"
 import { saveColors } from "../../Data.js"
 import { ConfigScreenBase } from "../Screen.js"
 import { screens } from "../../ScreenManager.js"
 import { sprites } from "../../Sprites.js"
+import { draw } from "../../Global.js"
 
 export class ColorsScreen extends ConfigScreenBase {
     constructor() {
@@ -117,7 +118,7 @@ export class ColorsScreen extends ConfigScreenBase {
                 if (button.value == "save") {
                     colors.colors = colorsTemp
                     saveColors(colors)
-                    renderAll()
+                    draw.renderAll()
                 }
                 this.close()
                 screens.config.addNavigation()

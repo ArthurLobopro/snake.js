@@ -1,6 +1,5 @@
-import { renderAll } from "./View.js"
 import { snake } from "./Snake.js"
-import { game } from "./Global.js"
+import { game, draw } from "./Global.js"
 import { loadCheat } from "./Cheats.js"
 import { game_screen_components, screens } from "./ScreenManager.js"
 
@@ -29,7 +28,7 @@ const comands = {
 
 const render = async () => {
     game.loadTurn()
-    renderAll()
+    draw.renderAll()
 }
 
 const mainKeyDown = event => {

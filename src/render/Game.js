@@ -3,7 +3,7 @@ import { getData, saveRecorde } from "./Data.js"
 import { snake } from "./Snake.js"
 import { randint, randItem } from "./Util.js"
 import { screens, game_screen_components } from "./ScreenManager.js"
-import { renderAll } from "./View.js"
+import { draw } from "./Global.js"
 import "./Debug.js"
 
 const { canvas, points_div, record_div } = game_screen_components
@@ -149,7 +149,7 @@ export class Game {
             tail.forEach(tail_segment => {
                 if (tail_segment.px === px && tail_segment.py === py) {
                     resolve(true)
-                    renderAll()
+                    draw.renderAll()
                     this.gameOver()
                 }
             })
