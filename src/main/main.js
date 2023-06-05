@@ -4,6 +4,8 @@ const Store = require('electron-store')
 
 Store.initRenderer()
 
+require("electron-css-injector/main")
+
 require('electron-frame/main')
 
 require('update-electron-app')({

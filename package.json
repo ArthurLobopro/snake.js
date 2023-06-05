@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ArthurLobopro/snake.js#readme",
   "dependencies": {
+    "@electron-fonts/nunito": "^1.1.0",
+    "@electron-fonts/press-start-2p": "^1.1.0",
     "electron-frame": "^1.1.3",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
