@@ -1,4 +1,4 @@
-import { game } from "./Game.js"
+import { game } from "./Global.js"
 
 class Snake {
 

@@ -1,4 +1,4 @@
-import { game } from "./Game.js"
+import { game } from "./Global.js"
 import { screens } from "./ScreenManager.js"
 import { Alert } from "./Screens/Alert.js"
 

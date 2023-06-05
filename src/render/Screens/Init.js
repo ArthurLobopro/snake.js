@@ -1,6 +1,6 @@
 import { Screen } from "./Screen.js"
 import { screens } from "../ScreenManager.js"
-import { game } from "../Game.js"
+import { game } from "../Global.js"
 
 export class InitScreen extends Screen {
     constructor() {

@@ -1,6 +1,6 @@
 import { renderAll } from "./View.js"
 import { snake } from "./Snake.js"
-import { game } from "./Game.js"
+import { game } from "./Global.js"
 import { loadCheat } from "./Cheats.js"
 import { game_screen_components, screens } from "./ScreenManager.js"
 

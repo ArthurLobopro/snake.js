@@ -1,6 +1,6 @@
 import { saveVelocity } from "../../Data.js"
 import { ConfigScreenBase } from "../Screen.js"
-import { game } from "../../Game.js"
+import { game } from "../../Global.js"
 import { screens } from "../../ScreenManager.js"
 
 export class VelocityScreen extends ConfigScreenBase {

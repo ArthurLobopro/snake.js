@@ -8,7 +8,7 @@ import "./Debug.js"
 
 const { canvas, points_div, record_div } = game_screen_components
 
-class Game {
+export class Game {
     //Atributes
     unity = 15
     quantX = 21
@@ -158,7 +158,7 @@ class Game {
     }
 
     async loadTurn() {
-        if (!await game.collision()) {
+        if (!await this.collision()) {
             snake.move()
         }
         snake.moveLock = false
@@ -169,6 +169,4 @@ class Game {
     }
 }
 
-const game = new Game()
-
-export { game, canvas }
+export { canvas }

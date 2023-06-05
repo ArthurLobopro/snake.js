@@ -1,13 +1,11 @@
 import { getColors } from "./Data.js"
-import { game } from "./Game.js"
 import { snake } from "./Snake.js"
 import { game_screen_components } from "./ScreenManager.js"
 import { sprites } from "./Sprites.js"
-
+import { game } from "./Global.js"
 
 const canvas = game_screen_components.canvas
 const ctx = canvas.getContext("2d")
-
 
 //Cores usadas no jogo
 class Colors {

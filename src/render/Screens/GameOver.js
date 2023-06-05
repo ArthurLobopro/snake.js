@@ -1,5 +1,6 @@
-import { game, canvas } from "../Game.js"
+import { canvas } from "../Game.js"
 import { Screen } from "./Screen.js"
+import { game } from "../Global.js"
 
 const tela = document.getElementById('tela')
 
