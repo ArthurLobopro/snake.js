@@ -15,6 +15,9 @@
 			},
 			"style": {
 				"noParameterAssign": "off"
+			},
+			"performance": {
+				"noDelete": "off"
 			}
 		}
 	},
