@@ -1,29 +1,29 @@
-import { snake } from "./Snake.js"
-import { game, draw } from "./Global.js"
 import { loadCheat } from "./Cheats.js"
+import { draw, game } from "./Global.js"
 import { game_screen_components, screens } from "./ScreenManager.js"
+import { snake } from "./Snake.js"
 
 const recordDiv = game_screen_components.record_div
 
 const moves = {
-    "arrowleft": () => snake.setDirection("left"),
-    "arrowdown": () => snake.setDirection("down"),
-    "arrowright": () => snake.setDirection("right"),
-    "arrowup": () => snake.setDirection("up"),
-    "w": () => snake.setDirection("up"),
-    "a": () => snake.setDirection("left"),
-    "s": () => snake.setDirection("down"),
-    "d": () => snake.setDirection("right")
+    arrowleft: () => snake.setDirection("left"),
+    arrowdown: () => snake.setDirection("down"),
+    arrowright: () => snake.setDirection("right"),
+    arrowup: () => snake.setDirection("up"),
+    w: () => snake.setDirection("up"),
+    a: () => snake.setDirection("left"),
+    s: () => snake.setDirection("down"),
+    d: () => snake.setDirection("right"),
 }
 
 const comands = {
-    "escape": async () => {
+    escape: async () => {
         if (game.status === "active") return game.pause()
         if (game.status === "inative") {
             screens.config.show(screens.gameScreen)
             window.onkeydown = mainKeyDown
         }
-    }
+    },
 }
 
 const render = async () => {
@@ -31,7 +31,7 @@ const render = async () => {
     draw.renderAll()
 }
 
-const mainKeyDown = event => {
+const mainKeyDown = (event) => {
     const key = event.key.toLowerCase()
     if (game.status === "inative") {
         if (moves[key]) {

@@ -4,18 +4,18 @@ const getData = () => {
     return { ...data, ...preferences }
 }
 
-const saveRecorde = recorde => {
+const saveRecorde = (recorde) => {
     gameApi.saveData({ recorde })
 }
 
-const saveVelocity = velocity => {
+const saveVelocity = (velocity) => {
     gameApi.savePreferences({ velocity })
 }
 
-const saveColors = colors => {
+const saveColors = (colors) => {
     gameApi.saveColors(colors)
 }
 
 const getColors = () => gameApi.getColors()
 
-export { saveRecorde, getData, saveVelocity , saveColors, getColors }
+export { saveRecorde, getData, saveVelocity, saveColors, getColors }

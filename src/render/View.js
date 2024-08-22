@@ -1,6 +1,6 @@
 import { getColors } from "./Data.js"
-import { snake } from "./Snake.js"
 import { game_screen_components } from "./ScreenManager.js"
+import { snake } from "./Snake.js"
 import { sprites } from "./Sprites.js"
 
 //Cores usadas no jogo
@@ -32,13 +32,13 @@ const colors = new Colors()
 //#region Calcs
 //Pega a posição da cabeça da cobra e calcula uma posição para a lingua
 const getLangPosition = () => {
-    let { direction = "right", px, py } = snake
+    const { direction = "right", px, py } = snake
 
     const positions = {
-        right: () => [((px + 1) * 15) - 10, py * 15],
-        left: () => [((px - 1) * 15) + 5, py * 15],
-        up: () => [px * 15, ((py - 1) * 15) + 5],
-        down: () => [px * 15, ((py + 1) * 15) - 10]
+        right: () => [(px + 1) * 15 - 10, py * 15],
+        left: () => [(px - 1) * 15 + 5, py * 15],
+        up: () => [px * 15, (py - 1) * 15 + 5],
+        down: () => [px * 15, (py + 1) * 15 - 10],
     }
 
     return positions[direction]()
@@ -65,7 +65,7 @@ export class Drawer {
     fruit() {
         const { py, px } = this.game.fruit
         const { unity, fruit } = this.game
-        let { type = "maca" } = fruit
+        const { type = "maca" } = fruit
         this.ctx.drawImage(sprites.fruits[type], px * unity, py * unity)
     }
 
@@ -89,21 +89,14 @@ export class Drawer {
     }
 
     renderAll() {
-        const render_order = [
-            "background",
-            "fruit",
-            "snake",
-            "lang"
-        ]
+        const render_order = ["background", "fruit", "snake", "lang"]
 
-        render_order.forEach(render => {
+        render_order.forEach((render) => {
             this[render]()
         })
     }
 }
 
 //#endregion
-
-
 
 export { colors }
