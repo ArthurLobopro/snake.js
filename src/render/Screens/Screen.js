@@ -3,13 +3,13 @@ import navigation from "./navigation.js"
 const container = document.getElementById("container")
 
 export class Screen {
-    buildFunction(){}
-    
+    buildFunction() {}
+
     addNavigation() {
-        window.onkeydown = event => navigation[event.key]?.(this.screen)
+        window.onkeydown = (event) => navigation[event.key]?.(this.screen)
     }
 
-    removeNavigation(){
+    removeNavigation() {
         window.onkeydown = null
     }
 
@@ -19,7 +19,7 @@ export class Screen {
 
     show(navigation = true) {
         container.appendChild(this.screen)
-        if(navigation){
+        if (navigation) {
             this.addNavigation()
         }
     }
@@ -35,10 +35,6 @@ export class Screen {
 }
 
 export class ConfigScreenBase extends Screen {
-    constructor(){
-        super()
-    }
-
     show() {
         this.reset()
         super.show(false)

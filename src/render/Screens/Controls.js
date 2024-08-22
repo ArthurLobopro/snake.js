@@ -55,7 +55,7 @@ export class ControlsScreen extends Screen {
                 </fieldset>
             </div>`
 
-        constrols_screen.querySelector('button').onclick = () => {
+        constrols_screen.querySelector("button").onclick = () => {
             this.close()
         }
 

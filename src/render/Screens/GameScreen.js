@@ -9,9 +9,9 @@ export class GameScreen extends Screen {
 
     get components() {
         return {
-            canvas: this.screen.querySelector('canvas'),
+            canvas: this.screen.querySelector("canvas"),
             points_div: this.screen.querySelector("#points"),
-            record_div: this.screen.querySelector('#record')
+            record_div: this.screen.querySelector("#record"),
         }
     }
 
@@ -21,7 +21,7 @@ export class GameScreen extends Screen {
     }
 
     buildFunction() {
-        const game_screen = document.createElement('div')
+        const game_screen = document.createElement("div")
         game_screen.className = "screen-wrapper"
 
         game_screen.innerHTML = `
