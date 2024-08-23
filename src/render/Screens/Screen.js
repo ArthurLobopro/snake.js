@@ -1,6 +1,6 @@
 import navigation from "./navigation.js"
 
-const container = document.getElementById("container")
+const container = $("#container")
 
 export class Screen {
     buildFunction() {}

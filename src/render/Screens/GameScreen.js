@@ -9,9 +9,9 @@ export class GameScreen extends Screen {
 
     get components() {
         return {
-            canvas: this.screen.querySelector("canvas"),
-            points_div: this.screen.querySelector("#points"),
-            record_div: this.screen.querySelector("#record"),
+            canvas: $("canvas", this.screen),
+            points_div: $("#points", this.screen),
+            record_div: $("#record", this.screen),
         }
     }
 

@@ -33,7 +33,7 @@ export class Alert extends Screen {
             </button>
         </fieldset>`
 
-        alert_screen.querySelector("#remove-alert").onclick = () => this.close()
+        $("#remove-alert", alert_screen).onclick = () => this.close()
 
         return alert_screen
     }

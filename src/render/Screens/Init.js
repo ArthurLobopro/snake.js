@@ -40,8 +40,7 @@ export class InitScreen extends Screen {
             },
         }
 
-        const buttons = init_screen.querySelectorAll("button")
-
+        const buttons = $$("button", init_screen)
         buttons.forEach((button) => {
             button.onclick = () => {
                 functions?.[button.dataset.action]?.call(this)

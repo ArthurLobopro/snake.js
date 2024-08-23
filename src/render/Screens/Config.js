@@ -44,7 +44,7 @@ export class ConfigScreen extends Screen {
 
         configs.voltar = () => this.close()
 
-        const buttons = config_screen.querySelectorAll("button")
+        const buttons = $$("button", config_screen)
         buttons.forEach((button) => {
             button.onclick = () => {
                 configs[button.dataset.action](game)

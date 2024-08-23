@@ -17,3 +17,11 @@ export function randint(min, max) {
 export function randItem(arr) {
     return arr[randint(0, arr.length - 1)]
 }
+
+export function $(q, c = document) {
+    return c.querySelector(q)
+}
+
+export function $$(q, c = document) {
+    return Array.from(c.querySelectorAll(q))
+}

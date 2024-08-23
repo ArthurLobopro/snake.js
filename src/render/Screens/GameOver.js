@@ -32,7 +32,7 @@ export class GameOverScreen extends Screen {
             <button class="focus">NOVO JOGO</button>
         </fieldset>`
 
-        const button = game_over_screen.getElementsByTagName("button")[0]
+        const button = $("button", game_over_screen)
 
         button.onclick = () => {
             this.close()

@@ -44,7 +44,7 @@ export class PauseScreen extends Screen {
             },
         }
 
-        const buttons = pause_screen.querySelectorAll("button")
+        const buttons = $$("button", pause_screen)
         buttons.forEach((button) => {
             button.onclick = () => {
                 buttonsFunctions[button.dataset.action]?.call(this)
