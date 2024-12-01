@@ -15,7 +15,7 @@ export class ControlsScreen extends Screen {
                     <legend>CONTROLES</legend>
                     <div class="line">
                         Muda a direção da cobra para esquerda.
-                        <div class="flex-center">
+                        <div class="flex-center gap">
                             <div class="key">A</div>
                             <span>ou</span>
                             <div class="key">&LeftArrow;</div>
@@ -23,7 +23,7 @@ export class ControlsScreen extends Screen {
                     </div>
                     <div class="line">
                         Muda a direção da cobra para direita.
-                        <div class="flex-center">
+                        <div class="flex-center gap">
                             <div class="key">D</div>
                             <span>ou</span>
                             <div class="key">&RightArrow;</div>
@@ -31,7 +31,7 @@ export class ControlsScreen extends Screen {
                     </div>
                     <div class="line">
                         Muda a direção da cobra para cima.
-                        <div class="flex-center">
+                        <div class="flex-center gap">
                             <div class="key">W</div>
                             <span>ou</span>
                             <div class="key">&UpArrow;</div>
@@ -39,7 +39,7 @@ export class ControlsScreen extends Screen {
                     </div>
                     <div class="line">
                         Muda a direção da cobra para baixo.
-                        <div class="flex-center">
+                        <div class="flex-center gap">
                             <div class="key">S</div>
                             <span>ou</span>
                             <div class="key">&DownArrow;</div>
@@ -55,7 +55,7 @@ export class ControlsScreen extends Screen {
                 </fieldset>
             </div>`
 
-        constrols_screen.querySelector('button').onclick = () => {
+        constrols_screen.querySelector("button").onclick = () => {
             this.close()
         }
 

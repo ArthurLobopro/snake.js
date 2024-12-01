@@ -1,6 +1,6 @@
 import { game } from "../Global.js"
-import { Screen } from "./Screen.js"
 import { screens } from "../ScreenManager.js"
+import { Screen } from "./Screen.js"
 
 export class PauseScreen extends Screen {
     constructor() {
@@ -9,7 +9,7 @@ export class PauseScreen extends Screen {
     }
 
     buildFunction() {
-        const pause_screen = document.createElement('div')
+        const pause_screen = document.createElement("div")
         pause_screen.className = "screen-wrapper"
         pause_screen.id = "pause-wrapper"
 
@@ -25,7 +25,7 @@ export class PauseScreen extends Screen {
         </fieldset>`
 
         const buttonsFunctions = {
-            "continue": () => {
+            continue: () => {
                 this.close()
                 setTimeout(() => game.play(), 150)
             },
@@ -41,11 +41,11 @@ export class PauseScreen extends Screen {
                 this.close()
                 game.status = "inative"
                 screens.init.show()
-            }
+            },
         }
 
         const buttons = pause_screen.querySelectorAll("button")
-        buttons.forEach(button => {
+        buttons.forEach((button) => {
             button.onclick = () => {
                 buttonsFunctions[button.dataset.action]?.call(this)
             }

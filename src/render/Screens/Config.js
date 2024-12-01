@@ -1,6 +1,6 @@
 import { game } from "../Global.js"
-import { Screen } from "./Screen.js"
 import { screens } from "../ScreenManager.js"
+import { Screen } from "./Screen.js"
 export class ConfigScreen extends Screen {
     constructor() {
         super()
@@ -18,7 +18,7 @@ export class ConfigScreen extends Screen {
     }
 
     buildFunction() {
-        const config_screen = document.createElement('div')
+        const config_screen = document.createElement("div")
         config_screen.className = "screen-wrapper"
         config_screen.id = "config"
 
@@ -40,13 +40,12 @@ export class ConfigScreen extends Screen {
             cores() {
                 screens.config_screens.colors.show()
             },
-
         }
 
         configs.voltar = () => this.close()
 
-        const buttons = config_screen.querySelectorAll('button')
-        buttons.forEach(button => {
+        const buttons = config_screen.querySelectorAll("button")
+        buttons.forEach((button) => {
             button.onclick = () => {
                 configs[button.dataset.action](game)
             }

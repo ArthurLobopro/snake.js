@@ -6,7 +6,7 @@ const keys = []
 let timeout = null
 
 const clean = () => {
-    while (keys.length != 0) {
+    while (keys.length !== 0) {
         keys.shift()
     }
 }
@@ -17,15 +17,15 @@ const cheats = {
         game.canSaveRecord = false
         const alert = new Alert({
             title: "Imortalidade Ativada",
-            text: "Sua pontuação não será mais contabilizada como recorde, para desativar o modo imortal pause e inicie um novo jogo."
+            text: "Sua pontuação não será mais contabilizada como recorde, para desativar o modo imortal pause e inicie um novo jogo.",
         })
         alert.show(screens.gameScreen)
-    }
+    },
 }
 
-const loadCheat = event => {
+const loadCheat = (event) => {
     keys.push(event.key)
-    const string = keys.join('').toLowerCase()
+    const string = keys.join("").toLowerCase()
     Object.entries(cheats).forEach(([key, call]) => {
         if (string.search(key) !== -1) {
             call()

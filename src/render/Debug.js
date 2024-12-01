@@ -24,7 +24,7 @@ async function appendDebug() {
         },
         showScreens() {
             console.log(screens)
-        }
+        },
     }
 
     window.Debug = Debug

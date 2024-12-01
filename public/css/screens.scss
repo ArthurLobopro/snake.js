@@ -22,6 +22,10 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+#controls {
+    padding: 16px;
+}
+
 .line {
     padding: 3px 0;
     display: flex;
@@ -41,6 +45,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.gap {
+    gap: 8px;
 }
 
 .center-line {

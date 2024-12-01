@@ -1,6 +1,6 @@
-import { Screen } from "./Screen.js"
-import { screens } from "../ScreenManager.js"
 import { game } from "../Global.js"
+import { screens } from "../ScreenManager.js"
+import { Screen } from "./Screen.js"
 
 export class InitScreen extends Screen {
     constructor() {
@@ -9,7 +9,7 @@ export class InitScreen extends Screen {
     }
 
     buildFunction() {
-        const init_screen = document.createElement('div')
+        const init_screen = document.createElement("div")
         init_screen.className = "screen-wrapper"
 
         init_screen.innerHTML = `
@@ -36,13 +36,13 @@ export class InitScreen extends Screen {
                 screens.controls.show(this)
             },
             exit() {
-                ipcRenderer.send('close')
-            }
+                ipcRenderer.send("close")
+            },
         }
 
-        const buttons = init_screen.querySelectorAll('button')
+        const buttons = init_screen.querySelectorAll("button")
 
-        buttons.forEach(button => {
+        buttons.forEach((button) => {
             button.onclick = () => {
                 functions?.[button.dataset.action]?.call(this)
             }

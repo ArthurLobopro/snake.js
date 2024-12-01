@@ -1,10 +1,10 @@
 import { mainKeyDown, render } from "./Controller.js"
 import { getData, saveRecorde } from "./Data.js"
-import { snake } from "./Snake.js"
-import { randint, randItem } from "./Util.js"
-import { screens, game_screen_components } from "./ScreenManager.js"
-import { draw } from "./Global.js"
 import "./Debug.js"
+import { draw } from "./Global.js"
+import { game_screen_components, screens } from "./ScreenManager.js"
+import { snake } from "./Snake.js"
+import { randItem, randint } from "./Util.js"
 
 const { canvas, points_div, record_div } = game_screen_components
 
@@ -21,20 +21,20 @@ export class Game {
     fruits = [
         {
             type: "maca",
-            value: 100
+            value: 100,
         },
         {
             type: "laranja",
-            value: 250
+            value: 250,
         },
         {
             type: "cereja",
-            value: 300
+            value: 300,
         },
         {
             type: "coco",
-            value: 500
-        }
+            value: 500,
+        },
     ]
 
     setPoints(points) {
@@ -64,7 +64,7 @@ export class Game {
             py: 11,
             px: 15,
             value: 100,
-            type: "maca"
+            type: "maca",
         }
         const data = Object.entries(getData())
         data.forEach(([key, value]) => {
@@ -79,11 +79,13 @@ export class Game {
             const px = randint(0, quantX - 1)
             const py = randint(0, quantY - 1)
             if (snake.px !== px && snake.py !== py) {
-                let find = snake.tail.map(q => q.px === px && q.py === py)
+                const find = snake.tail.map((q) => q.px === px && q.py === py)
                 if (find.indexOf(true) === -1) {
                     this.fruit = {
-                        px, py,
-                        type, value
+                        px,
+                        py,
+                        type,
+                        value,
                     }
                     return
                 }
@@ -126,11 +128,11 @@ export class Game {
     }
 
     async collision() {
-        if (this.status == "inative") return false
+        if (this.status === "inative") return false
         const { px, py, tail } = snake
 
         //Tamanho máximo da cobra
-        if (snake.length == this.width * this.height) {
+        if (snake.length === this.width * this.height) {
             this.gameOver()
             return true
         }
@@ -145,8 +147,8 @@ export class Game {
         if (this.imortal) return false
 
         //Colisão com a cauda
-        return new Promise(resolve => {
-            tail.forEach(tail_segment => {
+        return new Promise((resolve) => {
+            tail.forEach((tail_segment) => {
                 if (tail_segment.px === px && tail_segment.py === py) {
                     resolve(true)
                     draw.renderAll()
@@ -158,7 +160,7 @@ export class Game {
     }
 
     async loadTurn() {
-        if (!await this.collision()) {
+        if (!(await this.collision())) {
             snake.move()
         }
         snake.moveLock = false

@@ -18,7 +18,7 @@ export class Alert extends Screen {
     }
 
     buildFunction() {
-        const alert_screen = document.createElement('div')
+        const alert_screen = document.createElement("div")
         alert_screen.className = "screen-wrapper"
 
         const { text, animation, center, title } = this.options

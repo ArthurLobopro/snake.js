@@ -1,30 +1,25 @@
-import { colors } from "../../View.js"
 import { saveColors } from "../../Data.js"
-import { ConfigScreenBase } from "../Screen.js"
+import { draw } from "../../Global.js"
 import { screens } from "../../ScreenManager.js"
 import { sprites } from "../../Sprites.js"
-import { draw } from "../../Global.js"
+import { colors } from "../../View.js"
+import { ConfigScreenBase } from "../Screen.js"
 
 export class ColorsScreen extends ConfigScreenBase {
-    constructor() {
-        super()
-    }
-
     buildFunction() {
-
         const colorsTemp = {
             snake: "",
             background: "",
-            snake_tail: ""
+            snake_tail: "",
         }
 
-        const setColorsTemp = colors => {
+        const setColorsTemp = (colors) => {
             Object.entries(colors).forEach(([name, color]) => {
                 colorsTemp[name] = color
             })
         }
 
-        const colors_screen = document.createElement('div')
+        const colors_screen = document.createElement("div")
         colors_screen.className = "screen-wrapper"
 
         colors_screen.innerHTML = `
@@ -61,8 +56,8 @@ export class ColorsScreen extends ConfigScreenBase {
         setColorsTemp(colors)
 
         const renderPreview = () => {
-            const canvas = colors_screen.querySelector('#snake-preview')
-            const ctx = canvas.getContext('2d')
+            const canvas = colors_screen.querySelector("#snake-preview")
+            const ctx = canvas.getContext("2d")
 
             ctx.fillStyle = colorsTemp.background
             ctx.fillRect(0, 0, 135, 135)
@@ -73,13 +68,13 @@ export class ColorsScreen extends ConfigScreenBase {
             for (let i = 2; i < 5; i++) {
                 ctx.fillRect(i * 15, 60, 15, 15)
             }
-            ctx.drawImage(sprites.lang.right, ((6 * 15) - 10), 60)
+            ctx.drawImage(sprites.lang.right, 6 * 15 - 10, 60)
         }
 
         renderPreview()
 
-        const colorInputs = colors_screen.querySelectorAll('input[type=color]')
-        colorInputs.forEach(colorInput => {
+        const colorInputs = colors_screen.querySelectorAll("input[type=color]")
+        colorInputs.forEach((colorInput) => {
             colorInput.oninput = () => {
                 const name = colorInput.dataset.name
                 colorsTemp[name] = colorInput.value
@@ -89,33 +84,38 @@ export class ColorsScreen extends ConfigScreenBase {
 
         const resetFunctions = {
             reset: () => {
-                colors_screen.querySelector('#color-snake').value = colors.snake
-                colors_screen.querySelector('#color-snake-tail').value = colors.snake_tail
-                colors_screen.querySelector('#color-background').value = colors.background
+                colors_screen.querySelector("#color-snake").value = colors.snake
+                colors_screen.querySelector("#color-snake-tail").value =
+                    colors.snake_tail
+                colors_screen.querySelector("#color-background").value =
+                    colors.background
                 setColorsTemp(colors)
                 renderPreview()
             },
             default: () => {
                 const defaultColors = gameApi.getDefaultColors()
-                colors_screen.querySelector('#color-snake').value = defaultColors.snake
-                colors_screen.querySelector('#color-snake-tail').value = defaultColors.snake_tail
-                colors_screen.querySelector('#color-background').value = defaultColors.background
+                colors_screen.querySelector("#color-snake").value =
+                    defaultColors.snake
+                colors_screen.querySelector("#color-snake-tail").value =
+                    defaultColors.snake_tail
+                colors_screen.querySelector("#color-background").value =
+                    defaultColors.background
                 setColorsTemp(defaultColors)
                 renderPreview()
-            }
+            },
         }
 
-        const resetButtons = colors_screen.querySelectorAll('.inputs button')
-        resetButtons.forEach(button => {
+        const resetButtons = colors_screen.querySelectorAll(".inputs button")
+        resetButtons.forEach((button) => {
             button.onclick = () => {
                 resetFunctions?.[button.dataset.action]?.()
             }
         })
 
-        const buttons = colors_screen.querySelectorAll('.buttons button')
-        buttons.forEach(button => {
+        const buttons = colors_screen.querySelectorAll(".buttons button")
+        buttons.forEach((button) => {
             button.onclick = () => {
-                if (button.value == "save") {
+                if (button.value === "save") {
                     colors.colors = colorsTemp
                     saveColors(colors)
                     draw.renderAll()
