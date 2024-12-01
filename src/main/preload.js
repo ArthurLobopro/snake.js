@@ -1,9 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron")
-const { insertFrame } = require("electron-frame/renderer")
 const { colors, data, preferences } = require("../Store/Store")
-
-const NunitoFont = require("@electron-fonts/nunito")
-const PressStart2PFont = require("@electron-fonts/press-start-2p")
 
 const gameApi = {
     getColors: () => {
@@ -41,12 +37,17 @@ window.addEventListener("DOMContentLoaded", () => {
     gameScript.type = "module"
     document.head.appendChild(gameScript)
 
+    const NunitoFont = require("@electron-fonts/nunito")
+    const PressStart2PFont = require("@electron-fonts/press-start-2p")
+    const { ElectronFrame } = require("electron-frame/renderer")
+
     NunitoFont.inject()
     PressStart2PFont.inject()
 
-    insertFrame({
+    const frame = new ElectronFrame({
         colors: {
             background: "#000000",
         },
+        autoInsert: true,
     })
 })

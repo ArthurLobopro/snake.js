@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron")
+const { app, BrowserWindow, ipcMain } = require("electron")
 const path = require("node:path")
 const Store = require("electron-store")
 
@@ -35,7 +35,13 @@ const isUnicWindow = app.requestSingleInstanceLock()
 if (!isUnicWindow) {
     app.quit()
 } else {
-    app.whenReady().then(createWindow)
+    app.whenReady()
+        .then(createWindow)
+        .then(() => {
+            ipcMain.on("close", () => {
+                app.exit(0)
+            })
+        })
 }
 
 app.on("second-instance", () => {
@@ -56,6 +62,7 @@ app.on("activate", () => {
         createWindow()
     }
 })
+
 // Faz com que o programa não inicie várias vezes durante a instalação
 if (require("electron-squirrel-startup")) {
     app.quit()
